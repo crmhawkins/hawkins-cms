@@ -1,0 +1,156 @@
+services:
+  # ─── MariaDB ──────────────────────────────────────────────
+  mariadb:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-hawkins_cms}
+      MARIADB_USER: ${MARIADB_USER:-hawkins}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ─── MinIO (almacenamiento de imágenes S3-compatible) ─────
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Crea el bucket automáticamente al arrancar
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD};
+      mc mb --ignore-existing local/${MINIO_BUCKET:-media};
+      mc anonymous set download local/${MINIO_BUCKET:-media};
+      exit 0;
+      "
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+
+  # ─── Directus (CMS backend + API) ─────────────────────────
+  directus:
+    image: directus/directus:11.1.2
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    volumes:
+      - ./directus/extensions:/directus/extensions
+      - directus_uploads:/directus/uploads
+    environment:
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+
+      # Base de datos
+      DB_CLIENT: mysql
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_DATABASE: ${MARIADB_DATABASE:-hawkins_cms}
+      DB_USER: ${MARIADB_USER:-hawkins}
+      DB_PASSWORD: ${MARIADB_PASSWORD}
+
+      # Almacenamiento de ficheros (MinIO S3-compatible)
+      STORAGE_LOCATIONS: minio
+      STORAGE_MINIO_DRIVER: s3
+      STORAGE_MINIO_KEY: ${MINIO_ROOT_USER}
+      STORAGE_MINIO_SECRET: ${MINIO_ROOT_PASSWORD}
+      STORAGE_MINIO_BUCKET: ${MINIO_BUCKET:-media}
+      STORAGE_MINIO_REGION: us-east-1
+      STORAGE_MINIO_ENDPOINT: http://minio:9000
+      STORAGE_MINIO_FORCE_PATH_STYLE: "true"
+
+      # URL pública
+      PUBLIC_URL: ${PUBLIC_URL}/admin
+
+      # CORS para que el frontend pueda hablar con la API
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "true"
+
+      # Seguridad básica
+      RATE_LIMITER_ENABLED: "true"
+      RATE_LIMITER_POINTS: 50
+      RATE_LIMITER_DURATION: 1
+
+      # Email (opcional, para notificaciones de formularios)
+      EMAIL_FROM: ${EMAIL_FROM:-noreply@localhost}
+      EMAIL_TRANSPORT: ${EMAIL_TRANSPORT:-sendmail}
+      EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-}
+      EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-587}
+      EMAIL_SMTP_USER: ${EMAIL_SMTP_USER:-}
+      EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
+      EMAIL_SMTP_SECURE: ${EMAIL_SMTP_SECURE:-false}
+
+  # ─── Next.js (frontend público + panel editor Puck) ───────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - directus
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_DIRECTUS_URL: ${PUBLIC_URL}/admin
+      DIRECTUS_INTERNAL_URL: http://directus:8055
+      DIRECTUS_STATIC_TOKEN: ${DIRECTUS_STATIC_TOKEN}
+      PUBLIC_URL: ${PUBLIC_URL}
+      NEXT_PUBLIC_SITE_URL: ${PUBLIC_URL}
+      # Traducción automática (DeepL principal, LibreTranslate fallback)
+      DEEPL_API_KEY: ${DEEPL_API_KEY:-}
+      LIBRETRANSLATE_URL: http://libretranslate:5000
+
+  # ─── phpMyAdmin (acceso DB para debug) ────────────────────
+  phpmyadmin:
+    image: phpmyadmin:5-apache
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      UPLOAD_LIMIT: 256M
+
+  # ─── LibreTranslate (traducción automática self-hosted) ───
+  libretranslate:
+    image: libretranslate/libretranslate:latest
+    restart: unless-stopped
+    environment:
+      LT_LOAD_ONLY: ${LT_LANGUAGES:-en,es,fr,de,pt,it,ca}
+      LT_DISABLE_WEB_UI: "true"
+      LT_API_KEYS: "false"
+    volumes:
+      - libretranslate_data:/home/libretranslate/.local
+
+volumes:
+  mariadb_data:
+  minio_data:
+  directus_uploads:
+  libretranslate_data:
