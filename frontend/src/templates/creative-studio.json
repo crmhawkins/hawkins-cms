@@ -1,0 +1,49 @@
+{
+  "id": "creative-studio",
+  "name": "Estudio creativo",
+  "description": "Para estudios de diseño, branding y dirección de arte",
+  "category": "creative",
+  "thumbnail": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-1", "title": "Estudio de diseño con alma", "subtitle": "Creamos identidades visuales, ediciones y objetos. Cada proyecto es único.", "kicker": "MADRID · BARCELONA", "backgroundImage": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&q=80", "align": "left", "height": "full", "overlay": 0.3, "ctaLabel": "Ver proyectos", "ctaUrl": "/projects" } },
+        { "type": "TextBlock", "props": { "id": "tb-1", "heading": "Diseño artesanal, pensamiento estratégico", "body": "Somos un estudio pequeño, con criterio, que trabaja para marcas que quieren hacer las cosas bien. Nada de molinos: cada proyecto lo dirige uno de los socios.", "align": "center", "maxWidth": "medium", "background": "white" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-1", "heading": "Proyectos seleccionados", "subtitle": "", "source": "manual", "items": [ { "title": "Caserío Otxoa", "category": "Identidad", "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&q=80", "url": "#" }, { "title": "Revista Abril", "category": "Editorial", "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80", "url": "#" }, { "title": "Ronda 12", "category": "Packaging", "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80", "url": "#" }, { "title": "Museo del Aire", "category": "Señalética", "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", "url": "#" } ], "columns": 2, "showFilters": false } },
+        { "type": "ImageBreak", "props": { "id": "ib-1", "imageUrl": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80", "title": "Diseñamos despacio para durar", "subtitle": "", "height": "medium", "parallax": true, "overlayOpacity": 0.4 } },
+        { "type": "LogoGrid", "props": { "id": "lg-1", "heading": "Han confiado en nosotros", "logos": [ { "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&q=80", "alt": "Cliente 1", "url": "#" }, { "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=300&q=80", "alt": "Cliente 2", "url": "#" }, { "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&q=80", "alt": "Cliente 3", "url": "#" }, { "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80", "alt": "Cliente 4", "url": "#" } ], "columns": 4, "grayscale": true, "monochrome": true, "animate": true } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "¿Tienes una idea?", "subtitle": "Cuéntanos. Nos gusta escuchar.", "ctaLabel": "Escribir al estudio", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "projects": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-p", "title": "Proyectos", "subtitle": "Una selección del trabajo de los últimos años", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-p", "heading": "", "subtitle": "", "source": "manual", "items": [ { "title": "Caserío Otxoa", "category": "Identidad", "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&q=80", "url": "#" }, { "title": "Revista Abril", "category": "Editorial", "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80", "url": "#" }, { "title": "Ronda 12", "category": "Packaging", "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80", "url": "#" }, { "title": "Museo del Aire", "category": "Señalética", "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", "url": "#" }, { "title": "Helado Nata", "category": "Packaging", "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", "url": "#" }, { "title": "Teatro Arbós", "category": "Identidad", "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80", "url": "#" } ], "columns": 3, "showFilters": true } },
+        { "type": "CTA", "props": { "id": "cta-p", "heading": "¿Quieres empezar un proyecto?", "subtitle": "", "ctaLabel": "Contactar", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Proyectos" } },
+      "zones": {}
+    },
+    "about": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-a", "title": "El estudio", "subtitle": "Tres diseñadores obsesionados con los detalles", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80", "align": "center", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ImageText", "props": { "id": "it-a", "imageUrl": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&q=80", "imageAlt": "El estudio", "heading": "Una oficina luminosa en el barrio de Chueca", "body": "Somos tres socios y un colaborador. Pocos proyectos al año, cada uno dedicado con tiempo y mimo. Si buscas velocidad por encima de todo, no somos tu estudio. Si buscas detalle, sí.", "ctaLabel": "", "ctaUrl": "", "imageSide": "left", "background": "white" } },
+        { "type": "TeamGrid", "props": { "id": "tm-a", "heading": "Los socios", "subtitle": "", "members": [ { "name": "Claudia Pelayo", "role": "Dirección de arte", "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80", "bio": "", "linkedin": "#", "email": "claudia@estudio.com" }, { "name": "Ander Gaztañaga", "role": "Diseño gráfico", "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "bio": "", "linkedin": "#", "email": "ander@estudio.com" }, { "name": "Rita Molpeceres", "role": "Diseño editorial", "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80", "bio": "", "linkedin": "#", "email": "rita@estudio.com" } ], "columns": 3, "shape": "square" } },
+        { "type": "CTA", "props": { "id": "cta-a", "heading": "¿Conversamos?", "subtitle": "", "ctaLabel": "Escríbenos", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Sobre nosotros" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Hablemos", "subtitle": "", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80", "align": "left", "height": "small", "overlay": 0.45, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "Cuéntanos tu proyecto", "subtitle": "Respondemos cada mensaje", "fields": [ { "name": "nombre", "label": "Tu nombre", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "mensaje", "label": "Tu mensaje", "type": "textarea", "required": true } ], "submitLabel": "Enviar", "layout": "split", "sideContent": "C/ Augusto Figueroa 10, 2º\\n28004 Madrid\\nhola@estudio.com" } },
+        { "type": "TextBlock", "props": { "id": "tb-c", "heading": "", "body": "Si prefieres, también puedes llamarnos al +34 91 532 18 40 de lunes a viernes por la mañana.", "align": "center", "maxWidth": "narrow", "background": "light" } }
+      ],
+      "root": { "props": { "title": "Contacto" } },
+      "zones": {}
+    }
+  }
+}

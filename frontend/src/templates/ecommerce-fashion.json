@@ -1,0 +1,51 @@
+{
+  "id": "ecommerce-fashion",
+  "name": "E-commerce de moda",
+  "description": "Tienda online para marcas de moda y complementos",
+  "category": "ecommerce",
+  "thumbnail": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "HeroSlider", "props": { "id": "hs-1", "slides": [ { "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&q=80", "title": "Nueva colección otoño 2026", "subtitle": "Prendas que acompañan", "ctaLabel": "Comprar ahora", "ctaUrl": "/shop" }, { "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80", "title": "Tejidos naturales", "subtitle": "Algodón orgánico y lino europeo", "ctaLabel": "Descubrir", "ctaUrl": "/shop" }, { "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80", "title": "Edición limitada", "subtitle": "Solo mientras haya stock", "ctaLabel": "Ver edición", "ctaUrl": "/shop" } ], "autoplay": true } },
+        { "type": "Marquee", "props": { "id": "mq-1", "items": ["ENVÍO GRATIS A PARTIR DE 60€", "DEVOLUCIONES EN 30 DÍAS", "PRODUCCIÓN EN PORTUGAL"], "speed": 30, "fontSize": 16, "background": "dark", "separator": "·" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-1", "heading": "Destacados", "subtitle": "Las prendas más queridas de esta temporada", "source": "manual", "items": [ { "title": "Camisa Nadia · 79€", "category": "Camisas", "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80", "url": "#" }, { "title": "Jersey Aurora · 119€", "category": "Punto", "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=80", "url": "#" }, { "title": "Pantalón Elba · 95€", "category": "Pantalones", "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80", "url": "#" }, { "title": "Vestido Solay · 135€", "category": "Vestidos", "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80", "url": "#" } ], "columns": 4, "showFilters": false } },
+        { "type": "ImageText", "props": { "id": "it-1", "imageUrl": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80", "imageAlt": "Taller de producción", "heading": "Ropa hecha para durar", "body": "Todas nuestras piezas se fabrican en un pequeño taller familiar al norte de Portugal. Trabajamos con tejidos certificados GOTS y pieles de curtición vegetal.", "ctaLabel": "Conoce nuestra historia", "ctaUrl": "/about", "imageSide": "left", "background": "white" } },
+        { "type": "Testimonials", "props": { "id": "tst-1", "heading": "Lo que dicen quienes ya las llevan", "items": [ { "quote": "La camisa Nadia es mi favorita desde hace dos años. El algodón es increíble.", "author": "Carla M.", "role": "Cliente desde 2022", "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80" }, { "quote": "Calidad superior a marcas mucho más caras.", "author": "Sergio B.", "role": "Cliente verificado", "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" } ], "layout": "grid", "background": "light" } },
+        { "type": "Newsletter", "props": { "id": "nl-1", "heading": "Recibe nuestras novedades", "subtitle": "Un correo al mes. Sin spam. Promesa de marca pequeña.", "placeholder": "tu@email.com", "submitLabel": "Suscribirme", "successMessage": "Gracias, ya formas parte.", "variant": "inline", "background": "white" } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "Envío gratuito en pedidos mayores de 60€", "subtitle": "", "ctaLabel": "Ir a la tienda", "ctaUrl": "/shop", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "shop": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-s", "title": "Tienda", "subtitle": "Colección completa otoño 2026", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80", "align": "left", "height": "small", "overlay": 0.3, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-s", "heading": "", "subtitle": "", "source": "manual", "items": [ { "title": "Camisa Nadia · 79€", "category": "Camisas", "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80", "url": "#" }, { "title": "Blusa Orla · 89€", "category": "Camisas", "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80", "url": "#" }, { "title": "Jersey Aurora · 119€", "category": "Punto", "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=80", "url": "#" }, { "title": "Cárdigan Vera · 125€", "category": "Punto", "image": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80", "url": "#" }, { "title": "Pantalón Elba · 95€", "category": "Pantalones", "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80", "url": "#" }, { "title": "Vestido Solay · 135€", "category": "Vestidos", "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80", "url": "#" }, { "title": "Falda Manon · 85€", "category": "Faldas", "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80", "url": "#" }, { "title": "Abrigo Ivera · 245€", "category": "Abrigos", "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=80", "url": "#" } ], "columns": 4, "showFilters": true } },
+        { "type": "CTA", "props": { "id": "cta-s", "heading": "¿Dudas con las tallas?", "subtitle": "Tenemos guía detallada y equipo de atención al cliente", "ctaLabel": "Contactar", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Tienda" } },
+      "zones": {}
+    },
+    "about": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-a", "title": "Nuestra historia", "subtitle": "Una marca pequeña que se toma la moda en serio", "kicker": "SOBRE NOSOTROS", "backgroundImage": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1200&q=80", "align": "center", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-a", "heading": "Empezamos en 2019", "body": "Dos amigas, una idea: crear una marca de ropa hecha con tiempo, con gente a la que conoces por su nombre y con materiales que puedas rastrear. Seis años después seguimos siendo pequeñas y queremos seguir siéndolo.", "align": "center", "maxWidth": "narrow", "background": "white" } },
+        { "type": "Gallery", "props": { "id": "gl-a", "heading": "El taller", "images": [ { "url": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80", "alt": "Taller 1", "caption": "Corte" }, { "url": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80", "alt": "Taller 2", "caption": "Confección" }, { "url": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=80", "alt": "Taller 3", "caption": "Acabados" } ], "columns": 3, "gap": "medium", "lightbox": true } },
+        { "type": "Features", "props": { "id": "ft-a", "heading": "Valores", "subtitle": "", "items": [ { "icon": "leaf", "title": "Materiales certificados", "description": "GOTS, OEKO-TEX y Leather Working Group." }, { "icon": "heart", "title": "Producción ética", "description": "Salarios justos y trazabilidad completa." }, { "icon": "clock", "title": "Hecho para durar", "description": "Prendas pensadas para diez temporadas, no para una." } ], "columns": 3 } },
+        { "type": "CTA", "props": { "id": "cta-a", "heading": "Únete a la comunidad", "subtitle": "Recibe nuestros correos mensuales", "ctaLabel": "Suscribirme", "ctaUrl": "#newsletter", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Sobre nosotros" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Contacto", "subtitle": "Atención al cliente real, con personas reales", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "¿En qué podemos ayudarte?", "subtitle": "", "fields": [ { "name": "nombre", "label": "Nombre", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "pedido", "label": "Nº de pedido (si aplica)", "type": "text", "required": false }, { "name": "motivo", "label": "Motivo", "type": "select", "options": ["Devolución", "Cambio", "Consulta sobre producto", "Otro"], "required": true }, { "name": "mensaje", "label": "Mensaje", "type": "textarea", "required": true } ], "submitLabel": "Enviar", "layout": "split", "sideContent": "hola@marca.com\\n+34 93 123 45 67\\nAtención L-V 10:00 - 18:00\\n\\nDevoluciones:\\nMarca c/o Logística\\nC/ del Mar 4, Nave 8\\n08820 El Prat de Llobregat" } },
+        { "type": "FAQ", "props": { "id": "faq-c", "heading": "Preguntas frecuentes", "subtitle": "", "items": [ { "question": "¿Cuánto tardan los envíos?", "answer": "24-72 horas en España peninsular. 5-7 días en Europa." }, { "question": "¿Cómo devuelvo una prenda?", "answer": "Tienes 30 días. Te enviamos etiqueta prepagada." }, { "question": "¿Hacéis envíos fuera de Europa?", "answer": "Sí, con DHL Express y plazos de 4-8 días laborables." } ], "columns": 2 } }
+      ],
+      "root": { "props": { "title": "Contacto" } },
+      "zones": {}
+    }
+  }
+}

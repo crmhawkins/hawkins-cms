@@ -1,0 +1,50 @@
+{
+  "id": "architecture-studio",
+  "name": "Estudio de arquitectura",
+  "description": "Web visual y sobria para estudios de arquitectura",
+  "category": "architecture",
+  "thumbnail": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-1", "title": "Arquitectura para habitar el tiempo", "subtitle": "Proyectos residenciales, culturales y de rehabilitación. Desde 2006.", "kicker": "ROSALES + OBEJAS ARQUITECTOS", "backgroundImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80", "align": "left", "height": "full", "overlay": 0.35, "ctaLabel": "Ver proyectos", "ctaUrl": "/projects" } },
+        { "type": "TextBlock", "props": { "id": "tb-1", "heading": "Una manera de entender la arquitectura", "body": "Diseñamos lugares que responden al contexto, al clima y a la forma de vivir de quienes los habitan. Con materiales honestos y detalles pensados.", "align": "center", "maxWidth": "medium", "background": "white" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-1", "heading": "Proyectos destacados", "subtitle": "", "source": "manual", "items": [ { "title": "Casa Enea", "category": "Residencial", "image": "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=600&q=80", "url": "#" }, { "title": "Centro cívico Tarazona", "category": "Cultural", "image": "https://images.unsplash.com/photo-1496564203457-11bb12075d90?w=600&q=80", "url": "#" }, { "title": "Rehabilitación Duque de Rivas", "category": "Rehabilitación", "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=80", "url": "#" }, { "title": "Bodega Alba Río", "category": "Industrial", "image": "https://images.unsplash.com/photo-1520637836862-4d197d17c38a?w=600&q=80", "url": "#" } ], "columns": 2, "showFilters": false } },
+        { "type": "ImageBreak", "props": { "id": "ib-1", "imageUrl": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=80", "title": "Diseñar es ordenar el vacío", "subtitle": "Alberto Campo Baeza", "height": "large", "parallax": true, "overlayOpacity": 0.5 } },
+        { "type": "Stats", "props": { "id": "st-1", "heading": "", "items": [ { "value": "48", "label": "Proyectos construidos", "suffix": "" }, { "value": "18", "label": "Años de actividad", "suffix": "" }, { "value": "7", "label": "Premios", "suffix": "" } ], "columns": 3, "animate": true, "background": "light" } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "Consulta con el estudio", "subtitle": "Atendemos encargos en toda España", "ctaLabel": "Escribir", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "projects": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-p", "title": "Proyectos", "subtitle": "Obra construida 2006-2024", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-p", "heading": "", "subtitle": "", "source": "manual", "items": [ { "title": "Casa Enea", "category": "Residencial", "image": "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=600&q=80", "url": "#" }, { "title": "Casa dos Patios", "category": "Residencial", "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80", "url": "#" }, { "title": "Centro cívico Tarazona", "category": "Cultural", "image": "https://images.unsplash.com/photo-1496564203457-11bb12075d90?w=600&q=80", "url": "#" }, { "title": "Biblioteca Sagasta", "category": "Cultural", "image": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=80", "url": "#" }, { "title": "Rehabilitación Duque de Rivas", "category": "Rehabilitación", "image": "https://images.unsplash.com/photo-1520637836862-4d197d17c38a?w=600&q=80", "url": "#" }, { "title": "Bodega Alba Río", "category": "Industrial", "image": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=600&q=80", "url": "#" } ], "columns": 3, "showFilters": true } },
+        { "type": "CTA", "props": { "id": "cta-p", "heading": "¿Tienes un proyecto?", "subtitle": "", "ctaLabel": "Contactar", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Proyectos" } },
+      "zones": {}
+    },
+    "about": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-a", "title": "El estudio", "subtitle": "", "kicker": "SOBRE NOSOTROS", "backgroundImage": "https://images.unsplash.com/photo-1496564203457-11bb12075d90?w=1200&q=80", "align": "center", "height": "medium", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ImageText", "props": { "id": "it-a", "imageUrl": "https://images.unsplash.com/photo-1520637836862-4d197d17c38a?w=1200&q=80", "imageAlt": "Estudio", "heading": "Fundado en 2006", "body": "El estudio nace en Zaragoza por iniciativa de Marta Rosales y Javier Obejas, ambos con formación en la ETSAB y experiencia previa en estudios de referencia. Hoy somos un equipo de 9 personas entre arquitectos, aparejadores y delineantes.", "ctaLabel": "", "ctaUrl": "", "imageSide": "right", "background": "white" } },
+        { "type": "TeamGrid", "props": { "id": "tm-a", "heading": "Socios directores", "subtitle": "", "members": [ { "name": "Marta Rosales", "role": "Arquitecta · socia", "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80", "bio": "Doctora por la ETSAB. Investiga en rehabilitación y materiales tradicionales.", "linkedin": "#", "email": "marta@rosalesobejas.com" }, { "name": "Javier Obejas", "role": "Arquitecto · socio", "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "bio": "Interesado en la arquitectura pública y los espacios colectivos.", "linkedin": "#", "email": "javier@rosalesobejas.com" } ], "columns": 2, "shape": "square" } },
+        { "type": "Timeline", "props": { "id": "tl-a", "heading": "Premios y reconocimientos", "subtitle": "", "items": [ { "year": "2012", "title": "Premio García Mercadal", "description": "Por la rehabilitación de la Casa Sagasta." }, { "year": "2018", "title": "FAD finalista", "description": "Por el Centro cívico de Tarazona." }, { "year": "2022", "title": "Mies van der Rohe mención", "description": "Por la Casa Enea." } ], "orientation": "horizontal" } },
+        { "type": "CTA", "props": { "id": "cta-a", "heading": "Hablemos de tu proyecto", "subtitle": "", "ctaLabel": "Contactar", "ctaUrl": "/contact", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Sobre nosotros" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Contacto", "subtitle": "", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "Cuéntanos tu encargo", "subtitle": "", "fields": [ { "name": "nombre", "label": "Nombre", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "tipo", "label": "Tipo de proyecto", "type": "select", "options": ["Vivienda unifamiliar", "Rehabilitación", "Interiorismo", "Concurso", "Otros"], "required": true }, { "name": "mensaje", "label": "Descripción", "type": "textarea", "required": true } ], "submitLabel": "Enviar", "layout": "split", "sideContent": "Paseo Independencia 21, 1º\\n50001 Zaragoza\\n+34 976 234 567\\nestudio@rosalesobejas.com" } },
+        { "type": "MapEmbed", "props": { "id": "mp-c", "heading": "", "address": "Paseo Independencia 21, Zaragoza", "latitude": 41.6518, "longitude": -0.8818, "zoom": 16, "height": 360, "style": "default" } }
+      ],
+      "root": { "props": { "title": "Contacto" } },
+      "zones": {}
+    }
+  }
+}

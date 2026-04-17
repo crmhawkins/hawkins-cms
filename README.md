@@ -84,45 +84,89 @@ Las credenciales de admin están en `.env` (generadas aleatoriamente).
 
 ---
 
-## 🧱 Bloques del editor (Fase 5 — en progreso)
+## 🧱 Bloques del editor
 
-Hero · HeroSlider · Gallery · Slider · Portfolio Grid · Features · CTA
-Testimonials · FAQ · Pricing · Team · Contact form · Rich text · Video embed
-Map · Stats · Timeline · Accordion · Tabs · Logo grid · Newsletter
+**22 bloques** listos (ver [`docs/blocks.md`](./docs/blocks.md)):
+
+Hero · HeroSlider · ImageBreak · Marquee · TextBlock · ImageText · Gallery
+VideoEmbed · Features · Stats · Timeline · LogoGrid · TeamGrid · PortfolioGrid
+Testimonials · Pricing · FAQ · CTA · ContactForm · Newsletter · Spacer · MapEmbed
+
+---
+
+## 🎨 Templates de arranque
+
+**15 plantillas** pre-configuradas (ver [`frontend/src/templates/`](./frontend/src/templates/)):
+
+- **Corporativa**: Corporate · Agency · Legal firm · Clinic
+- **Portfolio**: Creative studio · Photographer · Architecture studio · Interior designer
+- **E-commerce**: Fashion store · Product (one-star)
+- **Hostelería**: Hotel boutique · Restaurant
+- **Landing**: Event landing · Coming soon
+- **Blog**: Magazine
+
+Aplicables desde el admin o por API (`POST /api/templates/apply`).
 
 ---
 
 ## 🌍 Despliegue en Coolify
 
-Ver [`coolify/deploy.md`](./coolify/deploy.md) para la guía detallada.
+Ver [`docs/new-client.md`](./docs/new-client.md) para la guía paso a paso.
 
-Resumen:
+**Resumen:**
 
-1. En Coolify → **New Resource** → **Docker Compose** → pega el `docker-compose.yml` o conecta este repo.
-2. Configura las variables de entorno (`.env.example` como referencia).
-3. Asigna el dominio del cliente.
-4. Deploy.
+1. En Coolify → **New Resource** → **Docker Compose** → conecta este repo
+2. Configura variables de entorno (`.env.example` como referencia)
+3. Asigna el dominio del cliente al servicio `frontend`
+4. Deploy → espera 5 minutos → todo listo
+5. Login en `/login` y aplica un template
+
+**Tiempo por cliente nuevo: ~15 minutos.**
 
 ---
 
-## 🗺️ Roadmap
+## 🌐 Multi-idioma
 
-- [x] Fase 1: Stack base (docker-compose) ← **estamos aquí**
-- [ ] Fase 2: Auth unificada `/login` + roles
-- [ ] Fase 3: Colecciones base versionadas en YAML
-- [ ] Fase 4: Integración Puck editor
-- [ ] Fase 5: Bloques visuales (20+)
-- [ ] Fase 6: Header/Footer builder con overrides por página
-- [ ] Fase 7: Multi-idioma con DeepL + LibreTranslate
-- [ ] Fase 8: Templates de arranque (15+)
-- [ ] Fase 9: Onboarding guiado primer login
-- [ ] Fase 10: Documentación + video tutorial
+Sistema de traducción automática con fallback:
 
-**Módulos opcionales (bajo demanda):**
-- [ ] E-commerce + Stripe
+1. **DeepL Free API** (500k caracteres/mes gratis, mejor calidad)
+2. **LibreTranslate** self-hosted (ilimitado, integrado en el stack)
+
+Endpoint: `POST /api/translate { text | json, from?, to }`
+Usado desde el admin con el botón "Traducir a…" en cada campo o página.
+
+---
+
+## 🗺️ Estado del proyecto
+
+### Completado
+- [x] **Fase 1**: Stack docker-compose (MariaDB + Directus + Next.js + MinIO + LibreTranslate + phpMyAdmin)
+- [x] **Fase 2**: Roles Editor + Tienda Customer + Admin login unificado
+- [x] **Fase 3**: Colecciones (pages, posts, projects, products, team, menus, headers, footers, settings, seo, redirects, forms, form_submissions, translations)
+- [x] **Fase 4**: Editor Puck integrado en `/editor/[pageId]` + render dinámico de páginas en `/[[...slug]]`
+- [x] **Fase 5**: 22 bloques visuales listos
+- [x] **Fase 6**: Header/Footer builder con overrides por página
+- [x] **Fase 7**: Multi-idioma con DeepL + LibreTranslate
+- [x] **Fase 8**: 15 templates de arranque
+- [x] **Fase 9**: Onboarding guiado primer login
+- [x] **Fase 10**: Documentación completa (README, user guide, new-client, blocks)
+
+### Módulos opcionales (bajo demanda)
+- [ ] E-commerce + Stripe checkout (colecciones ya listas, falta UI + webhooks)
 - [ ] Newsletter (Mailerlite / Brevo)
 - [ ] Reservas / Booking
-- [ ] Member area
+- [ ] Member area protegida
+
+---
+
+## 📚 Documentación
+
+- [`docs/user-guide.md`](./docs/user-guide.md) — para el cliente final (editores)
+- [`docs/new-client.md`](./docs/new-client.md) — para desplegar una nueva instancia
+- [`docs/development.md`](./docs/development.md) — para desarrollar el CMS
+- [`docs/blocks.md`](./docs/blocks.md) — referencia de los 22 bloques
+- [`directus/README.md`](./directus/README.md) — colecciones y extensiones
+- [`coolify/deploy.md`](./coolify/deploy.md) — despliegue detallado
 
 ---
 

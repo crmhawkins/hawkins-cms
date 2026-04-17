@@ -106,6 +106,21 @@ services:
       EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
       EMAIL_SMTP_SECURE: ${EMAIL_SMTP_SECURE:-false}
 
+  # ─── Directus init (crea roles, colecciones y contenido base) ─
+  directus-init:
+    build:
+      context: ./directus/init
+      dockerfile: Dockerfile
+    depends_on:
+      - directus
+    volumes:
+      - directus_uploads:/directus/uploads
+    environment:
+      DIRECTUS_URL: http://directus:8055
+      DIRECTUS_ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      DIRECTUS_ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+    restart: "no"
+
   # ─── Next.js (frontend público + panel editor Puck) ───────
   frontend:
     build:

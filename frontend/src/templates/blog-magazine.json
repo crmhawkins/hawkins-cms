@@ -1,0 +1,49 @@
+{
+  "id": "blog-magazine",
+  "name": "Blog revista",
+  "description": "Para blogs, revistas digitales y medios especializados",
+  "category": "blog",
+  "thumbnail": "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-1", "title": "Cuaderno", "subtitle": "Una revista digital sobre libros, ideas y tecnología", "kicker": "EDICIÓN 2026", "backgroundImage": "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1200&q=80", "align": "left", "height": "large", "overlay": 0.45, "ctaLabel": "Leer últimos artículos", "ctaUrl": "/blog" } },
+        { "type": "TextBlock", "props": { "id": "tb-1", "heading": "Destacado de la semana", "body": "Por qué seguimos leyendo libros de papel aunque todo esté a un clic. Una conversación con la librera Marta Pascual.", "align": "center", "maxWidth": "medium", "background": "white" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-1", "heading": "Artículos recientes", "subtitle": "", "source": "posts", "items": [ { "title": "Por qué seguimos leyendo papel", "category": "Cultura", "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&q=80", "url": "/blog/por-que-seguimos-leyendo" }, { "title": "El regreso de los foros de internet", "category": "Tecnología", "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80", "url": "/blog/foros-internet" }, { "title": "Cuando escribimos a mano", "category": "Ideas", "image": "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&q=80", "url": "/blog/escribir-a-mano" }, { "title": "Redes sociales tranquilas", "category": "Tecnología", "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80", "url": "/blog/redes-tranquilas" }, { "title": "Leer poesía los domingos", "category": "Cultura", "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80", "url": "/blog/poesia-domingos" }, { "title": "El oficio del traductor", "category": "Entrevistas", "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", "url": "/blog/oficio-traductor" } ], "columns": 3, "showFilters": true } },
+        { "type": "ImageBreak", "props": { "id": "ib-1", "imageUrl": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80", "title": "Leer despacio en un mundo rápido", "subtitle": "Editorial del mes", "height": "medium", "parallax": true, "overlayOpacity": 0.5 } },
+        { "type": "Newsletter", "props": { "id": "nl-1", "heading": "Recibe Cuaderno en tu buzón", "subtitle": "Una selección semanal de los mejores textos, cada viernes por la mañana", "placeholder": "tu@email.com", "submitLabel": "Suscribirme", "successMessage": "Gracias por sumarte.", "variant": "inline", "background": "light" } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "Apóyanos", "subtitle": "Somos independientes. Cualquier contribución nos ayuda.", "ctaLabel": "Hacerme miembro", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "blog": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-b", "title": "Artículos", "subtitle": "Todo lo que hemos publicado, ordenado por fecha", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-b", "heading": "", "subtitle": "", "source": "posts", "items": [ { "title": "Por qué seguimos leyendo papel", "category": "Cultura", "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600&q=80", "url": "/blog/por-que-seguimos-leyendo" }, { "title": "El regreso de los foros de internet", "category": "Tecnología", "image": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&q=80", "url": "/blog/foros-internet" }, { "title": "Cuando escribimos a mano", "category": "Ideas", "image": "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=600&q=80", "url": "/blog/escribir-a-mano" }, { "title": "Redes sociales tranquilas", "category": "Tecnología", "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80", "url": "/blog/redes-tranquilas" }, { "title": "Leer poesía los domingos", "category": "Cultura", "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80", "url": "/blog/poesia-domingos" }, { "title": "El oficio del traductor", "category": "Entrevistas", "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", "url": "/blog/oficio-traductor" }, { "title": "Contra la productividad", "category": "Ideas", "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&q=80", "url": "/blog/contra-productividad" }, { "title": "Las librerías de barrio", "category": "Cultura", "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", "url": "/blog/librerias-barrio" } ], "columns": 4, "showFilters": true } },
+        { "type": "Newsletter", "props": { "id": "nl-b", "heading": "No te pierdas los próximos", "subtitle": "", "placeholder": "tu@email.com", "submitLabel": "Suscribirme", "successMessage": "Gracias.", "variant": "inline", "background": "white" } }
+      ],
+      "root": { "props": { "title": "Blog" } },
+      "zones": {}
+    },
+    "about": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-a", "title": "Qué es Cuaderno", "subtitle": "Una revista pequeña, hecha con tiempo", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1200&q=80", "align": "center", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-a", "heading": "Nuestra propuesta", "body": "Cuaderno es una revista digital independiente publicada desde 2021. Escribimos sobre libros, ideas y tecnología, pero siempre desde una perspectiva lenta y personal. No publicamos para ganar clics. Publicamos para que merezca la pena leer.", "align": "center", "maxWidth": "narrow", "background": "white" } },
+        { "type": "TeamGrid", "props": { "id": "tm-a", "heading": "Quién escribe", "subtitle": "", "members": [ { "name": "Adrián Buendía", "role": "Editor", "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "bio": "Filólogo, escribe sobre literatura contemporánea.", "linkedin": "", "email": "adrian@cuaderno.es" }, { "name": "Celia Mendieta", "role": "Redactora jefe", "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80", "bio": "Ex periodista en El Confidencial, especializada en tecnología.", "linkedin": "", "email": "celia@cuaderno.es" }, { "name": "Óscar Peñuela", "role": "Colaborador habitual", "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80", "bio": "Crítico literario y traductor.", "linkedin": "", "email": "" } ], "columns": 3, "shape": "circle" } },
+        { "type": "CTA", "props": { "id": "cta-a", "heading": "¿Quieres escribir con nosotros?", "subtitle": "Aceptamos colaboraciones externas", "ctaLabel": "Escribir a redacción", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Sobre nosotros" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Contacto", "subtitle": "Redacción, colaboraciones y prensa", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "Escríbenos", "subtitle": "Respondemos los miércoles", "fields": [ { "name": "nombre", "label": "Nombre", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "asunto", "label": "Motivo", "type": "select", "options": ["Colaboración", "Suscripción", "Prensa", "Otro"], "required": true }, { "name": "mensaje", "label": "Mensaje", "type": "textarea", "required": true } ], "submitLabel": "Enviar", "layout": "centered", "sideContent": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-c", "heading": "También por correo", "body": "Redacción: redaccion@cuaderno.es\\nColaboraciones: colaboraciones@cuaderno.es\\nPrensa: prensa@cuaderno.es", "align": "center", "maxWidth": "narrow", "background": "light" } }
+      ],
+      "root": { "props": { "title": "Contacto" } },
+      "zones": {}
+    }
+  }
+}

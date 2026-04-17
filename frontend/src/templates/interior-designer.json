@@ -1,0 +1,50 @@
+{
+  "id": "interior-designer",
+  "name": "Interiorista",
+  "description": "Para estudios de interiorismo y decoración",
+  "category": "interior",
+  "thumbnail": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "HeroSlider", "props": { "id": "hs-1", "slides": [ { "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80", "title": "Espacios que cuentan historias", "subtitle": "Interiorismo residencial a medida", "ctaLabel": "Ver proyectos", "ctaUrl": "/projects" }, { "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80", "title": "Cada casa, un carácter", "subtitle": "Piezas únicas y diseño atemporal", "ctaLabel": "Conócenos", "ctaUrl": "/about" }, { "image": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=1200&q=80", "title": "Desde el plano hasta el último detalle", "subtitle": "Dirección integral de proyecto", "ctaLabel": "Contactar", "ctaUrl": "/contact" } ], "autoplay": true } },
+        { "type": "TextBlock", "props": { "id": "tb-1", "heading": "Estudio Valdecañas", "body": "Interiorismo residencial de alta gama. Dirigido por Lucía Valdecañas desde 2014. Trabajamos proyectos integrales en Madrid, Marbella y Mallorca.", "align": "center", "maxWidth": "medium", "background": "white" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-1", "heading": "Proyectos recientes", "subtitle": "", "source": "manual", "items": [ { "title": "Ático Almagro", "category": "Residencial", "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80", "url": "#" }, { "title": "Villa Sa Fortesa", "category": "Residencial", "image": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80", "url": "#" }, { "title": "Apartamento Marbella", "category": "Residencial", "image": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600&q=80", "url": "#" } ], "columns": 3, "showFilters": false } },
+        { "type": "ImageText", "props": { "id": "it-1", "imageUrl": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80", "imageAlt": "Proyecto interior", "heading": "Un método, tres fases", "body": "Primero escuchamos. Después dibujamos. Y finalmente construimos con los mejores artesanos y proveedores. Acompañamos cada proyecto de principio a fin, sin intermediarios.", "ctaLabel": "Leer más", "ctaUrl": "/about", "imageSide": "left", "background": "light" } },
+        { "type": "Testimonials", "props": { "id": "tst-1", "heading": "Nuestros clientes", "items": [ { "quote": "Lucía entendió perfectamente la casa que queríamos. El resultado superó cualquier expectativa.", "author": "Alicia y Pedro", "role": "Ático Almagro, Madrid", "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80" } ], "layout": "single", "background": "white" } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "¿Quieres que estudiemos tu casa?", "subtitle": "Primera visita sin compromiso", "ctaLabel": "Pedir cita", "ctaUrl": "/contact", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "projects": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-p", "title": "Proyectos", "subtitle": "Una mirada al trabajo del estudio", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "Gallery", "props": { "id": "gl-p", "heading": "Ático Almagro", "images": [ { "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80", "alt": "Salón", "caption": "Salón" }, { "url": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80", "alt": "Comedor", "caption": "Comedor" }, { "url": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&q=80", "alt": "Dormitorio", "caption": "Dormitorio principal" }, { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80", "alt": "Cocina", "caption": "Cocina" } ], "columns": 2, "gap": "medium", "lightbox": true } },
+        { "type": "Gallery", "props": { "id": "gl-p2", "heading": "Villa Sa Fortesa", "images": [ { "url": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80", "alt": "Salón", "caption": "" }, { "url": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600&q=80", "alt": "Exterior", "caption": "" } ], "columns": 2, "gap": "medium", "lightbox": true } },
+        { "type": "CTA", "props": { "id": "cta-p", "heading": "Hablemos de tu proyecto", "subtitle": "", "ctaLabel": "Contactar", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Proyectos" } },
+      "zones": {}
+    },
+    "about": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-a", "title": "Estudio Valdecañas", "subtitle": "Interiorismo residencial desde 2014", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ImageText", "props": { "id": "it-a", "imageUrl": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&q=80", "imageAlt": "Lucía Valdecañas", "heading": "Lucía Valdecañas", "body": "Formada en el Istituto Europeo di Design de Milán, trabajó siete años en Studio Peregalli antes de fundar su propio estudio en Madrid. Especializada en viviendas de alta gama donde el diseño convive con la historia de sus habitantes.", "ctaLabel": "", "ctaUrl": "", "imageSide": "left", "background": "white" } },
+        { "type": "Features", "props": { "id": "ft-a", "heading": "Servicios", "subtitle": "", "items": [ { "icon": "pencil", "title": "Proyecto integral", "description": "Desde el plano hasta la última pieza decorativa." }, { "icon": "sofa", "title": "Decoración", "description": "Selección de mobiliario, textiles e iluminación." }, { "icon": "hammer", "title": "Dirección de obra", "description": "Coordinación con gremios y control de calidad." }, { "icon": "search", "title": "Consultoría", "description": "Sesiones puntuales de asesoramiento." } ], "columns": 4 } },
+        { "type": "CTA", "props": { "id": "cta-a", "heading": "¿Conversamos?", "subtitle": "", "ctaLabel": "Escribir", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Sobre nosotros" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Contacto", "subtitle": "", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "Pide tu cita", "subtitle": "Primera visita sin compromiso", "fields": [ { "name": "nombre", "label": "Nombre", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "telefono", "label": "Teléfono", "type": "tel", "required": false }, { "name": "ubicacion", "label": "Ubicación del proyecto", "type": "text", "required": false }, { "name": "mensaje", "label": "Cuéntanos", "type": "textarea", "required": true } ], "submitLabel": "Enviar", "layout": "split", "sideContent": "C/ Almagro 12, 2º izq.\\n28010 Madrid\\n+34 91 308 72 10\\nestudio@valdecanias.com" } },
+        { "type": "MapEmbed", "props": { "id": "mp-c", "heading": "", "address": "Calle Almagro 12, Madrid", "latitude": 40.4323, "longitude": -3.6926, "zoom": 16, "height": 360, "style": "default" } }
+      ],
+      "root": { "props": { "title": "Contacto" } },
+      "zones": {}
+    }
+  }
+}
