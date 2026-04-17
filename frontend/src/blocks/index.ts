@@ -34,6 +34,13 @@ import { Spacer } from './Spacer';
 import { ImageBreak } from './ImageBreak';
 import { Marquee } from './Marquee';
 import { Newsletter } from './Newsletter';
+import { ProductGrid } from './ProductGrid';
+import { ProductFeatured } from './ProductFeatured';
+import { CartMini } from './CartMini';
+import { BookingForm } from './BookingForm';
+import { ServicesList } from './ServicesList';
+import { MemberGate } from './MemberGate';
+import { MemberLoginForm } from './MemberLoginForm';
 
 export const blocks = {
   Hero: Hero.config,
@@ -58,6 +65,13 @@ export const blocks = {
   ImageBreak: ImageBreak.config,
   Marquee: Marquee.config,
   Newsletter: Newsletter.config,
+  ProductGrid: ProductGrid.config,
+  ProductFeatured: ProductFeatured.config,
+  CartMini: CartMini.config,
+  BookingForm: BookingForm.config,
+  ServicesList: ServicesList.config,
+  MemberGate: MemberGate.config,
+  MemberLoginForm: MemberLoginForm.config,
 } as const;
 
 export const puckConfig: Config = {
@@ -69,6 +83,9 @@ export const puckConfig: Config = {
     Portfolio: { components: ['PortfolioGrid'] },
     Social: { components: ['Testimonials', 'Pricing', 'FAQ'] },
     Conversión: { components: ['CTA', 'ContactForm', 'Newsletter'] },
+    Tienda: { components: ['ProductGrid', 'ProductFeatured', 'CartMini'] },
+    Reservas: { components: ['BookingForm', 'ServicesList'] },
+    Miembros: { components: ['MemberGate', 'MemberLoginForm'] },
     Utilidades: { components: ['Spacer', 'MapEmbed'] },
   },
   root: {

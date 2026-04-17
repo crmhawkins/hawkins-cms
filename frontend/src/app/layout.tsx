@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { cms } from '@/lib/cms';
+import { Providers } from '@/components/Providers';
 
 export async function generateMetadata(): Promise<Metadata> {
   const s = await cms.getSettings();
@@ -52,7 +53,9 @@ export default async function RootLayout({
           />
         )}
       </head>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

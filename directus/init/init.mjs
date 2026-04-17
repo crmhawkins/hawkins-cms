@@ -429,6 +429,44 @@ async function main() {
   await addField('settings', 'contact_phone', 'string');
   await addField('settings', 'contact_address', 'text');
 
+  // ─── Módulos activables ──────────────────
+  await addField('settings', 'module_ecommerce_enabled', 'boolean', { default: false, note: 'Activa la tienda online' });
+  await addField('settings', 'module_newsletter_enabled', 'boolean', { default: false, note: 'Activa la captura de suscriptores' });
+  await addField('settings', 'module_booking_enabled', 'boolean', { default: false, note: 'Activa las reservas' });
+  await addField('settings', 'module_members_enabled', 'boolean', { default: false, note: 'Activa el área privada de miembros' });
+
+  // ─── E-commerce config ────────────────
+  await addField('settings', 'stripe_publishable_key', 'string', { note: 'Clave pública Stripe' });
+  await addField('settings', 'stripe_secret_key', 'string', { note: 'Clave secreta Stripe', hidden: true });
+  await addField('settings', 'stripe_webhook_secret', 'string', { note: 'Secret del webhook Stripe', hidden: true });
+  await addField('settings', 'shop_currency', 'string', { default: 'EUR' });
+  await addField('settings', 'shop_shipping_flat_rate', 'decimal', { default: 0, options: { step: 0.01 } });
+  await addField('settings', 'shop_tax_rate', 'decimal', { default: 21, note: 'IVA en porcentaje', options: { step: 0.01 } });
+
+  // ─── Newsletter config ────────────────
+  await addField('settings', 'newsletter_provider', 'string', {
+    interface: 'select-dropdown',
+    options: {
+      choices: [
+        { text: 'Brevo (ex-SendInBlue)', value: 'brevo' },
+        { text: 'Mailerlite', value: 'mailerlite' },
+        { text: 'Mailchimp', value: 'mailchimp' },
+        { text: 'Interno (solo BBDD)', value: 'internal' },
+      ],
+    },
+    default: 'internal',
+  });
+  await addField('settings', 'newsletter_api_key', 'string', { hidden: true });
+  await addField('settings', 'newsletter_list_id', 'string', { note: 'ID de la lista donde se suscribe' });
+
+  // ─── Booking config ────────────────
+  await addField('settings', 'booking_duration_minutes', 'integer', { default: 60 });
+  await addField('settings', 'booking_buffer_minutes', 'integer', { default: 15, note: 'Tiempo entre reservas' });
+  await addField('settings', 'booking_advance_days', 'integer', { default: 60, note: 'Días máx de antelación' });
+  await addField('settings', 'booking_hours_start', 'string', { default: '09:00' });
+  await addField('settings', 'booking_hours_end', 'string', { default: '19:00' });
+  await addField('settings', 'booking_days', 'json', { interface: 'tags', default: ['mon', 'tue', 'wed', 'thu', 'fri'] });
+
   // ─── redirects ──────────────────────
   await createCol('redirects', { icon: 'compare_arrows', note: 'Redirecciones 301/302' });
   await addField('redirects', 'from_path', 'string', { required: true });
@@ -458,6 +496,163 @@ async function main() {
   await addField('translations', 'locale', 'string', { required: true });
   await addField('translations', 'value', 'text');
 
+  // ═══════════════════════════════════════════════════════════
+  // ─── COLECCIONES DE MÓDULOS OPCIONALES ────────────────────
+  // ═══════════════════════════════════════════════════════════
+
+  // ─── E-COMMERCE ────────────────────
+  // orders
+  await createCol('orders', { icon: 'shopping_cart', note: 'Pedidos de la tienda' });
+  await addField('orders', 'order_number', 'string', { required: true, note: 'Ej. #ORD-20260401-0001' });
+  await addField('orders', 'customer_email', 'string', { required: true });
+  await addField('orders', 'customer_name', 'string');
+  await addField('orders', 'customer_phone', 'string');
+  await addField('orders', 'shipping_address', 'json', { note: '{line1, line2, city, postal_code, state, country}' });
+  await addField('orders', 'billing_address', 'json');
+  await addField('orders', 'subtotal', 'decimal', { options: { step: 0.01 } });
+  await addField('orders', 'tax', 'decimal', { options: { step: 0.01 } });
+  await addField('orders', 'shipping', 'decimal', { options: { step: 0.01 } });
+  await addField('orders', 'total', 'decimal', { options: { step: 0.01 } });
+  await addField('orders', 'currency', 'string', { default: 'EUR' });
+  await addField('orders', 'payment_status', 'string', {
+    interface: 'select-dropdown',
+    options: {
+      choices: [
+        { text: 'Pendiente', value: 'pending' },
+        { text: 'Pagado', value: 'paid' },
+        { text: 'Fallido', value: 'failed' },
+        { text: 'Reembolsado', value: 'refunded' },
+      ],
+    },
+    default: 'pending',
+  });
+  await addField('orders', 'fulfillment_status', 'string', {
+    interface: 'select-dropdown',
+    options: {
+      choices: [
+        { text: 'Sin procesar', value: 'unfulfilled' },
+        { text: 'Procesando', value: 'processing' },
+        { text: 'Enviado', value: 'shipped' },
+        { text: 'Entregado', value: 'delivered' },
+        { text: 'Cancelado', value: 'cancelled' },
+      ],
+    },
+    default: 'unfulfilled',
+  });
+  await addField('orders', 'stripe_session_id', 'string');
+  await addField('orders', 'stripe_payment_intent_id', 'string');
+  await addField('orders', 'tracking_number', 'string');
+  await addField('orders', 'notes', 'text');
+
+  // order_items
+  await createCol('order_items', { icon: 'inventory_2', note: 'Líneas de pedido' });
+  await addField('order_items', 'order_id', 'uuid', { interface: 'select-dropdown-m2o', special: ['m2o'], required: true });
+  await addField('order_items', 'product_id', 'uuid', { interface: 'select-dropdown-m2o', special: ['m2o'] });
+  await addField('order_items', 'product_name', 'string', { required: true, note: 'Snapshot del nombre' });
+  await addField('order_items', 'product_sku', 'string');
+  await addField('order_items', 'unit_price', 'decimal', { options: { step: 0.01 } });
+  await addField('order_items', 'quantity', 'integer', { default: 1 });
+  await addField('order_items', 'subtotal', 'decimal', { options: { step: 0.01 } });
+
+  // ─── NEWSLETTER ────────────────────
+  await createCol('subscribers', { icon: 'mark_email_read', note: 'Suscriptores al newsletter' });
+  await addField('subscribers', 'email', 'string', { required: true });
+  await addField('subscribers', 'name', 'string');
+  await addField('subscribers', 'confirmed', 'boolean', { default: false });
+  await addField('subscribers', 'confirmation_token', 'string', { hidden: true });
+  await addField('subscribers', 'unsubscribe_token', 'string', { hidden: true });
+  await addField('subscribers', 'source', 'string', { note: 'De dónde vino (footer, popup…)' });
+  await addField('subscribers', 'provider_id', 'string', { note: 'ID externo en Brevo/Mailerlite/…' });
+  await addField('subscribers', 'tags', 'json', { interface: 'tags' });
+
+  // ─── BOOKING ────────────────────
+  await createCol('booking_services', { icon: 'event_note', note: 'Servicios reservables' });
+  await addField('booking_services', 'name', 'string', { required: true });
+  await addField('booking_services', 'description', 'text');
+  await addField('booking_services', 'duration_minutes', 'integer', { default: 60 });
+  await addField('booking_services', 'price', 'decimal', { options: { step: 0.01 } });
+  await addField('booking_services', 'image', 'uuid', { interface: 'file-image', special: ['file'] });
+  await addField('booking_services', 'active', 'boolean', { default: true });
+
+  await createCol('bookings', { icon: 'event_available', note: 'Reservas' });
+  await addField('bookings', 'service_id', 'uuid', { interface: 'select-dropdown-m2o', special: ['m2o'] });
+  await addField('bookings', 'customer_name', 'string', { required: true });
+  await addField('bookings', 'customer_email', 'string', { required: true });
+  await addField('bookings', 'customer_phone', 'string');
+  await addField('bookings', 'date', 'date', { required: true });
+  await addField('bookings', 'time', 'string', { required: true, note: 'HH:MM' });
+  await addField('bookings', 'duration_minutes', 'integer', { default: 60 });
+  await addField('bookings', 'notes', 'text');
+  await addField('bookings', 'booking_status', 'string', {
+    interface: 'select-dropdown',
+    options: {
+      choices: [
+        { text: 'Pendiente', value: 'pending' },
+        { text: 'Confirmada', value: 'confirmed' },
+        { text: 'Completada', value: 'completed' },
+        { text: 'Cancelada', value: 'cancelled' },
+        { text: 'No-show', value: 'no_show' },
+      ],
+    },
+    default: 'pending',
+  });
+  await addField('bookings', 'confirmation_token', 'string', { hidden: true });
+
+  // ─── MEMBERS ────────────────────
+  await createCol('members', { icon: 'badge', note: 'Miembros del área privada' });
+  await addField('members', 'email', 'string', { required: true });
+  await addField('members', 'name', 'string');
+  await addField('members', 'password_hash', 'string', { hidden: true, note: 'Hash bcrypt' });
+  await addField('members', 'email_verified', 'boolean', { default: false });
+  await addField('members', 'verification_token', 'string', { hidden: true });
+  await addField('members', 'reset_token', 'string', { hidden: true });
+  await addField('members', 'reset_expires', 'timestamp', { hidden: true });
+  await addField('members', 'avatar', 'uuid', { interface: 'file-image', special: ['file'] });
+  await addField('members', 'tier', 'string', {
+    interface: 'select-dropdown',
+    options: {
+      choices: [
+        { text: 'Free', value: 'free' },
+        { text: 'Premium', value: 'premium' },
+        { text: 'VIP', value: 'vip' },
+      ],
+    },
+    default: 'free',
+  });
+  await addField('members', 'last_login', 'timestamp');
+
+  await createCol('member_content', { icon: 'lock', note: 'Contenido exclusivo para miembros' });
+  await addField('member_content', 'title', 'string', { required: true });
+  await addField('member_content', 'slug', 'string', { required: true });
+  await addField('member_content', 'excerpt', 'text');
+  await addField('member_content', 'cover_image', 'uuid', { interface: 'file-image', special: ['file'] });
+  await addField('member_content', 'content', 'text', { interface: 'input-rich-text-html' });
+  await addField('member_content', 'required_tier', 'string', {
+    interface: 'select-dropdown',
+    options: {
+      choices: [
+        { text: 'Free', value: 'free' },
+        { text: 'Premium', value: 'premium' },
+        { text: 'VIP', value: 'vip' },
+      ],
+    },
+    default: 'free',
+  });
+  await addField('member_content', 'content_type', 'string', {
+    interface: 'select-dropdown',
+    options: {
+      choices: [
+        { text: 'Artículo', value: 'article' },
+        { text: 'Video', value: 'video' },
+        { text: 'Descarga', value: 'download' },
+        { text: 'Curso', value: 'course' },
+      ],
+    },
+    default: 'article',
+  });
+  await addField('member_content', 'video_url', 'string');
+  await addField('member_content', 'download_file', 'uuid', { interface: 'file', special: ['file'] });
+
   // ─── RELACIONES M2O ─────────────────
   log('Creando relaciones…');
   const addRelation = async (collection, field, related_collection) => {
@@ -486,6 +681,9 @@ async function main() {
   await addRelation('pages', 'footer_override', 'footers');
   await addRelation('headers', 'menu_id', 'menus');
   await addRelation('form_submissions', 'form_id', 'forms');
+  await addRelation('order_items', 'order_id', 'orders');
+  await addRelation('order_items', 'product_id', 'products');
+  await addRelation('bookings', 'service_id', 'booking_services');
 
   // ─── CONTENIDO INICIAL ──────────────
   log('Creando contenido inicial…');

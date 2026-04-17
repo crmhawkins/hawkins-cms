@@ -151,11 +151,13 @@ Usado desde el admin con el botón "Traducir a…" en cada campo o página.
 - [x] **Fase 9**: Onboarding guiado primer login
 - [x] **Fase 10**: Documentación completa (README, user guide, new-client, blocks)
 
-### Módulos opcionales (bajo demanda)
-- [ ] E-commerce + Stripe checkout (colecciones ya listas, falta UI + webhooks)
-- [ ] Newsletter (Mailerlite / Brevo)
-- [ ] Reservas / Booking
-- [ ] Member area protegida
+### Módulos opcionales — todos listos, se activan/desactivan desde Settings
+- [x] **E-commerce + Stripe** — productos, carrito, checkout, webhooks, pedidos
+- [x] **Newsletter** — Brevo / Mailerlite / Mailchimp / interno
+- [x] **Reservas** — servicios, slots, calendario, confirmación por token
+- [x] **Members** — registro, login, JWT, tiers (free/premium/vip), contenido gated
+
+Ver [`docs/modules.md`](./docs/modules.md) para la guía completa.
 
 ---
 
