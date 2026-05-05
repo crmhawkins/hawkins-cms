@@ -1,0 +1,53 @@
+{
+  "id": "restaurant",
+  "name": "Restaurante",
+  "description": "Web para restaurantes con carta, reservas y reseñas",
+  "category": "food",
+  "thumbnail": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-1", "title": "La Raspa", "subtitle": "Cocina de mercado y producto de temporada. Barrio de Lavapiés, Madrid.", "kicker": "DESDE 2017", "backgroundImage": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80", "align": "center", "height": "large", "overlay": 0.5, "ctaLabel": "Reservar mesa", "ctaUrl": "/reservations" } },
+        { "type": "TextBlock", "props": { "id": "tb-1", "heading": "Un restaurante pequeño con ambición", "body": "Trabajamos con pescados de lonja, verduras del huerto familiar y carne de ganadería regenerativa. Carta corta que cambia cada quince días.", "align": "center", "maxWidth": "medium", "background": "white" } },
+        { "type": "Gallery", "props": { "id": "gl-1", "heading": "Platos que hemos preparado estos días", "images": [ { "url": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80", "alt": "Plato 1", "caption": "Tomate en tres texturas" }, { "url": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80", "alt": "Plato 2", "caption": "Merluza a la brasa" }, { "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80", "alt": "Plato 3", "caption": "Canelón de rustido" }, { "url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80", "alt": "Plato 4", "caption": "Cordero glaseado" }, { "url": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80", "alt": "Plato 5", "caption": "Torrija caramelizada" } ], "columns": 5, "gap": "small", "lightbox": true } },
+        { "type": "ImageText", "props": { "id": "it-1", "imageUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80", "imageAlt": "Cocina", "heading": "Cocina abierta, equipo pequeño", "body": "Seis personas en sala y cocina, todos con nombre y apellidos. Nos gusta que nos conozcas. Pasa por la cocina cuando quieras saludar.", "ctaLabel": "Conócenos", "ctaUrl": "/about", "imageSide": "right", "background": "light" } },
+        { "type": "Testimonials", "props": { "id": "tst-1", "heading": "Opiniones recientes", "items": [ { "quote": "Uno de los mejores restaurantes de barrio de Madrid. Producto de diez y precio justo.", "author": "El Comidista", "role": "Crítica gastronómica", "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" }, { "quote": "Fui con mi madre y ahora quiere ir todas las semanas. Cocina honesta y buena.", "author": "Javier T.", "role": "Google Reviews", "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" } ], "layout": "grid", "background": "white" } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "Reserva tu mesa", "subtitle": "Abrimos de martes a sábado, comidas y cenas", "ctaLabel": "Reservar ahora", "ctaUrl": "/reservations", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "menu": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-m", "title": "La carta", "subtitle": "Cambia cada quince días, según lo que encontramos en el mercado", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-m1", "heading": "Entrantes", "body": "Tomate del huerto en tres texturas · 9€\\nAnchoas del Cantábrico con mantequilla · 14€\\nVieira a la brasa con puerros · 16€\\nCroquetas de cocido (4 uds) · 8€", "align": "left", "maxWidth": "medium", "background": "white" } },
+        { "type": "TextBlock", "props": { "id": "tb-m2", "heading": "Principales", "body": "Merluza a la brasa con pil-pil de temporada · 22€\\nCordero lechal glaseado con hinojo · 24€\\nCanelón de rustido de ternera · 18€\\nArroz meloso de codorniz · 19€", "align": "left", "maxWidth": "medium", "background": "light" } },
+        { "type": "TextBlock", "props": { "id": "tb-m3", "heading": "Postres", "body": "Torrija caramelizada con helado de vainilla · 8€\\nLeche frita con frutos rojos · 7€\\nSelección de quesos (3 tipos) · 12€", "align": "left", "maxWidth": "medium", "background": "white" } },
+        { "type": "ImageBreak", "props": { "id": "ib-m", "imageUrl": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=80", "title": "Menú degustación: 48€", "subtitle": "Seis pases · Disponible solo con reserva", "height": "medium", "parallax": false, "overlayOpacity": 0.5 } },
+        { "type": "CTA", "props": { "id": "cta-m", "heading": "Reserva tu mesa", "subtitle": "", "ctaLabel": "Reservar", "ctaUrl": "/reservations", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Carta" } },
+      "zones": {}
+    },
+    "reservations": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-r", "title": "Reservar mesa", "subtitle": "Te confirmamos en menos de 2 horas", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80", "align": "center", "height": "medium", "overlay": 0.45, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-r", "heading": "Datos de la reserva", "subtitle": "", "fields": [ { "name": "nombre", "label": "Nombre", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "telefono", "label": "Teléfono", "type": "tel", "required": true }, { "name": "fecha", "label": "Fecha", "type": "date", "required": true }, { "name": "hora", "label": "Hora", "type": "time", "required": true }, { "name": "personas", "label": "Comensales", "type": "number", "required": true }, { "name": "alergias", "label": "Alergias o comentarios", "type": "textarea", "required": false } ], "submitLabel": "Enviar reserva", "layout": "centered", "sideContent": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-r", "heading": "Horario", "body": "Martes a sábado\\nComidas: 13:30 - 15:30\\nCenas: 20:30 - 22:30\\n\\nDomingo y lunes cerrado", "align": "center", "maxWidth": "narrow", "background": "light" } },
+        { "type": "MapEmbed", "props": { "id": "mp-r", "heading": "Cómo llegar", "address": "Calle del Olvido 12, 28012 Madrid", "latitude": 40.4086, "longitude": -3.7027, "zoom": 16, "height": 360, "style": "default" } }
+      ],
+      "root": { "props": { "title": "Reservas" } },
+      "zones": {}
+    },
+    "about": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-a", "title": "La Raspa", "subtitle": "Una pequeña familia alrededor de los fogones", "kicker": "SOBRE NOSOTROS", "backgroundImage": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-a", "heading": "Nuestra historia", "body": "Abrimos en 2017 con la idea de abrir un restaurante donde comer bien sin ceremonia. Siete años después, seguimos con la misma filosofía: producto honesto, cocina clara y trato cercano.", "align": "center", "maxWidth": "narrow", "background": "white" } },
+        { "type": "TeamGrid", "props": { "id": "tm-a", "heading": "El equipo", "subtitle": "", "members": [ { "name": "Álex Laredo", "role": "Chef y copropietario", "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "bio": "", "linkedin": "", "email": "" }, { "name": "Pilar Camarasa", "role": "Sala y copropietaria", "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80", "bio": "", "linkedin": "", "email": "" }, { "name": "Mateo Arias", "role": "Jefe de cocina", "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80", "bio": "", "linkedin": "", "email": "" } ], "columns": 3, "shape": "circle" } },
+        { "type": "CTA", "props": { "id": "cta-a", "heading": "Ven a vernos", "subtitle": "", "ctaLabel": "Reservar", "ctaUrl": "/reservations", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Sobre nosotros" } },
+      "zones": {}
+    }
+  }
+}

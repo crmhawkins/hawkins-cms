@@ -1,0 +1,50 @@
+{
+  "id": "portfolio-photographer",
+  "name": "Portfolio fotógrafo",
+  "description": "Portfolio visual para fotógrafos profesionales",
+  "category": "portfolio",
+  "thumbnail": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-1", "title": "Luz. Historia. Instante.", "subtitle": "Fotografía de autor para marcas, editoriales y particulares.", "kicker": "MARINA OSSORIO · FOTÓGRAFA", "backgroundImage": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=1200&q=80", "align": "center", "height": "full", "overlay": 0.4, "ctaLabel": "Ver galería", "ctaUrl": "/gallery" } },
+        { "type": "Gallery", "props": { "id": "gl-1", "heading": "Trabajos destacados", "images": [ { "url": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=600&q=80", "alt": "Paisaje", "caption": "Monte Perdido, 2023" }, { "url": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80", "alt": "Retrato", "caption": "Encargos editoriales" }, { "url": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=80", "alt": "Arquitectura", "caption": "Arquitecturas domésticas" }, { "url": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=600&q=80", "alt": "Paisaje urbano", "caption": "Urbanismos" }, { "url": "https://images.unsplash.com/photo-1520637836862-4d197d17c38a?w=600&q=80", "alt": "Interior", "caption": "Interiores" }, { "url": "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=600&q=80", "alt": "Línea", "caption": "Línea y luz" } ], "columns": 3, "gap": "small", "lightbox": true } },
+        { "type": "ImageText", "props": { "id": "it-1", "imageUrl": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200&q=80", "imageAlt": "Marina Ossorio", "heading": "Sobre Marina", "body": "Fotógrafa desde 2011, formada en la Escuela Lens de Madrid. Mi trabajo se mueve entre el retrato, la arquitectura y el paisaje. Colaboro con revistas como El País Semanal, AD España o Vogue Living.", "ctaLabel": "Leer más", "ctaUrl": "/about", "imageSide": "right", "background": "white" } },
+        { "type": "LogoGrid", "props": { "id": "lg-1", "heading": "Publicaciones y clientes", "logos": [ { "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=300&q=80", "alt": "Cliente 1", "url": "#" }, { "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=300&q=80", "alt": "Cliente 2", "url": "#" }, { "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&q=80", "alt": "Cliente 3", "url": "#" }, { "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&q=80", "alt": "Cliente 4", "url": "#" } ], "columns": 4, "grayscale": true, "monochrome": true, "animate": false } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "¿Necesitas un fotógrafo?", "subtitle": "Trabajo por encargo en toda España", "ctaLabel": "Pedir presupuesto", "ctaUrl": "/contact", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "gallery": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-g", "title": "Galería", "subtitle": "Una selección del archivo 2018-2024", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "Gallery", "props": { "id": "gl-g1", "heading": "Retrato", "images": [ { "url": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80", "alt": "Retrato 1", "caption": "" }, { "url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80", "alt": "Retrato 2", "caption": "" }, { "url": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80", "alt": "Retrato 3", "caption": "" }, { "url": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80", "alt": "Retrato 4", "caption": "" } ], "columns": 4, "gap": "small", "lightbox": true } },
+        { "type": "Gallery", "props": { "id": "gl-g2", "heading": "Arquitectura", "images": [ { "url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80", "alt": "Arq 1", "caption": "" }, { "url": "https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=600&q=80", "alt": "Arq 2", "caption": "" }, { "url": "https://images.unsplash.com/photo-1496564203457-11bb12075d90?w=600&q=80", "alt": "Arq 3", "caption": "" }, { "url": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=600&q=80", "alt": "Arq 4", "caption": "" } ], "columns": 4, "gap": "small", "lightbox": true } },
+        { "type": "Gallery", "props": { "id": "gl-g3", "heading": "Paisaje", "images": [ { "url": "https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=600&q=80", "alt": "Paisaje 1", "caption": "" }, { "url": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80", "alt": "Paisaje 2", "caption": "" }, { "url": "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=80", "alt": "Paisaje 3", "caption": "" }, { "url": "https://images.unsplash.com/photo-1520637836862-4d197d17c38a?w=600&q=80", "alt": "Paisaje 4", "caption": "" } ], "columns": 4, "gap": "small", "lightbox": true } },
+        { "type": "CTA", "props": { "id": "cta-g", "heading": "Imprimir una obra", "subtitle": "Venta de copias firmadas en edición limitada", "ctaLabel": "Ver copias disponibles", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Galería" } },
+      "zones": {}
+    },
+    "about": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-a", "title": "Marina Ossorio", "subtitle": "Fotografía desde 2011", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-a", "heading": "Recorrido", "body": "Nacida en Oviedo en 1985, estudió Bellas Artes en Salamanca y se formó como fotógrafa en la Escuela Lens de Madrid. Desde 2015 trabaja como fotógrafa independiente entre Madrid y Lisboa, colaborando regularmente con revistas de arquitectura y lifestyle.", "align": "center", "maxWidth": "narrow", "background": "white" } },
+        { "type": "Timeline", "props": { "id": "tl-a", "heading": "Hitos", "subtitle": "", "items": [ { "year": "2015", "title": "Primera exposición individual", "description": "'Ángulos lentos', Sala El Brocense, Cáceres." }, { "year": "2018", "title": "Beca BBVA", "description": "Proyecto documental sobre el norte peninsular." }, { "year": "2021", "title": "Publicación de libro", "description": "'Arquitecturas domésticas' (Editorial La Fábrica)." }, { "year": "2024", "title": "Retrospectiva", "description": "Sala Canal Isabel II, Madrid. Comisariada por Laura Terré." } ], "orientation": "vertical" } },
+        { "type": "CTA", "props": { "id": "cta-a", "heading": "Contacto profesional", "subtitle": "Disponible para encargos comerciales y editoriales", "ctaLabel": "Contactar", "ctaUrl": "/contact", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Sobre mí" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Contacto", "subtitle": "Para encargos, prensa y compra de copias", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "Escríbeme", "subtitle": "Respondo personalmente en menos de 72 horas", "fields": [ { "name": "nombre", "label": "Nombre", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "asunto", "label": "Motivo", "type": "select", "options": ["Encargo comercial", "Encargo editorial", "Compra de copia", "Prensa", "Otro"], "required": true }, { "name": "mensaje", "label": "Mensaje", "type": "textarea", "required": true } ], "submitLabel": "Enviar", "layout": "centered", "sideContent": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-c", "heading": "", "body": "Representación para publicidad: Laura Andersson — laura@agencia-representacion.com\\nContacto directo: marina@marinaossorio.com", "align": "center", "maxWidth": "narrow", "background": "light" } }
+      ],
+      "root": { "props": { "title": "Contacto" } },
+      "zones": {}
+    }
+  }
+}

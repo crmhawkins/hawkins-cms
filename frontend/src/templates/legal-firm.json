@@ -1,0 +1,51 @@
+{
+  "id": "legal-firm",
+  "name": "Despacho jurídico",
+  "description": "Web profesional para bufetes y abogados",
+  "category": "legal",
+  "thumbnail": "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-1", "title": "Asesoramiento jurídico de confianza desde 1987", "subtitle": "Un bufete con raíces clásicas y visión contemporánea. Derecho mercantil, fiscal y procesal al más alto nivel.", "kicker": "ABOGADOS · ECONOMISTAS", "backgroundImage": "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1200&q=80", "align": "left", "height": "large", "overlay": 0.55, "ctaLabel": "Consulta inicial", "ctaUrl": "/contact" } },
+        { "type": "Features", "props": { "id": "ft-1", "heading": "Áreas de práctica", "subtitle": "Especialistas en asuntos empresariales y patrimoniales complejos", "items": [ { "icon": "briefcase", "title": "Derecho mercantil", "description": "Contratos, societario, compraventas, reestructuraciones y operaciones." }, { "icon": "calculator", "title": "Fiscal y tributario", "description": "Planificación fiscal, inspecciones y procedimientos ante Hacienda." }, { "icon": "scale", "title": "Procesal y arbitrajes", "description": "Litigación civil, mercantil y arbitrajes nacionales e internacionales." }, { "icon": "users", "title": "Laboral", "description": "Asesoramiento integral en relaciones laborales y planes de igualdad." }, { "icon": "home", "title": "Inmobiliario", "description": "Operaciones de compraventa, promociones y urbanismo." }, { "icon": "shield", "title": "Compliance penal", "description": "Modelos de prevención de delitos y defensa penal corporativa." } ], "columns": 3 } },
+        { "type": "ImageText", "props": { "id": "it-1", "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80", "imageAlt": "Socio director del despacho", "heading": "Tres generaciones al servicio de nuestros clientes", "body": "Fundado por Don Ramón Alcocer en 1987, el despacho ha crecido manteniendo intactos los valores que lo distinguen: rigor técnico, discreción absoluta y atención personal. Hoy somos 24 profesionales y seguimos cogiendo el teléfono a la primera.", "ctaLabel": "Conozca al equipo", "ctaUrl": "/team", "imageSide": "left", "background": "white" } },
+        { "type": "Stats", "props": { "id": "st-1", "heading": "", "items": [ { "value": "37", "label": "Años de experiencia", "suffix": "" }, { "value": "24", "label": "Profesionales", "suffix": "" }, { "value": "500", "label": "Clientes activos", "suffix": "+" }, { "value": "9", "label": "Áreas de práctica", "suffix": "" } ], "columns": 4, "animate": true, "background": "dark" } },
+        { "type": "Testimonials", "props": { "id": "tst-1", "heading": "La palabra de nuestros clientes", "items": [ { "quote": "Nos acompañaron en una operación muy compleja con una profesionalidad impecable. Recomendables sin reservas.", "author": "Fernando Aliaga", "role": "Consejero delegado, Grupo Aliaga", "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" }, { "quote": "Son el despacho que cualquier empresa familiar debería tener detrás. Cercanía, rigor y una visión a largo plazo.", "author": "Beatriz Murcia", "role": "Presidenta, Bodegas Murcia", "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80" } ], "layout": "grid", "background": "light" } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "Primera consulta sin coste", "subtitle": "Analizaremos su caso y le indicaremos los pasos a seguir", "ctaLabel": "Solicitar consulta", "ctaUrl": "/contact", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "services": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-s", "title": "Áreas de práctica", "subtitle": "Un equipo multidisciplinar para atender asuntos complejos", "kicker": "SERVICIOS JURÍDICOS", "backgroundImage": "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1200&q=80", "align": "center", "height": "medium", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-s", "heading": "Cómo trabajamos", "body": "Cada caso comienza con una reunión sin compromiso en la que evaluamos la viabilidad y los tiempos. Explicamos honorarios con total transparencia antes de iniciar cualquier actuación.", "align": "center", "maxWidth": "narrow", "background": "white" } },
+        { "type": "Features", "props": { "id": "ft-s", "heading": "", "subtitle": "", "items": [ { "icon": "briefcase", "title": "Mercantil y societario", "description": "Constituciones, pactos de socios, due diligence, M&A y reestructuraciones." }, { "icon": "calculator", "title": "Fiscal", "description": "Planificación, consultas vinculantes y defensa en procedimientos de inspección." }, { "icon": "scale", "title": "Procesal", "description": "Litigios en todas las instancias, incluidos Tribunal Supremo y TJUE." }, { "icon": "users", "title": "Laboral", "description": "Negociación colectiva, despidos, expatriados y planes de igualdad." } ], "columns": 2 } },
+        { "type": "FAQ", "props": { "id": "faq-s", "heading": "Preguntas frecuentes", "subtitle": "", "items": [ { "question": "¿Cómo se calculan los honorarios?", "answer": "Dependiendo del asunto ofrecemos igualas, tarifa por hora o precio cerrado. Siempre hay presupuesto previo por escrito." }, { "question": "¿Atienden particulares?", "answer": "Sí, especialmente en materia patrimonial, herencias y procedimientos civiles." }, { "question": "¿Trabajan en otros idiomas?", "answer": "Ofrecemos servicio en inglés, francés y portugués." }, { "question": "¿Tienen seguro de responsabilidad?", "answer": "Por supuesto, con una cobertura ampliamente superior a la exigida por el Colegio." } ], "columns": 2 } },
+        { "type": "CTA", "props": { "id": "cta-s", "heading": "Explíquenos su caso", "subtitle": "Confidencialidad garantizada", "ctaLabel": "Contactar", "ctaUrl": "/contact", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Servicios" } },
+      "zones": {}
+    },
+    "team": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-t", "title": "Nuestro equipo", "subtitle": "Abogados, economistas y fiscalistas a su disposición", "kicker": "PROFESIONALES", "backgroundImage": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=1200&q=80", "align": "center", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "TeamGrid", "props": { "id": "tm-t", "heading": "Socios", "subtitle": "La dirección del despacho", "members": [ { "name": "Ramón Alcocer Jr.", "role": "Socio director · Mercantil", "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80", "bio": "Socio director desde 2010, especializado en operaciones corporativas y gobierno societario.", "linkedin": "#", "email": "ralcocer@despacho.com" }, { "name": "Pilar Manjón", "role": "Socia · Fiscal", "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80", "bio": "Economista y abogada, referente en planificación fiscal internacional.", "linkedin": "#", "email": "pmanjon@despacho.com" }, { "name": "Gonzalo Iturriaga", "role": "Socio · Procesal", "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80", "bio": "Más de 200 sentencias favorables en asuntos mercantiles de alta complejidad.", "linkedin": "#", "email": "giturriaga@despacho.com" }, { "name": "Cecilia Dorado", "role": "Socia · Laboral", "photo": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80", "bio": "Experta en negociación colectiva y relaciones laborales complejas.", "linkedin": "#", "email": "cdorado@despacho.com" } ], "columns": 4, "shape": "square" } },
+        { "type": "TextBlock", "props": { "id": "tb-t", "heading": "Asociados y colaboradores", "body": "Además de los socios, el despacho cuenta con 20 asociados y colaboradores que completan las distintas áreas de práctica. Todos son licenciados en Derecho colegiados, muchos con formación complementaria en economía o empresa.", "align": "center", "maxWidth": "narrow", "background": "light" } },
+        { "type": "CTA", "props": { "id": "cta-t", "heading": "¿Busca un despacho de confianza?", "subtitle": "Solicite una primera reunión sin coste", "ctaLabel": "Contactar", "ctaUrl": "/contact", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Equipo" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Contacto", "subtitle": "Estamos a su disposición", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.6, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "Solicite una consulta", "subtitle": "Tratamiento confidencial de su información", "fields": [ { "name": "nombre", "label": "Nombre y apellidos", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "telefono", "label": "Teléfono de contacto", "type": "tel", "required": true }, { "name": "area", "label": "Área de interés", "type": "select", "options": ["Mercantil", "Fiscal", "Procesal", "Laboral", "Inmobiliario", "Otros"], "required": true }, { "name": "mensaje", "label": "Descripción del asunto", "type": "textarea", "required": true } ], "submitLabel": "Enviar consulta", "layout": "split", "sideContent": "C/ Velázquez 45, 3º dcha.\\n28001 Madrid\\n+34 91 435 80 20\\ninfo@despacho.com" } },
+        { "type": "MapEmbed", "props": { "id": "mp-c", "heading": "Nuestra oficina", "address": "Calle Velázquez 45, 28001 Madrid", "latitude": 40.4272, "longitude": -3.6854, "zoom": 16, "height": 400, "style": "default" } }
+      ],
+      "root": { "props": { "title": "Contacto" } },
+      "zones": {}
+    }
+  }
+}

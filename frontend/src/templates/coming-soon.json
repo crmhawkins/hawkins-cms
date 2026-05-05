@@ -1,0 +1,19 @@
+{
+  "id": "coming-soon",
+  "name": "Próximamente",
+  "description": "Página de aterrizaje simple para capturar emails antes del lanzamiento",
+  "category": "launch",
+  "thumbnail": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-1", "title": "Algo nuevo está en camino", "subtitle": "Estamos trabajando en una idea que creemos que te va a gustar. Mientras tanto, deja tu email y serás de los primeros en saberlo.", "kicker": "PRÓXIMAMENTE", "backgroundImage": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&q=80", "align": "center", "height": "full", "overlay": 0.6, "ctaLabel": "Avísame cuando estemos listos", "ctaUrl": "#newsletter" } },
+        { "type": "Newsletter", "props": { "id": "nl-1", "heading": "Sé el primero", "subtitle": "Nada de spam. Un único correo cuando lancemos.", "placeholder": "tu@email.com", "submitLabel": "Avísame", "successMessage": "Gracias, te avisaremos.", "variant": "centered", "background": "white" } },
+        { "type": "Features", "props": { "id": "ft-1", "heading": "Qué estamos preparando", "subtitle": "Un pequeño adelanto", "items": [ { "icon": "sparkles", "title": "Una experiencia nueva", "description": "Diseñada desde cero pensando en ti." }, { "icon": "clock", "title": "Pronto disponible", "description": "Primavera de 2026, sin fecha exacta aún." }, { "icon": "heart", "title": "Hecho con mimo", "description": "Un equipo pequeño, muchas ganas." } ], "columns": 3 } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "Síguenos mientras tanto", "subtitle": "Instagram · Twitter · LinkedIn", "ctaLabel": "@nuestracuenta", "ctaUrl": "https://instagram.com", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Próximamente" } },
+      "zones": {}
+    }
+  }
+}

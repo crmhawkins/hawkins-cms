@@ -1,0 +1,51 @@
+{
+  "id": "ecommerce-product",
+  "name": "Lanzamiento de producto",
+  "description": "Landing de producto físico: un solo producto protagonista",
+  "category": "ecommerce",
+  "thumbnail": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-1", "title": "Orbe — la lámpara que cambia todo", "subtitle": "Iluminación cálida, app silenciosa, madera maciza. Ya disponible.", "kicker": "NOVEDAD 2026", "backgroundImage": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=1200&q=80", "align": "left", "height": "full", "overlay": 0.3, "ctaLabel": "Comprar por 189€", "ctaUrl": "/shop" } },
+        { "type": "Features", "props": { "id": "ft-1", "heading": "Pensada hasta el último detalle", "subtitle": "", "items": [ { "icon": "lightbulb", "title": "Luz cálida de 2700K", "description": "Temperatura ideal para entornos domésticos, regulable por app." }, { "icon": "cog", "title": "Materiales naturales", "description": "Madera de fresno maciza y cable textil trenzado." }, { "icon": "wifi", "title": "Conectada por WiFi", "description": "Compatible con Google Home, Alexa y Apple HomeKit." }, { "icon": "leaf", "title": "Fabricada en Europa", "description": "Producción en Oporto con componentes de origen responsable." } ], "columns": 4 } },
+        { "type": "Gallery", "props": { "id": "gl-1", "heading": "Orbe en cinco entornos", "images": [ { "url": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&q=80", "alt": "Orbe salón", "caption": "Salón" }, { "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", "alt": "Orbe escritorio", "caption": "Escritorio" }, { "url": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80", "alt": "Orbe dormitorio", "caption": "Dormitorio" }, { "url": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", "alt": "Orbe detalle", "caption": "Detalle" } ], "columns": 4, "gap": "small", "lightbox": true } },
+        { "type": "ImageText", "props": { "id": "it-1", "imageUrl": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80", "imageAlt": "Taller", "heading": "Dos años de desarrollo", "body": "Detrás de Orbe hay un equipo de seis personas, 17 prototipos descartados y una alianza con el taller Calheiros Pinto, donde llevan ebanistería en la familia desde 1948. El resultado: una lámpara que parece simple, pero no lo es.", "ctaLabel": "Lee la historia", "ctaUrl": "/about", "imageSide": "right", "background": "light" } },
+        { "type": "Pricing", "props": { "id": "pr-1", "heading": "Versiones disponibles", "subtitle": "Elige la tuya", "plans": [ { "name": "Orbe Fresno", "price": "189", "period": "€", "description": "La clásica", "features": ["Madera de fresno natural", "Cable trenzado beige", "Bombilla LED incluida", "Envío en 48h"], "ctaLabel": "Comprar", "ctaUrl": "#", "highlighted": false }, { "name": "Orbe Nogal", "price": "219", "period": "€", "description": "La más elegante", "features": ["Madera de nogal", "Cable trenzado negro", "Bombilla LED incluida", "Envío en 48h"], "ctaLabel": "Comprar", "ctaUrl": "#", "highlighted": true }, { "name": "Orbe Edición", "price": "289", "period": "€", "description": "Edición limitada 200 unidades", "features": ["Roble antiguo recuperado", "Numerada y firmada", "Caja de regalo", "Envío certificado"], "ctaLabel": "Comprar", "ctaUrl": "#", "highlighted": false } ], "columns": 3 } },
+        { "type": "Testimonials", "props": { "id": "tst-1", "heading": "Primeras opiniones", "items": [ { "quote": "La luz más agradable que he tenido en casa. Se nota el cuidado.", "author": "Helena R.", "role": "Verificada en Amazon", "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80" }, { "quote": "Estéticamente perfecta, la app funciona rápido. Recomendada.", "author": "Jorge P.", "role": "Verificado", "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" } ], "layout": "grid", "background": "white" } },
+        { "type": "FAQ", "props": { "id": "faq-1", "heading": "Preguntas frecuentes", "subtitle": "", "items": [ { "question": "¿Qué bombilla usa?", "answer": "LED E27, incluida. Compatible con cualquier E27 regulable." }, { "question": "¿Tiene garantía?", "answer": "2 años de garantía y asistencia técnica en España." }, { "question": "¿Hay envío express?", "answer": "Sí, 24 horas por 9€ adicionales." }, { "question": "¿Puedo devolverla?", "answer": "Tienes 30 días para probarla en casa." } ], "columns": 2 } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "Llévate la tuya hoy", "subtitle": "Envío gratuito a toda España", "ctaLabel": "Comprar Orbe desde 189€", "ctaUrl": "/shop", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "shop": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-s", "title": "Comprar Orbe", "subtitle": "Elige tu versión y acabado", "kicker": "TIENDA", "backgroundImage": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "PortfolioGrid", "props": { "id": "pg-s", "heading": "Variantes", "subtitle": "", "source": "manual", "items": [ { "title": "Orbe Fresno · 189€", "category": "Clásica", "image": "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=600&q=80", "url": "#" }, { "title": "Orbe Nogal · 219€", "category": "Premium", "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80", "url": "#" }, { "title": "Orbe Edición · 289€", "category": "Edición limitada", "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80", "url": "#" }, { "title": "Bombilla extra · 12€", "category": "Accesorios", "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", "url": "#" } ], "columns": 4, "showFilters": false } },
+        { "type": "CTA", "props": { "id": "cta-s", "heading": "Envío gratis en 48h", "subtitle": "Y devoluciones en 30 días", "ctaLabel": "Ir al inicio", "ctaUrl": "/", "align": "center", "variant": "light" } }
+      ],
+      "root": { "props": { "title": "Tienda" } },
+      "zones": {}
+    },
+    "about": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-a", "title": "Detrás de Orbe", "subtitle": "Cómo hicimos una lámpara que nos gustaría tener", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-a", "heading": "Todo empezó con una frustración", "body": "No encontrábamos una lámpara que fuese bonita, conectada y honesta. Las tres cosas a la vez. Así que decidimos hacerla. Dos años, muchos cafés y algunos viajes a Oporto después, Orbe es real.", "align": "center", "maxWidth": "narrow", "background": "white" } },
+        { "type": "VideoEmbed", "props": { "id": "vd-a", "heading": "Del prototipo al producto", "subtitle": "Un vídeo de 3 minutos sobre cómo se hace Orbe", "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "videoType": "youtube", "poster": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80", "autoplay": false, "controls": true, "aspectRatio": "16:9" } },
+        { "type": "CTA", "props": { "id": "cta-a", "heading": "¿Quieres una Orbe en casa?", "subtitle": "", "ctaLabel": "Comprar ahora", "ctaUrl": "/shop", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Sobre nosotros" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Contacto", "subtitle": "", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "Hola", "subtitle": "Dudas, prensa, colaboraciones", "fields": [ { "name": "nombre", "label": "Nombre", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "asunto", "label": "Asunto", "type": "select", "options": ["Pedido", "Devolución", "Prensa", "Partnership", "Otro"], "required": true }, { "name": "mensaje", "label": "Mensaje", "type": "textarea", "required": true } ], "submitLabel": "Enviar", "layout": "centered", "sideContent": "" } },
+        { "type": "TextBlock", "props": { "id": "tb-c", "heading": "Otros canales", "body": "hola@orbelamp.com · +34 91 000 00 00 · L-V 10-18h", "align": "center", "maxWidth": "narrow", "background": "light" } }
+      ],
+      "root": { "props": { "title": "Contacto" } },
+      "zones": {}
+    }
+  }
+}

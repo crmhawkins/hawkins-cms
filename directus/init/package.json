@@ -1,0 +1,13 @@
+{
+  "name": "hawkins-cms-directus-init",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "init": "node init.mjs"
+  },
+  "dependencies": {
+    "@directus/sdk": "^19.0.0",
+    "node-fetch": "^3.3.2"
+  }
+}

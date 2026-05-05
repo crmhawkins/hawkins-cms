@@ -1,0 +1,53 @@
+{
+  "id": "hotel-boutique",
+  "name": "Hotel boutique",
+  "description": "Web elegante para hoteles pequeños y con personalidad",
+  "category": "hospitality",
+  "thumbnail": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80",
+  "pages": {
+    "home": {
+      "content": [
+        { "type": "HeroSlider", "props": { "id": "hs-1", "slides": [ { "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80", "title": "Hotel Viñasol", "subtitle": "Un refugio en el corazón de La Rioja Alavesa", "ctaLabel": "Reservar", "ctaUrl": "/contact" }, { "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80", "title": "12 habitaciones con alma", "subtitle": "Cada una con su propia historia", "ctaLabel": "Ver habitaciones", "ctaUrl": "/rooms" }, { "image": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=1200&q=80", "title": "Cocina de raíz", "subtitle": "Producto local y fuego de leña", "ctaLabel": "Descubrir", "ctaUrl": "/dining" } ], "autoplay": true } },
+        { "type": "TextBlock", "props": { "id": "tb-1", "heading": "Bienvenidos a Viñasol", "body": "Una casona del siglo XVIII rehabilitada con sensibilidad, rodeada de viñedos centenarios. Un hotel pequeño donde el silencio, el paisaje y la mesa son los protagonistas.", "align": "center", "maxWidth": "medium", "background": "white" } },
+        { "type": "Features", "props": { "id": "ft-1", "heading": "La experiencia Viñasol", "subtitle": "", "items": [ { "icon": "bed", "title": "12 habitaciones únicas", "description": "Cada una con vistas a los viñedos o al patio interior." }, { "icon": "utensils", "title": "Restaurante con estrella", "description": "Cocina de raíz firmada por el chef Álvaro Ansótegui." }, { "icon": "wine", "title": "Bodega propia", "description": "Catas y visitas guiadas por el sumiller del hotel." }, { "icon": "spa", "title": "Spa vinoterapia", "description": "Tratamientos con uva y productos naturales de la zona." } ], "columns": 4 } },
+        { "type": "Gallery", "props": { "id": "gl-1", "heading": "El hotel en imágenes", "images": [ { "url": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80", "alt": "Fachada", "caption": "Fachada" }, { "url": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80", "alt": "Habitación", "caption": "Habitación superior" }, { "url": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&q=80", "alt": "Salón", "caption": "Salón principal" }, { "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80", "alt": "Jardín", "caption": "Jardín" }, { "url": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80", "alt": "Restaurante", "caption": "Restaurante" }, { "url": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=600&q=80", "alt": "Bodega", "caption": "Bodega" } ], "columns": 3, "gap": "medium", "lightbox": true } },
+        { "type": "Testimonials", "props": { "id": "tst-1", "heading": "Lo que dicen quienes ya nos conocen", "items": [ { "quote": "Tres noches perfectas. Habitación, cena y trato memorables. Volveremos.", "author": "Isabel y Carlos", "role": "Madrid", "photo": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80" }, { "quote": "El sitio perfecto para desconectar. Silencio, paisaje y cena de diez.", "author": "Henrik J.", "role": "Copenhague", "photo": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&q=80" } ], "layout": "slider", "background": "light" } },
+        { "type": "CTA", "props": { "id": "cta-1", "heading": "Reserva tu escapada", "subtitle": "Tarifas desde 185€ con desayuno incluido", "ctaLabel": "Reservar ahora", "ctaUrl": "/contact", "backgroundImage": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Inicio" } },
+      "zones": {}
+    },
+    "rooms": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-r", "title": "Habitaciones", "subtitle": "12 habitaciones, todas distintas, todas únicas", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=1200&q=80", "align": "left", "height": "medium", "overlay": 0.4, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ImageText", "props": { "id": "it-r1", "imageUrl": "https://images.unsplash.com/photo-1615873968403-89e068629265?w=1200&q=80", "imageAlt": "Habitación estándar", "heading": "Habitación Viña · desde 185€", "body": "28 m². Cama king, baño con ducha efecto lluvia, vistas a los viñedos. Incluye desayuno buffet.", "ctaLabel": "Reservar", "ctaUrl": "/contact", "imageSide": "left", "background": "white" } },
+        { "type": "ImageText", "props": { "id": "it-r2", "imageUrl": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80", "imageAlt": "Habitación superior", "heading": "Superior Reserva · desde 235€", "body": "36 m². Salón separado, bañera y ducha, balcón privado. Amenidades premium.", "ctaLabel": "Reservar", "ctaUrl": "/contact", "imageSide": "right", "background": "light" } },
+        { "type": "ImageText", "props": { "id": "it-r3", "imageUrl": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80", "imageAlt": "Suite", "heading": "Suite Gran Reserva · desde 365€", "body": "55 m². Dos ambientes, chimenea, terraza privada con vistas. Servicio de butler disponible.", "ctaLabel": "Reservar", "ctaUrl": "/contact", "imageSide": "left", "background": "white" } },
+        { "type": "FAQ", "props": { "id": "faq-r", "heading": "Información útil", "subtitle": "", "items": [ { "question": "¿Incluye desayuno?", "answer": "Sí, todas las tarifas incluyen nuestro desayuno buffet con producto local." }, { "question": "¿Aceptan mascotas?", "answer": "Sí, en habitaciones específicas y con suplemento de 25€/noche." }, { "question": "¿Política de cancelación?", "answer": "Cancelación gratuita hasta 48h antes de la llegada." } ], "columns": 2 } },
+        { "type": "CTA", "props": { "id": "cta-r", "heading": "Consulta disponibilidad", "subtitle": "", "ctaLabel": "Reservar", "ctaUrl": "/contact", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Habitaciones" } },
+      "zones": {}
+    },
+    "dining": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-d", "title": "Restaurante Tierra", "subtitle": "Cocina de raíz con estrella Michelin", "kicker": "GASTRONOMÍA", "backgroundImage": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80", "align": "center", "height": "large", "overlay": 0.5, "ctaLabel": "Reservar mesa", "ctaUrl": "/contact" } },
+        { "type": "ImageText", "props": { "id": "it-d", "imageUrl": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80", "imageAlt": "Chef", "heading": "Chef Álvaro Ansótegui", "body": "Formado en Mugaritz y Noma, Álvaro vuelve a sus raíces con una cocina honesta y profundamente conectada al territorio. Menú degustación de 9 pases.", "ctaLabel": "Ver menú", "ctaUrl": "#", "imageSide": "left", "background": "white" } },
+        { "type": "Gallery", "props": { "id": "gl-d", "heading": "Platos de temporada", "images": [ { "url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80", "alt": "Plato 1", "caption": "Verduras del huerto" }, { "url": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80", "alt": "Plato 2", "caption": "Cordero lechal" }, { "url": "https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&q=80", "alt": "Plato 3", "caption": "Postre" } ], "columns": 3, "gap": "medium", "lightbox": true } },
+        { "type": "TextBlock", "props": { "id": "tb-d", "heading": "Horarios", "body": "Cena de miércoles a domingo, 20:30 a 22:30. Almuerzo viernes, sábado y domingo, 13:30 a 15:00. Menú degustación 98€, maridaje 55€.", "align": "center", "maxWidth": "narrow", "background": "light" } },
+        { "type": "CTA", "props": { "id": "cta-d", "heading": "Reserva tu mesa", "subtitle": "Se recomienda hacerlo con al menos una semana de antelación", "ctaLabel": "Reservar", "ctaUrl": "/contact", "align": "center", "variant": "dark" } }
+      ],
+      "root": { "props": { "title": "Restaurante" } },
+      "zones": {}
+    },
+    "contact": {
+      "content": [
+        { "type": "Hero", "props": { "id": "hero-c", "title": "Reserva y contacto", "subtitle": "", "kicker": "", "backgroundImage": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=80", "align": "center", "height": "small", "overlay": 0.5, "ctaLabel": "", "ctaUrl": "" } },
+        { "type": "ContactForm", "props": { "id": "cf-c", "heading": "Solicita tu reserva", "subtitle": "Te confirmamos en menos de 12 horas", "fields": [ { "name": "nombre", "label": "Nombre y apellidos", "type": "text", "required": true }, { "name": "email", "label": "Email", "type": "email", "required": true }, { "name": "telefono", "label": "Teléfono", "type": "tel", "required": true }, { "name": "entrada", "label": "Fecha de entrada", "type": "date", "required": true }, { "name": "salida", "label": "Fecha de salida", "type": "date", "required": true }, { "name": "personas", "label": "Personas", "type": "number", "required": true }, { "name": "mensaje", "label": "Peticiones especiales", "type": "textarea", "required": false } ], "submitLabel": "Solicitar reserva", "layout": "split", "sideContent": "Hotel Viñasol\\nCtra. Laguardia km 3\\n01300 Álava\\n+34 945 600 100\\nreservas@vinasol.es" } },
+        { "type": "MapEmbed", "props": { "id": "mp-c", "heading": "Cómo llegar", "address": "Carretera Laguardia km 3, Álava", "latitude": 42.5534, "longitude": -2.5863, "zoom": 13, "height": 400, "style": "default" } }
+      ],
+      "root": { "props": { "title": "Reservas" } },
+      "zones": {}
+    }
+  }
+}
