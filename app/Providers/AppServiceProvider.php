@@ -28,5 +28,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('edit-content', function (User $user) {
             return $user->hasRole(['admin', 'editor', 'superadmin']);
         });
+
+        \App\Models\Page::observe(\App\Observers\PageObserver::class);
+        \App\Models\Block::observe(\App\Observers\BlockObserver::class);
     }
 }

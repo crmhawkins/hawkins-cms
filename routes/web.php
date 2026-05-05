@@ -39,6 +39,14 @@ Route::post('csp-report', function () {
     return response()->noContent();
 })->withoutMiddleware([\Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class]);
 
+// Blog
+Route::get('/blog', [App\Http\Controllers\BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [App\Http\Controllers\BlogController::class, 'show'])->name('blog.show');
+
+// Sitemap + robots
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+Route::get('/robots.txt', [App\Http\Controllers\SitemapController::class, 'robots'])->name('robots');
+
 // Public CMS page routes (must be last to avoid conflicts)
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/{slug}', [PageController::class, 'show'])->name('page.show')

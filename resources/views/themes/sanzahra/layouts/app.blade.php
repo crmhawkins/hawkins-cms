@@ -42,6 +42,7 @@
 
 @php
     use App\Models\Header;
+    use App\Models\Menu;
     use App\Models\MenuItem;
 
     $header       = Header::getInstance();
@@ -49,9 +50,16 @@
     $bgColor      = $header->bg_color ?? '#ffffff';
     $textColor    = $header->text_color ?? '#000000';
 
-    $menuItems = MenuItem::whereNull('parent_id')
-        ->orderBy('sort')
-        ->get();
+    // Menu locations — fallback to all root items if no menu assigned
+    $headerMenu  = Menu::forLocation('header');
+    $menuItems   = $headerMenu
+        ? $headerMenu->items()->whereNull('parent_id')->get()
+        : MenuItem::whereNull('parent_id')->orderBy('sort')->get();
+
+    $footerMenu  = Menu::forLocation('footer');
+    $footerItems = $footerMenu
+        ? $footerMenu->items()->whereNull('parent_id')->get()
+        : collect();
 
     $half      = (int) ceil($menuItems->count() / 2);
     $leftItems = $menuItems->take($half);
@@ -121,6 +129,15 @@
 </main>
 
 <footer style="background:#f5f5f5;padding:1.5rem;text-align:center;color:#666;font-size:.875rem;margin-top:3rem;">
+    @if($footerItems->isNotEmpty())
+        <nav style="margin-bottom:.75rem;">
+            <ul style="list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:1.25rem;">
+                @foreach($footerItems as $item)
+                    <li><a href="{{ $item->url }}" style="color:#666;text-decoration:none;">{{ $item->label }}</a></li>
+                @endforeach
+            </ul>
+        </nav>
+    @endif
     &copy; {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.
 </footer>
 

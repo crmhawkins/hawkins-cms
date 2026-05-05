@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MenuItem extends Model
 {
-    protected $fillable = ['label', 'url', 'sort', 'parent_id'];
+    protected $fillable = ['label', 'url', 'sort', 'parent_id', 'menu_id'];
 
     protected $casts = [
         'sort' => 'integer',
     ];
+
+    public function menu(): BelongsTo
+    {
+        return $this->belongsTo(Menu::class);
+    }
 
     public function parent(): BelongsTo
     {

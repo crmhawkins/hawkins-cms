@@ -29,12 +29,16 @@ class CartController extends Controller
         ]);
 
         $product = Product::findOrFail($data['product_id']);
+        $variantId = isset($data['variant_id']) ? (int) $data['variant_id'] : null;
+        $price = $variantId
+            ? (\App\Models\ProductVariant::find($variantId)?->price_override ?? $product->price)
+            : $product->price;
         $cart = $this->resolveCart($request);
         $cart->addItem(
             (int) $data['product_id'],
-            isset($data['variant_id']) ? (int) $data['variant_id'] : null,
+            $variantId,
             (int) $data['qty'],
-            (int) $product->price,
+            (int) $price,
         );
 
         return redirect()->route('shop.cart')->with('status', 'Producto añadido al carrito');

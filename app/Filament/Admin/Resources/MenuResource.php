@@ -3,7 +3,8 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Filament\Admin\Resources\MenuResource\Pages;
-use App\Models\MenuItem;
+use App\Filament\Admin\Resources\MenuResource\RelationManagers\ItemsRelationManager;
+use App\Models\Menu;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,35 +13,29 @@ use Filament\Tables\Table;
 
 class MenuResource extends Resource
 {
-    protected static ?string $model = MenuItem::class;
+    protected static ?string $model = Menu::class;
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
-    protected static ?string $navigationLabel = 'Menú';
-    protected static ?string $modelLabel = 'Ítem de menú';
-    protected static ?string $pluralModelLabel = 'Ítems de menú';
+    protected static ?string $navigationLabel = 'Menús';
+    protected static ?string $navigationGroup = 'Contenido';
+    protected static ?string $modelLabel = 'Menú';
+    protected static ?string $pluralModelLabel = 'Menús';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('label')
-                ->label('Etiqueta')
+            Forms\Components\TextInput::make('name')
+                ->label('Nombre')
                 ->required()
                 ->maxLength(255),
 
-            Forms\Components\TextInput::make('url')
-                ->label('URL')
-                ->required()
-                ->maxLength(255),
-
-            Forms\Components\TextInput::make('sort')
-                ->label('Orden')
-                ->numeric()
-                ->default(0),
-
-            Forms\Components\Select::make('parent_id')
-                ->label('Ítem padre')
-                ->relationship('parent', 'label')
-                ->searchable()
-                ->nullable(),
+            Forms\Components\Select::make('location')
+                ->label('Ubicación')
+                ->options([
+                    'header' => 'Cabecera',
+                    'footer' => 'Pie de página',
+                    'mobile' => 'Móvil',
+                ])
+                ->required(),
         ]);
     }
 
@@ -48,20 +43,30 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('sort')
-                    ->label('Orden')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('label')
-                    ->label('Etiqueta')
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('url')
-                    ->label('URL'),
-                Tables\Columns\TextColumn::make('parent.label')
-                    ->label('Padre')
-                    ->default('—'),
+                Tables\Columns\BadgeColumn::make('location')
+                    ->label('Ubicación')
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'header' => 'Cabecera',
+                        'footer' => 'Pie de página',
+                        'mobile' => 'Móvil',
+                        default  => $state,
+                    })
+                    ->colors([
+                        'primary' => 'header',
+                        'secondary' => 'footer',
+                        'success' => 'mobile',
+                    ]),
+                Tables\Columns\TextColumn::make('items_count')
+                    ->label('Ítems')
+                    ->counts('items'),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Actualizado')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable(),
             ])
-            ->defaultSort('sort')
-            ->reorderable('sort')
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
@@ -71,6 +76,13 @@ class MenuResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getRelationManagers(): array
+    {
+        return [
+            ItemsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
