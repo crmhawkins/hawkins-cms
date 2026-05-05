@@ -72,16 +72,19 @@ class CheckoutController extends Controller
         ]);
 
         if (($settings->payment_gateway ?? 'none') === 'none') {
+            $cart->update(['items' => []]);
             return redirect()->route('shop.success', ['order' => $order->order_number]);
         }
 
         $gateway = PaymentGatewayFactory::make();
-        $session = $gateway->createCheckoutSession($order);
+        $session = $gateway->createCheckoutSession($order, [
+            'cart_id' => (string) $cart->id,
+        ]);
 
         $order->update(['payment_id' => $session->id]);
 
-        // Clear cart
-        $cart->update(['items' => []]);
+        // Cart is cleared in the webhook (checkout.session.completed) NOT here
+        // so the user can return if they abandon the payment
 
         return redirect()->away($session->url);
     }

@@ -7,14 +7,14 @@ use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 // Editor API routes — require auth + edit-content permission + no-cache
-Route::prefix('edit')->name('editor.')->middleware(['web', 'auth', 'editor.cache'])->group(function () {
+Route::prefix('edit')->name('editor.')->middleware(['web', 'auth', 'editor.cache', 'throttle:60,1'])->group(function () {
     Route::patch('api/field', [FieldController::class, 'update'])->name('field.update');
     Route::post('api/image', [MediaController::class, 'upload'])->name('image.upload');
     Route::delete('api/image/{id}', [MediaController::class, 'destroy'])->name('image.destroy');
 });
 
 // Contact form submission
-Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit')->middleware('throttle:5,1');
 
 // E-commerce shop routes
 Route::prefix('tienda')->name('shop.')->group(function () {

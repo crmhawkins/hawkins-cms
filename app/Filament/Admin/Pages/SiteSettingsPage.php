@@ -43,6 +43,7 @@ class SiteSettingsPage extends Page
                 ])->default('none'),
                 TextInput::make('stripe_secret_key')->label('Stripe Secret Key')->password()->dehydrateStateUsing(fn ($state) => filled($state) ? $state : SiteSettings::instance()->stripe_secret_key),
                 TextInput::make('stripe_webhook_secret')->label('Stripe Webhook Secret')->password()->dehydrateStateUsing(fn ($state) => filled($state) ? $state : SiteSettings::instance()->stripe_webhook_secret),
+                TextInput::make('contact_email')->label('Email para recibir contactos')->email(),
             ])
             ->statePath('data');
     }

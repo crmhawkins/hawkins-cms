@@ -4,7 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? config('app.name') }}</title>
+
+    @php
+        $siteName = config('app.name');
+        $seoTitle = isset($page) ? ($page->seoTitle() . ' — ' . $siteName) : ($title ?? $siteName);
+        $seoDesc  = isset($page) ? $page->seoDescription() : '';
+        $seoRobots = isset($page) ? ($page->meta_robots ?? 'index, follow') : 'index, follow';
+        $ogImage  = isset($page) && $page->og_image ? asset($page->og_image) : null;
+        $canonical = request()->url();
+    @endphp
+
+    <title>{{ $seoTitle }}</title>
+    @if($seoDesc)
+    <meta name="description" content="{{ $seoDesc }}">
+    @endif
+    <meta name="robots" content="{{ $seoRobots }}">
+    <link rel="canonical" href="{{ $canonical }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ $seoTitle }}">
+    <meta property="og:url" content="{{ $canonical }}">
+    <meta property="og:site_name" content="{{ $siteName }}">
+    @if($seoDesc)
+    <meta property="og:description" content="{{ $seoDesc }}">
+    @endif
+    @if($ogImage)
+    <meta property="og:image" content="{{ $ogImage }}">
+    @endif
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">

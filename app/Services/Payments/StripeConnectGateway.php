@@ -27,6 +27,7 @@ class StripeConnectGateway implements PaymentGateway
             'cancel_url' => $options['cancel_url'] ?? route('shop.cancel'),
             'metadata' => [
                 'order_number' => $order->order_number,
+                'cart_id'      => (string) ($options['cart_id'] ?? ''),
             ],
             'customer_email' => $order->customer_email,
         ];
@@ -70,7 +71,14 @@ class StripeConnectGateway implements PaymentGateway
                         'payment_id' => $session->id,
                         'stripe_payment_intent_id' => $session->payment_intent ?? null,
                     ]);
+                    \App\Models\AuditLog::record('order.paid', ['order_id' => $order->id, 'payment_id' => $session->id]);
                     $orderId = (string) $order->id;
+
+                    // Clear the cart now that payment is confirmed
+                    $cartId = $session->metadata->cart_id ?? null;
+                    if ($cartId) {
+                        \App\Models\Cart::find((int) $cartId)?->update(['items' => []]);
+                    }
                 }
             }
         }
@@ -111,6 +119,7 @@ class StripeConnectGateway implements PaymentGateway
             'status' => 'refunded',
             'refund_id' => $refund->id,
         ]);
+        \App\Models\AuditLog::record('order.refunded', ['order_id' => $order->id, 'refund_id' => $refund->id, 'amount' => $refund->amount]);
 
         return new RefundResult(
             success: $refund->status === 'succeeded' || $refund->status === 'pending',

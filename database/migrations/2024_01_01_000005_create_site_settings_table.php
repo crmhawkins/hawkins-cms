@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('stripe_secret_key')->nullable();
             $table->text('stripe_webhook_secret')->nullable();
             $table->string('logo_path')->nullable();
+            $table->string('contact_email')->nullable();
             $table->timestamps();
         });
     }

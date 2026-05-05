@@ -9,11 +9,13 @@ class SiteSettings extends Model
     protected $fillable = [
         'site_name', 'site_url', 'theme', 'ecommerce_enabled',
         'payment_gateway', 'stripe_secret_key', 'stripe_webhook_secret',
-        'logo_path',
+        'logo_path', 'contact_email',
     ];
 
     protected $casts = [
         'ecommerce_enabled' => 'boolean',
+        'stripe_secret_key' => 'encrypted',
+        'stripe_webhook_secret' => 'encrypted',
     ];
 
     public static function instance(): self

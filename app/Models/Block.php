@@ -20,6 +20,6 @@ class Block extends Model
 
     public function revisions(): HasMany
     {
-        return $this->hasMany(BlockRevision::class)->latest()->limit(20);
+        return $this->hasMany(BlockRevision::class)->latest();
     }
 }
