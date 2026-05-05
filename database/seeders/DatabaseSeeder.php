@@ -10,6 +10,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Sanzahra tenant (local/staging only):
+        // $this->call(SanzahraTenantSeeder::class);
+
         // Hawkins superadmin
         User::updateOrCreate(
             ['email' => 'admin@hawkins.es'],
