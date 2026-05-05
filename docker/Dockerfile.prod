@@ -1,0 +1,43 @@
+FROM php:8.4-fpm-alpine
+
+RUN apk add --no-cache \
+    nginx \
+    supervisor \
+    git \
+    curl \
+    libpng-dev \
+    libzip-dev \
+    icu-dev \
+    oniguruma-dev \
+    && docker-php-ext-install \
+        pdo_mysql \
+        mbstring \
+        exif \
+        bcmath \
+        gd \
+        zip \
+        intl \
+        opcache
+
+RUN echo "opcache.enable=1\nopcache.memory_consumption=256\nopcache.max_accelerated_files=20000\nopcache.validate_timestamps=0" \
+    > /usr/local/etc/php/conf.d/opcache.ini
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+
+COPY . .
+
+RUN composer install --no-interaction --prefer-dist --no-dev --optimize-autoloader
+
+RUN chown -R www-data:www-data storage bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
+
+COPY docker/nginx.dev.conf /etc/nginx/nginx.conf
+COPY docker/supervisord.dev.conf /etc/supervisord.conf
+COPY docker/entrypoint.prod.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 80
+
+CMD ["/entrypoint.sh"]

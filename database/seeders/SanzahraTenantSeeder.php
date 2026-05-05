@@ -14,8 +14,8 @@ class SanzahraTenantSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Tenant
-        $tenant = Tenant::firstOrCreate(
+        // 1. Tenant (withoutEvents evita que stancl cree BD separada en single-DB mode)
+        $tenant = Tenant::withoutEvents(fn () => Tenant::firstOrCreate(
             ['id' => 'sanzahra'],
             [
                 'name'               => 'Sanzahra',
@@ -24,7 +24,7 @@ class SanzahraTenantSeeder extends Seeder
                 'header_layout'      => 'center',
                 'payment_gateway'    => 'none',
             ]
-        );
+        ));
 
         // Ensure name/theme are set on existing record too
         $tenant->update([

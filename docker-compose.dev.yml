@@ -11,7 +11,7 @@ services:
       APP_NAME: "Hawkins CMS"
       APP_ENV: local
       APP_DEBUG: "true"
-      APP_KEY: ""
+      APP_KEY: "base64:htUiAim+OflBmLBGNtqzeHqb7FU7HixIKLedxAzlP04="
       APP_URL: http://localhost:8080
       DB_CONNECTION: mysql
       DB_HOST: mariadb
@@ -19,10 +19,9 @@ services:
       DB_DATABASE: hawkins_cms
       DB_USERNAME: hawkins
       DB_PASSWORD: hawkins_dev_pass
-      CACHE_STORE: redis
-      SESSION_DRIVER: redis
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+      CACHE_STORE: file
+      SESSION_DRIVER: file
+      QUEUE_CONNECTION: sync
       FILESYSTEM_DISK: local
       TENANCY_DB_BOOTSTRAPPER: ""
     depends_on:
@@ -36,7 +35,7 @@ services:
     command: >
       sh -c "
         php artisan key:generate --force &&
-        php artisan migrate --force &&
+        php artisan migrate:fresh --force &&
         php artisan db:seed --class=DatabaseSeeder --force &&
         php artisan sanzahra:migrate &&
         /usr/bin/supervisord -c /etc/supervisord.conf
