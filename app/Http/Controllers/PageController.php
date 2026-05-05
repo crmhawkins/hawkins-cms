@@ -15,7 +15,7 @@ class PageController extends Controller
             return Page::where('slug', $slug)
                 ->where('status', 'published')
                 ->where(fn ($q) => $q->whereNull('published_at')->orWhere('published_at', '<=', now()))
-                ->with(['blocks' => fn ($q) => $q->where('active', true)->orderBy('sort')])
+                ->with(['blocks' => fn ($q) => $q->orderBy('sort')])
                 ->firstOrFail();
         });
 
@@ -30,7 +30,7 @@ class PageController extends Controller
             return Page::where('slug', 'home')
                 ->where('status', 'published')
                 ->where(fn ($q) => $q->whereNull('published_at')->orWhere('published_at', '<=', now()))
-                ->with(['blocks' => fn ($q) => $q->where('active', true)->orderBy('sort')])
+                ->with(['blocks' => fn ($q) => $q->orderBy('sort')])
                 ->firstOrFail();
         });
 
