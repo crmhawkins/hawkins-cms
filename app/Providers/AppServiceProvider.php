@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Block;
+use App\Models\User;
+use App\Policies\BlockPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::policy(Block::class, BlockPolicy::class);
+
+        Gate::define('edit-content', function (User $user) {
+            return $user->hasRole(['admin', 'editor', 'superadmin']);
+        });
     }
 }
