@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'payment_gateway'   => 'none',
         ]);
 
-        Page::firstOrCreate(['slug' => 'home'], [
+        Page::updateOrCreate(['slug' => 'home'], [
             'title'        => 'Inicio',
             'status'       => 'published',
             'published_at' => now(),
