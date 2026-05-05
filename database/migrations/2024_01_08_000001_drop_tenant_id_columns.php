@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 // Safe on fresh installs (columns won't exist → no-op).
 return new class extends Migration {
     private array $tables = [
-        'pages', 'blocks', 'block_revisions', 'menu_items',
+        'users', 'pages', 'blocks', 'block_revisions', 'menu_items',
         'headers', 'products', 'product_variants', 'carts',
         'orders', 'contact_submissions',
     ];

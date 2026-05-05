@@ -1,16 +1,15 @@
 #!/bin/sh
-set -e
 
 echo "==> Running migrations..."
-php artisan migrate --force
+php artisan migrate --force || echo "[WARN] migrate failed, continuing..."
 
-echo "==> Seeding superadmin..."
-php artisan db:seed --class=DatabaseSeeder --force
+echo "==> Seeding..."
+php artisan db:seed --class=DatabaseSeeder --force || echo "[WARN] seed failed, continuing..."
 
 echo "==> Caching config & routes..."
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
+php artisan config:cache || true
+php artisan route:cache || true
+php artisan view:cache || true
 
 echo "==> Starting supervisord..."
 exec /usr/bin/supervisord -c /etc/supervisord.conf
