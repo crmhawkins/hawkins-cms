@@ -9,6 +9,7 @@ class Page extends Model
     protected $fillable = [
         'title', 'slug', 'status', 'seo_meta', 'published_at',
         'meta_title', 'meta_description', 'og_image', 'meta_robots',
+        'header_variant', 'footer_variant',
     ];
 
     protected $casts = [

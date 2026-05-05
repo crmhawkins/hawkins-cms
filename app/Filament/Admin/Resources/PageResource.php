@@ -79,6 +79,28 @@ class PageResource extends Resource
                     ->addActionLabel('Añadir bloque'),
             ]),
 
+            Forms\Components\Section::make('Presentación')->schema([
+                Forms\Components\Select::make('header_variant')
+                    ->label('Cabecera')
+                    ->options([
+                        'default'     => 'Predeterminada',
+                        'dark'        => 'Oscura',
+                        'transparent' => 'Transparente',
+                        'minimal'     => 'Mínima',
+                        'none'        => 'Sin cabecera',
+                    ])
+                    ->default('default'),
+
+                Forms\Components\Select::make('footer_variant')
+                    ->label('Pie de página')
+                    ->options([
+                        'default' => 'Predeterminado',
+                        'minimal' => 'Mínimo',
+                        'none'    => 'Sin pie de página',
+                    ])
+                    ->default('default'),
+            ])->columns(2)->collapsible()->collapsed(),
+
             Forms\Components\Section::make('SEO')->schema([
                 Forms\Components\TextInput::make('meta_title')
                     ->label('Meta título')

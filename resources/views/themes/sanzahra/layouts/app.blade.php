@@ -64,14 +64,44 @@
     $half      = (int) ceil($menuItems->count() / 2);
     $leftItems = $menuItems->take($half);
     $rightItems = $menuItems->slice($half);
+
+    // Per-page layout variants
+    $headerVariant = isset($page) ? ($page->header_variant ?? 'default') : 'default';
+    $footerVariant = isset($page) ? ($page->footer_variant ?? 'default') : 'default';
 @endphp
 
-<header style="background:{{ $bgColor }};color:{{ $textColor }};padding:.75rem 1.5rem;">
+@if($headerVariant !== 'none')
+@php
+    // Variant-specific overrides
+    if ($headerVariant === 'dark') {
+        $hBg   = '#1a1a1a';
+        $hText = '#ffffff';
+        $hPos  = 'relative';
+    } elseif ($headerVariant === 'transparent') {
+        $hBg   = 'transparent';
+        $hText = '#ffffff';
+        $hPos  = 'absolute';
+    } else {
+        // default or minimal
+        $hBg   = $bgColor;
+        $hText = $textColor;
+        $hPos  = 'relative';
+    }
+@endphp
+
+@if($headerVariant === 'minimal')
+<header style="background:{{ $hBg }};color:{{ $hText }};padding:.75rem 1.5rem;position:{{ $hPos }};">
+    <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;">
+        <a href="/" style="font-weight:700;font-size:1.25rem;color:{{ $hText }};text-decoration:none;">{{ config('app.name') }}</a>
+    </div>
+</header>
+@else
+<header style="background:{{ $hBg }};color:{{ $hText }};padding:.75rem 1.5rem;position:{{ $hPos }};{{ $headerVariant === 'transparent' ? 'top:0;left:0;right:0;z-index:100;width:100%;' : '' }}">
     @if($headerLayout === 'split')
         <nav style="display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;gap:1rem;">
             <ul style="list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;">
                 @foreach($leftItems as $item)
-                    <li><a href="{{ $item->url }}" style="color:{{ $textColor }};text-decoration:none;">{{ $item->label }}</a></li>
+                    <li><a href="{{ $item->url }}" style="color:{{ $hText }};text-decoration:none;">{{ $item->label }}</a></li>
                 @endforeach
             </ul>
 
@@ -79,13 +109,13 @@
                 @if(!empty($header?->logo_path))
                     <img src="{{ asset($header->logo_path) }}" alt="{{ config('app.name') }}" style="height:40px;">
                 @else
-                    <span style="font-weight:700;font-size:1.25rem;color:{{ $textColor }};">{{ config('app.name') }}</span>
+                    <span style="font-weight:700;font-size:1.25rem;color:{{ $hText }};">{{ config('app.name') }}</span>
                 @endif
             </a>
 
             <ul style="list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;">
                 @foreach($rightItems as $item)
-                    <li><a href="{{ $item->url }}" style="color:{{ $textColor }};text-decoration:none;">{{ $item->label }}</a></li>
+                    <li><a href="{{ $item->url }}" style="color:{{ $hText }};text-decoration:none;">{{ $item->label }}</a></li>
                 @endforeach
             </ul>
         </nav>
@@ -96,12 +126,12 @@
                 @if(!empty($header?->logo_path))
                     <img src="{{ asset($header->logo_path) }}" alt="{{ config('app.name') }}" style="height:40px;">
                 @else
-                    <span style="font-weight:700;font-size:1.25rem;color:{{ $textColor }};">{{ config('app.name') }}</span>
+                    <span style="font-weight:700;font-size:1.25rem;color:{{ $hText }};">{{ config('app.name') }}</span>
                 @endif
             </a>
             <ul style="list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;flex:1;">
                 @foreach($menuItems as $item)
-                    <li><a href="{{ $item->url }}" style="color:{{ $textColor }};text-decoration:none;">{{ $item->label }}</a></li>
+                    <li><a href="{{ $item->url }}" style="color:{{ $hText }};text-decoration:none;">{{ $item->label }}</a></li>
                 @endforeach
             </ul>
         </nav>
@@ -110,24 +140,32 @@
         <nav style="display:flex;align-items:center;max-width:1200px;margin:0 auto;gap:2rem;justify-content:space-between;">
             <ul style="list-style:none;margin:0;padding:0;display:flex;gap:1.5rem;">
                 @foreach($menuItems as $item)
-                    <li><a href="{{ $item->url }}" style="color:{{ $textColor }};text-decoration:none;">{{ $item->label }}</a></li>
+                    <li><a href="{{ $item->url }}" style="color:{{ $hText }};text-decoration:none;">{{ $item->label }}</a></li>
                 @endforeach
             </ul>
             <a href="/" style="flex-shrink:0;">
                 @if(!empty($header?->logo_path))
                     <img src="{{ asset($header->logo_path) }}" alt="{{ config('app.name') }}" style="height:40px;">
                 @else
-                    <span style="font-weight:700;font-size:1.25rem;color:{{ $textColor }};">{{ config('app.name') }}</span>
+                    <span style="font-weight:700;font-size:1.25rem;color:{{ $hText }};">{{ config('app.name') }}</span>
                 @endif
             </a>
         </nav>
     @endif
 </header>
+@endif
+@endif
 
 <main>
     @yield('content')
 </main>
 
+@if($footerVariant !== 'none')
+@if($footerVariant === 'minimal')
+<footer style="background:#f5f5f5;padding:1rem 1.5rem;text-align:center;color:#666;font-size:.875rem;margin-top:3rem;">
+    &copy; {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.
+</footer>
+@else
 <footer style="background:#f5f5f5;padding:1.5rem;text-align:center;color:#666;font-size:.875rem;margin-top:3rem;">
     @if($footerItems->isNotEmpty())
         <nav style="margin-bottom:.75rem;">
@@ -140,6 +178,8 @@
     @endif
     &copy; {{ date('Y') }} {{ config('app.name') }}. Todos los derechos reservados.
 </footer>
+@endif
+@endif
 
 @stack('scripts')
 
