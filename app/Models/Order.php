@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,10 +10,10 @@ use Illuminate\Support\Str;
 
 class Order extends Model
 {
-    use BelongsToTenant, SoftDeletes;
+    use SoftDeletes;
 
     protected $fillable = [
-        'tenant_id', 'user_id', 'order_number', 'status', 'items',
+        'user_id', 'order_number', 'status', 'items',
         'subtotal', 'tax_amount', 'total', 'currency',
         'customer_name', 'customer_email', 'customer_phone',
         'shipping_address', 'payment_gateway', 'payment_id',

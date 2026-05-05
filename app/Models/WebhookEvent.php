@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class WebhookEvent extends Model
 {
     protected $fillable = [
-        'tenant_id', 'gateway', 'event_id', 'type', 'payload', 'processed_at',
+        'gateway', 'event_id', 'type', 'payload', 'processed_at',
     ];
 
     protected $casts = [

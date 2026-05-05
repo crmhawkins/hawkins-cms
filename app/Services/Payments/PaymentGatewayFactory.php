@@ -2,13 +2,15 @@
 
 namespace App\Services\Payments;
 
-use App\Models\Tenant;
+use App\Models\SiteSettings;
 
 class PaymentGatewayFactory
 {
-    public static function for(Tenant $tenant): PaymentGateway
+    public static function make(): PaymentGateway
     {
-        return match ($tenant->payment_gateway) {
+        $settings = SiteSettings::instance();
+
+        return match ($settings->payment_gateway) {
             'stripe_connect' => new StripeConnectGateway(),
             default => new NullGateway(),
         };

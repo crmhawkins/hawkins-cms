@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('menu_items', function (Blueprint $table) {
             $table->id();
-            $table->string('tenant_id')->index();
             $table->string('label');
             $table->string('url');
             $table->unsignedInteger('sort')->default(0);

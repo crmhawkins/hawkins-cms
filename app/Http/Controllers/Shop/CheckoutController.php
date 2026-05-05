@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\Tenant;
+use App\Models\SiteSettings;
 use App\Services\Payments\PaymentGatewayFactory;
 use App\Support\Tax;
 use Illuminate\Http\Request;
@@ -39,8 +39,7 @@ class CheckoutController extends Controller
             return redirect()->route('shop.cart')->with('status', 'Tu carrito está vacío');
         }
 
-        $tenantId = function_exists('tenant') && tenant() ? tenant('id') : ($cart->tenant_id ?? null);
-        $tenant = $tenantId ? Tenant::find($tenantId) : null;
+        $settings = SiteSettings::instance();
 
         $items = collect($cart->items)->map(function ($item) {
             $product = Product::find($item['product_id'] ?? null);
@@ -58,7 +57,6 @@ class CheckoutController extends Controller
         $total = $subtotal + $tax;
 
         $order = Order::create([
-            'tenant_id' => $tenantId,
             'user_id' => auth()->id(),
             'order_number' => Order::generateOrderNumber(),
             'status' => 'pending',
@@ -70,14 +68,14 @@ class CheckoutController extends Controller
             'customer_name' => $data['customer_name'],
             'customer_email' => $data['customer_email'],
             'customer_phone' => $data['customer_phone'] ?? null,
-            'payment_gateway' => $tenant?->payment_gateway ?? 'none',
+            'payment_gateway' => $settings->payment_gateway ?? 'none',
         ]);
 
-        if (! $tenant || $tenant->payment_gateway === 'none') {
+        if (($settings->payment_gateway ?? 'none') === 'none') {
             return redirect()->route('shop.success', ['order' => $order->order_number]);
         }
 
-        $gateway = PaymentGatewayFactory::for($tenant);
+        $gateway = PaymentGatewayFactory::make();
         $session = $gateway->createCheckoutSession($order);
 
         $order->update(['payment_id' => $session->id]);

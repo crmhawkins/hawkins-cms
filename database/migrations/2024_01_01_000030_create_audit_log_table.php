@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('audit_log', function (Blueprint $table) {
             $table->id();
-            $table->string('tenant_id')->nullable()->index();
             $table->string('operator_user_id')->nullable();
             $table->string('action');
             $table->json('metadata')->nullable();

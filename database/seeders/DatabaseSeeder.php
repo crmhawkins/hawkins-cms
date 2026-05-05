@@ -5,23 +5,24 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Sanzahra tenant (local/staging only):
-        // $this->call(SanzahraTenantSeeder::class);
+        foreach (['superadmin', 'admin', 'editor'] as $role) {
+            Role::firstOrCreate(['name' => $role, 'guard_name' => 'web']);
+        }
 
-        // Hawkins superadmin
-        User::updateOrCreate(
+        $admin = User::updateOrCreate(
             ['email' => 'admin@hawkins.es'],
             [
-                'name' => 'Hawkins Admin',
+                'name' => 'Admin',
                 'email' => 'admin@hawkins.es',
                 'password' => Hash::make('Hawkins2024!'),
-                'tenant_id' => null,
             ]
         );
+        $admin->assignRole('superadmin');
     }
 }

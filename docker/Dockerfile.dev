@@ -10,7 +10,6 @@ RUN apk add --no-cache \
     libzip-dev \
     icu-dev \
     oniguruma-dev \
-    exif-dev \
     && docker-php-ext-install \
         pdo_mysql \
         mbstring \

@@ -2,18 +2,16 @@
     "$schema": "https://getcomposer.org/schema.json",
     "name": "crmhawkins/hawkins-cms",
     "type": "project",
-    "description": "Hawkins CMS \u2014 Multi-tenant visual CMS platform",
+    "description": "Hawkins CMS \u2014 Single-site visual CMS platform",
     "keywords": [
         "laravel",
-        "cms",
-        "multi-tenant"
+        "cms"
     ],
     "license": "MIT",
     "require": {
         "php": "^8.3",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
-        "stancl/tenancy": "^3.8",
         "filament/filament": "^3.3",
         "spatie/laravel-permission": "^6.0",
         "spatie/laravel-medialibrary": "^11.0",

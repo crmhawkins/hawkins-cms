@@ -14,7 +14,7 @@ class User extends Authenticatable implements FilamentUser
     use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
-        'name', 'email', 'password', 'tenant_id',
+        'name', 'email', 'password',
     ];
 
     protected $hidden = [
@@ -29,19 +29,8 @@ class User extends Authenticatable implements FilamentUser
         ];
     }
 
-    public function isSuperAdmin(): bool
-    {
-        return is_null($this->tenant_id);
-    }
-
     public function canAccessPanel(Panel $panel): bool
     {
-        if ($panel->getId() === 'hawkins') {
-            return $this->isSuperAdmin();
-        }
-        if ($panel->getId() === 'tenant') {
-            return !$this->isSuperAdmin();
-        }
-        return false;
+        return $panel->getId() === 'admin' && $this->hasRole(['admin', 'superadmin', 'editor']);
     }
 }

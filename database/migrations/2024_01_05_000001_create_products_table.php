@@ -9,9 +9,8 @@ return new class extends Migration {
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('tenant_id')->index();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->unsignedInteger('price'); // in cents
             $table->unsignedInteger('compare_price')->nullable();
@@ -22,7 +21,6 @@ return new class extends Migration {
             $table->json('metadata')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->unique(['tenant_id', 'slug']);
         });
     }
 

@@ -17,18 +17,14 @@
     use App\Models\Header;
     use App\Models\MenuItem;
 
-    $tenantId     = (function_exists('tenant') && tenant()) ? tenant('id') : null;
-    $header       = $tenantId ? Header::forTenant($tenantId) : null;
+    $header       = Header::getInstance();
     $headerLayout = $header->layout ?? 'split';
     $bgColor      = $header->bg_color ?? '#ffffff';
     $textColor    = $header->text_color ?? '#000000';
 
-    $menuItems = $tenantId
-        ? MenuItem::where('tenant_id', $tenantId)
-            ->whereNull('parent_id')
-            ->orderBy('sort')
-            ->get()
-        : collect();
+    $menuItems = MenuItem::whereNull('parent_id')
+        ->orderBy('sort')
+        ->get();
 
     $half      = (int) ceil($menuItems->count() / 2);
     $leftItems = $menuItems->take($half);

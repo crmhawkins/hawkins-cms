@@ -22,8 +22,7 @@ class MediaController extends Controller
         $this->authorize('update', $block);
 
         $file = $request->file('image');
-        $tenantId = function_exists('tenant') && tenant() ? tenant('id') : 'central';
-        $directory = "tenants/{$tenantId}/images";
+        $directory = 'images';
         $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
 
         $path = $file->storeAs($directory, $filename, 'public');

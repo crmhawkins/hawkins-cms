@@ -3,21 +3,13 @@
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\Tenant;
 use App\Support\Tax;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-test('product can be created for tenant', function () {
-    $tenant = Tenant::create([
-        'id' => 'tenant-shop-' . uniqid(),
-        'name' => 'Shop Tenant',
-        'ecommerce_enabled' => true,
-    ]);
-
+test('product can be created', function () {
     $product = Product::create([
-        'tenant_id' => $tenant->id,
         'name' => 'Vestido Rosa',
         'slug' => 'vestido-rosa',
         'price' => 4999,
@@ -26,17 +18,10 @@ test('product can be created for tenant', function () {
     ]);
 
     expect($product->priceFormatted)->toBe('49,99 €');
-    expect($product->tenant_id)->toBe($tenant->id);
 });
 
 test('cart calculates total correctly', function () {
-    $tenant = Tenant::create([
-        'id' => 'tenant-cart-' . uniqid(),
-        'name' => 'Cart Tenant',
-    ]);
-
     $cart = Cart::create([
-        'tenant_id' => $tenant->id,
         'session_id' => 'sess-test',
         'items' => [],
     ]);
@@ -59,23 +44,4 @@ test('order generates unique order number', function () {
 test('tax helper calculates 21% IVA', function () {
     expect(Tax::apply(1000))->toBe(1210);
     expect(Tax::calculate(1000))->toBe(210);
-});
-
-test('product is isolated between tenants', function () {
-    $tenantA = Tenant::create(['id' => 'tenant-a-' . uniqid(), 'name' => 'A']);
-    $tenantB = Tenant::create(['id' => 'tenant-b-' . uniqid(), 'name' => 'B']);
-
-    Product::create([
-        'tenant_id' => $tenantA->id,
-        'name' => 'Solo A',
-        'slug' => 'solo-a-' . uniqid(),
-        'price' => 100,
-        'status' => 'active',
-    ]);
-
-    $bProducts = Product::where('tenant_id', $tenantB->id)->get();
-    expect($bProducts)->toHaveCount(0);
-
-    $aProducts = Product::where('tenant_id', $tenantA->id)->get();
-    expect($aProducts)->toHaveCount(1);
 });

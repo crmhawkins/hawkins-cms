@@ -1,16 +1,13 @@
 <?php
 namespace App\Models;
 
-use App\Models\Concerns\BelongsToTenant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Block extends Model
 {
-    use BelongsToTenant;
-
-    protected $fillable = ['page_id', 'tenant_id', 'type', 'content', 'sort'];
+    protected $fillable = ['page_id', 'type', 'content', 'sort'];
 
     protected $casts = [
         'content' => 'array',

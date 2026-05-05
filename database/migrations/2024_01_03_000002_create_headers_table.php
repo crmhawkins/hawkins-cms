@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('headers', function (Blueprint $table) {
             $table->id();
-            $table->string('tenant_id')->index();
             $table->enum('layout', ['split', 'logo_left', 'logo_right'])->default('split');
             $table->string('logo_path')->nullable();
             $table->string('bg_color', 7)->default('#ffffff');

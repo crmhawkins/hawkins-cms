@@ -8,8 +8,6 @@ class BlockPolicy
 {
     public function update(User $user, Block $block): bool
     {
-        if ($user->isSuperAdmin()) return true;
-        return $user->tenant_id === $block->tenant_id
-            && ($user->hasRole('admin') || $user->hasRole('editor'));
+        return $user->hasRole(['superadmin', 'admin', 'editor']);
     }
 }

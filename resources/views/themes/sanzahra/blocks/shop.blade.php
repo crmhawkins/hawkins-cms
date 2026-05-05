@@ -1,6 +1,5 @@
 @php
-    $tenant = function_exists('tenant') ? tenant() : null;
-    $enabled = $tenant && ($tenant->ecommerce_enabled ?? false);
+    $enabled = (bool) \App\Models\SiteSettings::instance()->ecommerce_enabled;
     $title = $block->content['title'] ?? 'Nuestra Tienda';
     $max = (int) ($block->content['max_products'] ?? 6);
     $products = $enabled ? \App\Models\Product::active()->latest()->take($max)->get() : collect();

@@ -9,7 +9,6 @@ return new class extends Migration {
         Schema::create('blocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('page_id')->constrained()->cascadeOnDelete();
-            $table->string('tenant_id')->index();
             $table->string('type');
             $table->json('content')->nullable();
             $table->unsignedInteger('sort')->default(0);

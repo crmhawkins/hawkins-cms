@@ -7,9 +7,6 @@ php artisan migrate --force
 echo "==> Seeding superadmin..."
 php artisan db:seed --class=DatabaseSeeder --force
 
-echo "==> Seeding Sanzahra tenant..."
-php artisan sanzahra:migrate
-
 echo "==> Caching config & routes..."
 php artisan config:cache
 php artisan route:cache

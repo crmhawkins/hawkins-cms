@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('webhook_events', function (Blueprint $table) {
             $table->id();
-            $table->string('tenant_id')->nullable()->index();
             $table->string('gateway');
             $table->string('event_id')->unique();
             $table->string('type');

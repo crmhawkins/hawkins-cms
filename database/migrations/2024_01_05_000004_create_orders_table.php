@@ -9,7 +9,6 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('tenant_id')->index();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
             $table->string('order_number')->unique();
             $table->enum('status', ['pending', 'paid', 'shipped', 'cancelled', 'refunded'])->default('pending');

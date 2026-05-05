@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Product;
-use App\Models\Tenant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,7 +17,6 @@ class ProductFactory extends Factory
     {
         $name = fake()->words(3, true);
         return [
-            'tenant_id' => Tenant::factory(),
             'name' => $name,
             'slug' => Str::slug($name) . '-' . Str::random(4),
             'description' => fake()->paragraph(),

@@ -16,7 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\GenerateCspNonce::class,
         ]);
         $middleware->alias([
-            'tenancy' => \App\Http\Middleware\InitializeTenancyByDomainOrSubdomain::class,
             'editor.cache' => \App\Http\Middleware\EditorCacheControl::class,
         ]);
     })

@@ -3,7 +3,7 @@
 namespace App\Services\Payments;
 
 use App\Models\Order;
-use App\Models\Tenant;
+use App\Models\SiteSettings;
 use Illuminate\Http\Request;
 use Stripe\StripeClient;
 
@@ -13,13 +13,12 @@ class StripeConnectGateway implements PaymentGateway
 
     public function __construct()
     {
-        $this->stripe = new StripeClient((string) config('services.stripe.secret'));
+        $secret = SiteSettings::instance()->stripe_secret_key ?: (string) config('services.stripe.secret');
+        $this->stripe = new StripeClient($secret);
     }
 
     public function createCheckoutSession(Order $order, array $options = []): CheckoutSession
     {
-        $tenant = Tenant::find($order->tenant_id);
-
         $params = [
             'mode' => 'payment',
             'payment_method_types' => ['card'],
@@ -28,17 +27,9 @@ class StripeConnectGateway implements PaymentGateway
             'cancel_url' => $options['cancel_url'] ?? route('shop.cancel'),
             'metadata' => [
                 'order_number' => $order->order_number,
-                'tenant_id' => $order->tenant_id,
             ],
             'customer_email' => $order->customer_email,
         ];
-
-        if ($tenant && $tenant->stripe_account_id) {
-            $params['payment_intent_data'] = [
-                'application_fee_amount' => (int) ($order->total * 0.02),
-                'transfer_data' => ['destination' => $tenant->stripe_account_id],
-            ];
-        }
 
         $session = $this->stripe->checkout->sessions->create($params);
 
@@ -54,12 +45,10 @@ class StripeConnectGateway implements PaymentGateway
         $payload = $request->getContent();
         $signature = $request->header('Stripe-Signature', '');
 
+        $secret = SiteSettings::instance()->stripe_webhook_secret ?: (string) config('services.stripe.webhook_secret');
+
         try {
-            $event = \Stripe\Webhook::constructEvent(
-                $payload,
-                $signature,
-                (string) config('services.stripe.webhook_secret')
-            );
+            $event = \Stripe\Webhook::constructEvent($payload, $signature, $secret);
         } catch (\Stripe\Exception\SignatureVerificationException $e) {
             return new WebhookResult(handled: false, event: 'invalid_signature');
         } catch (\UnexpectedValueException $e) {
@@ -128,33 +117,6 @@ class StripeConnectGateway implements PaymentGateway
             refundId: $refund->id,
             amountCents: (int) $refund->amount,
         );
-    }
-
-    public function onboardTenant(Tenant $tenant): OnboardingLink
-    {
-        $account = $this->stripe->accounts->create([
-            'type' => 'express',
-            'country' => 'ES',
-        ]);
-
-        $tenant->update(['stripe_account_id' => $account->id]);
-
-        $link = $this->stripe->accountLinks->create([
-            'account' => $account->id,
-            'refresh_url' => url('/hawkins/stripe/onboard/refresh/' . $tenant->id),
-            'return_url' => url('/hawkins/stripe/onboard/return/' . $tenant->id),
-            'type' => 'account_onboarding',
-        ]);
-
-        return new OnboardingLink(
-            url: $link->url,
-            provider: 'stripe_connect',
-        );
-    }
-
-    public function offboardTenant(Tenant $tenant): void
-    {
-        $tenant->update(['stripe_account_id' => null]);
     }
 
     private function buildLineItems(Order $order): array
