@@ -56,3 +56,28 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Desarrollo Local con Docker
+
+### Arrancar
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+### Accesos
+- App: http://localhost:8080
+- Superadmin Hawkins: http://localhost:8080/hawkins (admin@hawkins.es / Hawkins2024!)
+- Tenant admin Sanzahra: http://localhost:8080/admin (admin@sanzahra.com / Sanzahra2024!)
+- phpMyAdmin: http://localhost:8081
+
+### Tenant routing en local
+Para ver la web pública de Sanzahra, añade a tu archivo `hosts` (`C:\Windows\System32\drivers\etc\hosts`):
+```
+127.0.0.1 sanzahra.localhost
+```
+Luego visita: http://sanzahra.localhost:8080
+
+### Limpiar
+```bash
+docker compose -f docker-compose.dev.yml down -v
+```
