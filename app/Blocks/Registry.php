@@ -6,7 +6,7 @@ class Registry
 {
     public static function all(): array
     {
-        return ['hero', 'gallery', 'text_image', 'contact_form', 'services', 'cta', 'map'];
+        return ['hero', 'gallery', 'text_image', 'contact_form', 'services', 'cta', 'map', 'shop'];
     }
 
     public static function schema(string $type): array
@@ -19,6 +19,7 @@ class Registry
             'services'     => ['title' => '', 'items' => []],
             'cta'          => ['title' => '', 'subtitle' => '', 'button_text' => '', 'button_url' => ''],
             'map'          => ['address' => '', 'embed_url' => '', 'zoom' => 15],
+            'shop'         => ['title' => 'Nuestra Tienda', 'show_featured' => true, 'max_products' => 6],
             default        => [],
         };
     }
@@ -33,6 +34,7 @@ class Registry
             'services'     => 'Servicios',
             'cta'          => 'Llamada a la Acción',
             'map'          => 'Mapa',
+            'shop'         => 'Tienda Online',
             default        => $type,
         };
     }
