@@ -2,7 +2,7 @@
 
 ## Pre-cutover checklist
 - [ ] hawkins-cms deployed to Coolify .81
-- [ ] Sanzahra tenant seeded: `php artisan sanzahra:migrate`
+- [ ] CMS instalado: `php artisan cms:install`
 - [ ] Domain sanzahra.com (or subdomain sanzahra.hawkins.es) added in Coolify
 - [ ] SSL certificate issued
 - [ ] HTTP 200 verified on staging URL

@@ -1,7 +1,7 @@
 {
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"curl -s -o /dev/null -w \\\"%{http_code}\\\" -L https://cms.hawkins.es/hawkins/login 2>&1\",\"description\":\"Check if cms.hawkins.es is live\"}",
-  "error": "Exit code 60\n000",
-  "timestamp": "2026-05-05T09:12:03.735Z",
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"C:\\\\Users\\\\Dani-Mefle\\\\repos\\\\hawkins-cms\\\\resources\\\\views\\\\welcome.blade.php\"}",
+  "error": "File content (31781 tokens) exceeds maximum allowed tokens (25000). Use offset and limit parameters to read specific portions of the file, or search for specific content instead of reading the whole file.",
+  "timestamp": "2026-05-05T09:55:38.815Z",
   "retry_count": 1
 }
