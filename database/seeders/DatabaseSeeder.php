@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Page;
+use App\Models\SiteSettings;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -24,5 +26,19 @@ class DatabaseSeeder extends Seeder
             ]
         );
         $admin->assignRole('superadmin');
+
+        SiteSettings::firstOrCreate(['id' => 1], [
+            'site_name'    => 'Mi Sitio',
+            'site_url'     => env('APP_URL', 'http://localhost'),
+            'theme'        => 'sanzahra',
+            'ecommerce_enabled' => false,
+            'payment_gateway'   => 'none',
+        ]);
+
+        Page::firstOrCreate(['slug' => 'home'], [
+            'title'        => 'Inicio',
+            'status'       => 'published',
+            'published_at' => now(),
+        ]);
     }
 }
