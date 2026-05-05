@@ -1,22 +1,40 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use Illuminate\Http\Response;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class PageController extends Controller
 {
-    public function __invoke(string $slug): Response
+    public function show(string $slug): View
     {
         $page = Page::where('slug', $slug)
+            ->where('tenant_id', tenant('id'))
             ->where('status', 'published')
-            ->with('blocks')
+            ->with(['blocks' => fn ($q) => $q->orderBy('sort')])
             ->firstOrFail();
 
-        $theme = function_exists('tenant') && tenant()
-            ? (tenant()->theme ?? 'sanzahra')
-            : 'sanzahra';
+        $theme = $page->tenant->theme ?? 'sanzahra';
 
-        return response()->view("themes.{$theme}.page", compact('page'));
+        return view("themes.{$theme}.page", compact('page'));
+    }
+
+    public function home(): View|RedirectResponse
+    {
+        $page = Page::where('tenant_id', tenant('id'))
+            ->where('slug', 'home')
+            ->where('status', 'published')
+            ->with(['blocks' => fn ($q) => $q->orderBy('sort')])
+            ->first();
+
+        if (! $page) {
+            abort(404);
+        }
+
+        $theme = $page->tenant->theme ?? 'sanzahra';
+
+        return view("themes.{$theme}.page", compact('page'));
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.cms', ['title' => $page->title])
+@extends('themes.sanzahra.layouts.app', ['title' => $page->title])
 
 @section('content')
     @foreach ($page->blocks as $block)
