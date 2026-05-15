@@ -169,126 +169,148 @@
         </div>
     </div>
 
-    {{-- Detail Modal --}}
+    {{-- Detail Modal — WordPress style --}}
     @if($editingMediaId && $this->editingFile)
-        @php $file = $this->editingFile; $fileUrl = asset('storage/'.$file->directory.'/'.$file->filename); @endphp
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" x-data="mediaModal()">
+        @php
+            $file    = $this->editingFile;
+            $fileUrl = asset('storage/'.$file->directory.'/'.$file->filename);
+            try {
+                $imgPath = Storage::disk($file->disk)->path($file->directory.'/'.$file->filename);
+                [$imgW, $imgH] = $file->isImage() ? (@getimagesize($imgPath) ?: [null, null]) : [null, null];
+            } catch(\Throwable $e) { $imgW = $imgH = null; }
+        @endphp
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" x-data="mediaModal()">
             <div class="absolute inset-0" x-on:click="close()"></div>
-            <div class="relative w-full max-w-3xl rounded-2xl bg-white dark:bg-gray-800 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+
+            {{-- Modal container --}}
+            <div class="relative w-full rounded-2xl bg-white dark:bg-gray-900 shadow-2xl overflow-hidden flex flex-col"
+                 style="max-width:900px; max-height:90vh;">
 
                 {{-- Header --}}
-                <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                    <h3 class="text-base font-semibold text-gray-900 dark:text-white truncate pr-4">{{ $file->original_name }}</h3>
-                    <button x-on:click="close()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                <div class="flex items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0">
+                    <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Detalles del archivo</span>
+                    <button x-on:click="close()" class="rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-200 transition-colors">
                         <x-heroicon-o-x-mark class="h-5 w-5" />
                     </button>
                 </div>
 
-                {{-- Body --}}
+                {{-- Body: left image + right details --}}
                 <div class="flex flex-1 overflow-hidden min-h-0">
 
-                    {{-- Left preview panel --}}
-                    <div class="w-64 shrink-0 flex flex-col bg-gray-50 dark:bg-gray-900 p-4 border-r border-gray-200 dark:border-gray-700 overflow-y-auto">
+                    {{-- LEFT — image preview --}}
+                    <div class="shrink-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-hidden"
+                         style="width:55%; min-height:360px;">
                         @if($file->isImage())
-                            <div class="w-full rounded-lg overflow-hidden bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 mb-3" x-show="!cropping">
-                                <img src="{{ $fileUrl }}" alt="{{ $file->alt }}" class="w-full object-contain max-h-48">
+                            <div x-show="!cropping" class="w-full h-full flex items-center justify-center p-4">
+                                <img src="{{ $fileUrl }}" alt="{{ $file->alt }}"
+                                     style="max-width:100%; max-height:360px; object-fit:contain; display:block;">
                             </div>
-                            <div class="w-full mb-3" x-show="cropping" x-cloak>
-                                <img x-ref="cropImg" src="{{ $fileUrl }}" alt="" class="max-w-full block">
+                            <div x-show="cropping" x-cloak class="w-full p-3 overflow-auto">
+                                <img x-ref="cropImg" src="{{ $fileUrl }}" alt="" style="max-width:100%; display:block;">
                             </div>
                         @else
-                            <div class="w-full h-32 flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg mb-3">
-                                <x-heroicon-o-document class="h-16 w-16 text-gray-400" />
+                            <div class="flex flex-col items-center gap-3 text-gray-400">
+                                <x-heroicon-o-document class="h-20 w-20" />
+                                <span class="text-sm font-medium uppercase">{{ pathinfo($file->original_name, PATHINFO_EXTENSION) }}</span>
                             </div>
                         @endif
+                    </div>
 
-                        <div class="w-full text-xs text-gray-500 space-y-1.5" x-show="!cropping">
-                            <p><span class="font-medium text-gray-700 dark:text-gray-300">Tipo:</span> {{ $file->mime_type }}</p>
-                            <p><span class="font-medium text-gray-700 dark:text-gray-300">Peso:</span> {{ $file->human_size }}</p>
-                            <p><span class="font-medium text-gray-700 dark:text-gray-300">Subido:</span> {{ $file->created_at->format('d/m/Y H:i') }}</p>
+                    {{-- RIGHT — metadata + fields --}}
+                    <div class="flex-1 overflow-y-auto flex flex-col">
+
+                        {{-- File metadata (static) --}}
+                        <div class="px-5 py-4 border-b border-gray-100 dark:border-gray-700 space-y-1 shrink-0">
+                            <p class="text-xs font-bold text-gray-900 dark:text-white truncate">{{ $file->original_name }}</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">{{ $file->created_at->format('d/m/Y') }} &middot; {{ $file->human_size }}
+                                @if($imgW && $imgH) &middot; {{ $imgW }}&times;{{ $imgH }} px @endif
+                            </p>
+                            <p class="text-xs text-gray-400 dark:text-gray-500">{{ $file->mime_type }}</p>
+                        </div>
+
+                        {{-- Editable fields --}}
+                        <div class="px-5 py-4 space-y-4 flex-1">
+
+                            {{-- Nombre --}}
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wide">Nombre</label>
+                                <input type="text" wire:model="editingName"
+                                       class="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            </div>
+
+                            {{-- Alt --}}
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wide">Texto alternativo</label>
+                                <input type="text" wire:model="editingAlt"
+                                       placeholder="Describe la imagen (SEO y accesibilidad)"
+                                       class="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                <p class="mt-1 text-xs text-gray-400">Cómo describir la imagen para lectores de pantalla.</p>
+                            </div>
+
+                            {{-- Caption --}}
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wide">Pie de foto</label>
+                                <textarea wire:model="editingCaption" rows="2"
+                                          placeholder="Pie de foto opcional"
+                                          class="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"></textarea>
+                            </div>
+
+                            {{-- Description --}}
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wide">Descripción</label>
+                                <textarea wire:model="editingDescription" rows="3"
+                                          placeholder="Descripción larga del archivo"
+                                          class="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"></textarea>
+                            </div>
+
+                            {{-- URL --}}
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1 uppercase tracking-wide">URL del archivo</label>
+                                <div class="flex gap-2">
+                                    <input type="text" readonly value="{{ $fileUrl }}" onclick="this.select()"
+                                           class="flex-1 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3 py-2 text-xs text-gray-500 dark:text-gray-400 cursor-text focus:outline-none">
+                                    <button type="button" x-on:click="copyUrl('{{ $fileUrl }}')"
+                                            class="shrink-0 rounded-lg border border-gray-300 dark:border-gray-600 px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                            style="min-width:70px; text-align:center;">
+                                        <span x-show="!urlCopied">Copiar</span>
+                                        <span x-show="urlCopied" x-cloak style="color:#16a34a; font-weight:700;">✓ Copiado</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {{-- Crop --}}
                             @if($file->isImage())
-                                @php
-                                    try {
-                                        $imgPath = Storage::disk($file->disk)->path($file->directory.'/'.$file->filename);
-                                        [$imgW, $imgH] = @getimagesize($imgPath) ?: [null, null];
-                                    } catch(\Throwable $e) { $imgW = $imgH = null; }
-                                @endphp
-                                @if($imgW && $imgH)
-                                    <p><span class="font-medium text-gray-700 dark:text-gray-300">Dimensiones:</span> {{ $imgW }}×{{ $imgH }} px</p>
-                                @endif
+                                <div x-show="!cropping">
+                                    <button type="button" x-on:click="initCropper()"
+                                            class="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center gap-2 justify-center transition-colors">
+                                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0H3m4 0h10m4 0h-4m0 0v12m0 4h4m-4 0H7m0 0v4"/></svg>
+                                        Recortar y duplicar
+                                    </button>
+                                </div>
+                                <div class="space-y-2" x-show="cropping" x-cloak>
+                                    <button type="button" x-on:click="applyCrop()" class="w-full rounded-lg bg-primary-600 px-3 py-2 text-xs font-medium text-white hover:bg-primary-700">✓ Aplicar recorte</button>
+                                    <button type="button" x-on:click="cancelCrop()" class="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50">Cancelar</button>
+                                </div>
                             @endif
-                        </div>
 
-                        @if($file->isImage())
-                            <div class="mt-4" x-show="!cropping">
-                                <button type="button" x-on:click="initCropper()"
-                                        class="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2 justify-center">
-                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0H3m4 0h10m4 0h-4m0 0v12m0 4h4m-4 0H7m0 0v4"/></svg>
-                                    Recortar y duplicar
-                                </button>
-                            </div>
-                            <div class="mt-4 space-y-2" x-show="cropping" x-cloak>
-                                <button type="button" x-on:click="applyCrop()" class="w-full rounded-lg bg-primary-600 px-3 py-2 text-xs font-medium text-white hover:bg-primary-700">✓ Aplicar recorte</button>
-                                <button type="button" x-on:click="cancelCrop()" class="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Cancelar recorte</button>
-                            </div>
-                        @endif
-                    </div>
-
-                    {{-- Right edit panel --}}
-                    <div class="flex-1 flex flex-col overflow-y-auto p-6 space-y-5">
-
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">URL del archivo</label>
-                            <div class="flex gap-2">
-                                <input type="text" readonly value="{{ $fileUrl }}"
-                                       onclick="this.select()"
-                                       class="flex-1 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 px-3 py-2 text-xs text-gray-600 dark:text-gray-400 cursor-text">
-                                <button type="button" x-on:click="copyUrl('{{ $fileUrl }}')"
-                                        class="shrink-0 rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 min-w-16 text-center">
-                                    <span x-show="!urlCopied">Copiar</span>
-                                    <span x-show="urlCopied" x-cloak class="text-green-600 font-semibold">✓</span>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Nombre del archivo</label>
-                            <input type="text" wire:model="editingName"
-                                   class="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm dark:bg-gray-700 dark:text-white">
-                            <p class="mt-1 text-xs text-gray-400">Solo el nombre de visualización. El archivo físico (UUID) no cambia.</p>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Texto alternativo (Alt)</label>
-                            <input type="text" wire:model="editingAlt"
-                                   placeholder="Describe la imagen para accesibilidad y SEO"
-                                   class="w-full rounded-lg border border-gray-300 dark:border-gray-600 px-3 py-2 text-sm dark:bg-gray-700 dark:text-white">
-                            <p class="mt-1 text-xs text-gray-400">Importante para SEO y accesibilidad (WCAG).</p>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Ruta en disco</label>
-                            <input type="text" readonly value="{{ $file->directory }}/{{ $file->filename }}"
-                                   class="w-full rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-3 py-2 text-xs text-gray-400 cursor-default">
-                        </div>
-
-                    </div>
-                </div>
+                        </div>{{-- /editable fields --}}
+                    </div>{{-- /right --}}
+                </div>{{-- /body --}}
 
                 {{-- Footer --}}
-                <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                <div class="flex items-center justify-between px-5 py-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 shrink-0">
                     <button wire:click="deleteMedia({{ $file->id }})"
                             wire:confirm="¿Eliminar '{{ addslashes($file->original_name) }}'? No se puede deshacer."
-                            class="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white hover:bg-red-600">
-                        Eliminar
+                            class="rounded-lg bg-red-500 px-4 py-2 text-xs font-semibold text-white hover:bg-red-600 transition-colors">
+                        Eliminar archivo
                     </button>
-                    <div class="flex gap-3">
+                    <div class="flex gap-2">
                         <button type="button" x-on:click="close()"
-                                class="rounded-lg border border-gray-300 dark:border-gray-600 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                class="rounded-lg border border-gray-300 dark:border-gray-600 px-4 py-2 text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                             Cancelar
                         </button>
                         <button wire:click="saveEdit()"
-                                class="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700">
+                                class="rounded-lg bg-primary-600 px-4 py-2 text-xs font-semibold text-white hover:bg-primary-700 transition-colors">
                             Guardar cambios
                         </button>
                     </div>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Media extends Model
 {
-    protected $fillable = ['disk', 'directory', 'filename', 'original_name', 'mime_type', 'size', 'alt'];
+    protected $fillable = ['disk', 'directory', 'filename', 'original_name', 'mime_type', 'size', 'alt', 'caption', 'description'];
 
     public function getUrlAttribute(): string
     {

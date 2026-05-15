@@ -25,6 +25,8 @@ class MediaLibraryPage extends Page
     public ?int $editingMediaId = null;
     public string $editingAlt = '';
     public string $editingName = '';
+    public string $editingCaption = '';
+    public string $editingDescription = '';
 
     public function getMediaProperty()
     {
@@ -74,9 +76,11 @@ class MediaLibraryPage extends Page
     {
         $media = Media::find($id);
         if (!$media) return;
-        $this->editingMediaId = $id;
-        $this->editingAlt     = $media->alt ?? '';
-        $this->editingName    = $media->original_name;
+        $this->editingMediaId    = $id;
+        $this->editingAlt        = $media->alt ?? '';
+        $this->editingName       = $media->original_name;
+        $this->editingCaption    = $media->caption ?? '';
+        $this->editingDescription = $media->description ?? '';
     }
 
     public function saveEdit(): void
@@ -88,6 +92,8 @@ class MediaLibraryPage extends Page
         $media->update([
             'alt'           => $this->editingAlt,
             'original_name' => trim($this->editingName) ?: $media->original_name,
+            'caption'       => $this->editingCaption,
+            'description'   => $this->editingDescription,
         ]);
 
         Notification::make()->title('Cambios guardados')->success()->send();
