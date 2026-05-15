@@ -14,6 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
         $middleware->web(append: [
             \App\Http\Middleware\GenerateCspNonce::class,
+            \App\Http\Middleware\HandleRedirects::class,
+            \App\Http\Middleware\MaintenanceMode::class,
         ]);
         $middleware->alias([
             'editor.cache' => \App\Http\Middleware\EditorCacheControl::class,

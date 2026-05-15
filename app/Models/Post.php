@@ -8,17 +8,23 @@ class Post extends Model
 {
     protected $fillable = [
         'category_id', 'title', 'slug', 'excerpt', 'body',
-        'featured_image', 'status', 'published_at',
+        'featured_image', 'status', 'featured', 'published_at',
         'meta_title', 'meta_description', 'og_image', 'meta_robots',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'featured' => 'boolean',
     ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     public function scopePublished($q)

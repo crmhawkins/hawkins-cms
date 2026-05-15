@@ -10,6 +10,7 @@ class Page extends Model
         'title', 'slug', 'status', 'seo_meta', 'published_at',
         'meta_title', 'meta_description', 'og_image', 'meta_robots',
         'header_variant', 'footer_variant',
+        'header_id', 'footer_id', 'custom_css', 'custom_js',
     ];
 
     protected $casts = [
@@ -20,6 +21,26 @@ class Page extends Model
     public function blocks(): HasMany
     {
         return $this->hasMany(Block::class)->orderBy('sort');
+    }
+
+    public function header(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Header::class);
+    }
+
+    public function footer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Footer::class);
+    }
+
+    public function resolvedHeader(): Header
+    {
+        return $this->header ?? Header::getDefault();
+    }
+
+    public function resolvedFooter(): Footer
+    {
+        return $this->footer ?? Footer::getDefault();
     }
 
     public function seoTitle(): string

@@ -6,7 +6,10 @@ class Registry
 {
     public static function all(): array
     {
-        return ['hero', 'gallery', 'text_image', 'contact_form', 'services', 'cta', 'map', 'shop'];
+        return [
+            'hero', 'gallery', 'text_image', 'contact_form', 'services', 'cta', 'map', 'shop',
+            'testimonials', 'faq', 'team', 'video', 'counter', 'accordion', 'pricing', 'timeline', 'logo_grid', 'banner',
+        ];
     }
 
     public static function schema(string $type): array
@@ -20,6 +23,16 @@ class Registry
             'cta'          => ['title' => '', 'subtitle' => '', 'button_text' => '', 'button_url' => ''],
             'map'          => ['address' => '', 'embed_url' => '', 'zoom' => 15],
             'shop'         => ['title' => 'Nuestra Tienda', 'show_featured' => true, 'max_products' => 6],
+            'testimonials' => ['title' => '', 'items' => []],
+            'faq'          => ['title' => '', 'subtitle' => '', 'items' => []],
+            'team'         => ['title' => '', 'subtitle' => '', 'items' => []],
+            'video'        => ['title' => '', 'subtitle' => '', 'video_url' => '', 'cover_image' => '', 'autoplay' => false],
+            'counter'      => ['title' => '', 'bg_color' => '', 'items' => []],
+            'accordion'    => ['title' => '', 'items' => []],
+            'pricing'      => ['title' => '', 'subtitle' => '', 'plans' => []],
+            'timeline'     => ['title' => '', 'items' => []],
+            'logo_grid'    => ['title' => '', 'subtitle' => '', 'logos' => []],
+            'banner'       => ['text' => '', 'cta_text' => '', 'cta_url' => '', 'bg_color' => '', 'text_color' => '', 'dismissible' => false],
             default        => [],
         };
     }
@@ -35,6 +48,16 @@ class Registry
             'cta'          => 'Llamada a la Acción',
             'map'          => 'Mapa',
             'shop'         => 'Tienda Online',
+            'testimonials' => 'Testimonios',
+            'faq'          => 'Preguntas frecuentes',
+            'team'         => 'Equipo',
+            'video'        => 'Vídeo',
+            'counter'      => 'Estadísticas / Contadores',
+            'accordion'    => 'Acordeón',
+            'pricing'      => 'Tabla de precios',
+            'timeline'     => 'Línea temporal',
+            'logo_grid'    => 'Grid de logos',
+            'banner'       => 'Banner anuncio',
             default        => $type,
         };
     }
