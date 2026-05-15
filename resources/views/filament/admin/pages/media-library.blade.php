@@ -1,8 +1,4 @@
 <x-filament-panels::page>
-    @push('scripts')
-    <script>window._mediaCsrf = '{{ csrf_token() }}';</script>
-    @endpush
-
     {{-- Upload zone --}}
     <div class="mb-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 text-center"
          x-data="{
@@ -10,6 +6,7 @@
              uploading: false,
              done: 0,
              total: 0,
+             csrf: '{{ csrf_token() }}',
              async handleFiles(files) {
                  if (!files || !files.length) return;
                  this.uploading = true;
@@ -18,15 +15,15 @@
                  for (const file of Array.from(files)) {
                      const fd = new FormData();
                      fd.append('file', file);
-                     fd.append('_token', window._mediaCsrf);
+                     fd.append('_token', this.csrf);
                      try {
                          await fetch('/admin/media/upload-file', { method: 'POST', body: fd });
                      } catch(e) {}
                      this.done++;
                  }
                  this.uploading = false;
-                 this.$refs.fileInput.value = '';
-                 $wire.\$refresh();
+                 this.\$refs.fileInput.value = '';
+                 \$wire.\$refresh();
              }
          }"
          x-on:dragover.prevent="dragging = true"
