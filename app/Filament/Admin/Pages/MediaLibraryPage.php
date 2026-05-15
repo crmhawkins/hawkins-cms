@@ -56,8 +56,9 @@ class MediaLibraryPage extends Page
             ]);
         }
 
+        $count = count($this->uploads);
         $this->uploads = [];
-        Notification::make()->title(count($this->uploads) > 1 ? 'Archivos subidos' : 'Archivo subido')->success()->send();
+        Notification::make()->title($count > 1 ? 'Archivos subidos' : 'Archivo subido')->success()->send();
     }
 
     public function startEditAlt(int $id): void
