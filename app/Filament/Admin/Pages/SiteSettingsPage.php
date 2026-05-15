@@ -30,7 +30,7 @@ class SiteSettingsPage extends Page
         return $form->schema([
             Forms\Components\Tabs::make('Ajustes')->tabs([
 
-                Forms\Components\Tabs\Tab::make('General')->schema([
+                Forms\Components\Tabs\Tab::make('General')->label('General')->schema([
                     Forms\Components\TextInput::make('site_name')->label('Nombre del sitio')->required(),
                     Forms\Components\TextInput::make('site_url')->label('URL del sitio')->url()->required(),
                     Forms\Components\Select::make('theme')->label('Tema activo')
@@ -83,9 +83,9 @@ class SiteSettingsPage extends Page
                     Forms\Components\Select::make('payment_gateway')->label('Pasarela de pago')
                         ->options(['none'=>'Ninguna','stripe_connect'=>'Stripe Connect','redsys'=>'Redsys','paypal'=>'PayPal'])
                         ->default('none'),
-                    Forms\Components\TextInput::make('stripe_secret_key')->label('Stripe Secret Key')->password()
+                    Forms\Components\TextInput::make('stripe_secret_key')->label('Clave secreta de Stripe')->password()
                         ->dehydrateStateUsing(fn ($state) => filled($state) ? $state : \App\Models\SiteSettings::instance()->stripe_secret_key),
-                    Forms\Components\TextInput::make('stripe_webhook_secret')->label('Stripe Webhook Secret')->password()
+                    Forms\Components\TextInput::make('stripe_webhook_secret')->label('Secreto de webhook de Stripe')->password()
                         ->dehydrateStateUsing(fn ($state) => filled($state) ? $state : \App\Models\SiteSettings::instance()->stripe_webhook_secret),
                 ])->columns(2),
 

@@ -13,11 +13,11 @@ class FooterResource extends Resource
 {
     protected static ?string $model = Footer::class;
     protected static ?string $navigationIcon = 'heroicon-o-bars-3-bottom-left';
-    protected static ?string $navigationLabel = 'Footers';
+    protected static ?string $navigationLabel = 'Pies de página';
     protected static ?string $navigationGroup = 'Diseño';
     protected static ?int $navigationSort = 2;
-    protected static ?string $modelLabel = 'Footer';
-    protected static ?string $pluralModelLabel = 'Footers';
+    protected static ?string $modelLabel = 'Pie de página';
+    protected static ?string $pluralModelLabel = 'Pies de página';
 
     public static function form(Form $form): Form
     {
@@ -27,10 +27,10 @@ class FooterResource extends Resource
                     Forms\Components\TextInput::make('name')->label('Nombre interno')->required()->maxLength(100),
                     Forms\Components\Select::make('type')->label('Tipo de footer')
                         ->options([
-                            'classic'  => 'Classic — 4 columnas',
-                            'centered' => 'Centered — Logo + links centrados',
-                            'dark'     => 'Dark — Oscuro con newsletter',
-                            'minimal'  => 'Minimal — Solo copyright',
+                            'classic'  => 'Clásico — 4 columnas',
+                            'centered' => 'Centrado — Logo + enlaces centrados',
+                            'dark'     => 'Oscuro — Fondo oscuro con newsletter',
+                            'minimal'  => 'Mínimo — Solo copyright',
                             'mega'     => 'Mega — Newsletter + columnas + barra inferior',
                         ])
                         ->required()->default('classic'),
@@ -41,7 +41,7 @@ class FooterResource extends Resource
                 ->schema([
                     Forms\Components\FileUpload::make('logo_path')->label('Logo')->image()->directory('footers')->imagePreviewHeight('50'),
                     Forms\Components\TextInput::make('logo_text')->label('Texto del logo (fallback)'),
-                    Forms\Components\Textarea::make('tagline')->label('Tagline / Descripción corta')->rows(2),
+                    Forms\Components\Textarea::make('tagline')->label('Eslogan / Descripción corta')->rows(2),
                 ])->columns(3),
 
             Forms\Components\Section::make('Colores')
@@ -68,11 +68,11 @@ class FooterResource extends Resource
                     Forms\Components\TextInput::make('social_youtube')->label('YouTube')->url(),
                 ])->columns(2)->collapsible()->collapsed(),
 
-            Forms\Components\Section::make('Newsletter')
+            Forms\Components\Section::make('Boletín de noticias')
                 ->schema([
-                    Forms\Components\Toggle::make('show_newsletter')->label('Mostrar sección newsletter')->live(),
-                    Forms\Components\TextInput::make('newsletter_title')->label('Título newsletter'),
-                    Forms\Components\TextInput::make('newsletter_placeholder')->label('Placeholder email')->default('Tu email'),
+                    Forms\Components\Toggle::make('show_newsletter')->label('Mostrar sección boletín')->live(),
+                    Forms\Components\TextInput::make('newsletter_title')->label('Título del boletín'),
+                    Forms\Components\TextInput::make('newsletter_placeholder')->label('Texto de ejemplo del email')->default('Tu email'),
                 ])->columns(3),
 
             Forms\Components\Section::make('Copyright')
@@ -92,7 +92,7 @@ class FooterResource extends Resource
                 Tables\Columns\BadgeColumn::make('type')->label('Tipo')
                     ->colors(['primary'=>'classic','success'=>'centered','gray'=>'dark','warning'=>'minimal','danger'=>'mega']),
                 Tables\Columns\IconColumn::make('is_default')->label('Predeterminado')->boolean(),
-                Tables\Columns\IconColumn::make('show_newsletter')->label('Newsletter')->boolean(),
+                Tables\Columns\IconColumn::make('show_newsletter')->label('Boletín')->boolean(),
                 Tables\Columns\ColorColumn::make('bg_color')->label('Fondo'),
                 Tables\Columns\TextColumn::make('updated_at')->label('Actualizado')->since()->sortable(),
             ])

@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"ssh -o ControlMaster=no -o ControlPath=none -o ConnectTimeout=15 -i ~/.ssh/hawcert_dani dani@217.160.39.81 \\\"docker ps | grep -i cms\\\" 2>&1\",\"description\":\"Find cms container\"}",
-  "error": "Exit code 1",
-  "timestamp": "2026-05-15T09:55:39.188Z",
-  "retry_count": 3
+  "tool_input_preview": "{\"command\":\"CONTAINER=$(ssh -o ControlMaster=no -o ControlPath=none -o ConnectTimeout=15 -i ~/.ssh/hawcert_dani dani@217.160.39.81 \\\"docker ps --format '{{.Names}}' | grep sosw\\\" 2>/dev/null)\\necho \\\"...",
+  "error": "Exit code 127\nContainer: sosw8o0owoogc4c4wk8ccwsg-102745517371\nwordpress-ek4oock0ccwkgsoswc4sws0g\nmariadb-ek4oock0ccwkgsoswc4sws0g\nmust specify at least one container source\nbash: line 2: wordpress-ek4oock0ccwkgsoswc4sws0g: command not found\nbash: line 3: mariadb-ek4oock0ccwkgsoswc4sws0g:/var/www/resources/views/filament/admin/pages/media-library.blade.php: No such file or directory\nbash: line 4: wordpress-ek4oock0ccwkgsoswc4sws0g: command not found\nbash: line 5: mariadb-ek4oock0ccwkgsoswc4sws0g...",
+  "timestamp": "2026-05-15T10:35:21.746Z",
+  "retry_count": 1
 }

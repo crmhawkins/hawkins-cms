@@ -1,6 +1,6 @@
 @extends('themes.sanzahra.layouts.app')
 
-@section('title', 'Checkout')
+@section('title', 'Finalizar compra')
 
 @section('content')
 <div style="max-width:900px;margin:3rem auto;padding:0 1.5rem;">

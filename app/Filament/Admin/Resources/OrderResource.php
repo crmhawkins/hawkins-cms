@@ -78,7 +78,7 @@ class OrderResource extends Resource
             Infolists\Components\Section::make('Pago')->schema([
                 Infolists\Components\TextEntry::make('payment_gateway')->label('Pasarela'),
                 Infolists\Components\TextEntry::make('payment_id')->label('ID sesión pago')->placeholder('—')->copyable(),
-                Infolists\Components\TextEntry::make('stripe_payment_intent_id')->label('Payment Intent')->placeholder('—')->copyable(),
+                Infolists\Components\TextEntry::make('stripe_payment_intent_id')->label('ID intento de pago')->placeholder('—')->copyable(),
             ])->columns(3),
         ]);
     }

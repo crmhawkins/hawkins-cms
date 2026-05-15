@@ -207,31 +207,46 @@
              x-data="mediaModal({{ json_encode($mediaIds) }}, {{ $file->id }})">
             <div class="absolute inset-0" x-on:click="close()"></div>
 
-            {{-- Prev arrow --}}
-            <button type="button" x-show="hasPrev" x-on:click.stop="prev()"
-                    class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white transition-colors"
-                    style="z-index:100001; width:48px; height:48px;">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                </svg>
-            </button>
-
-            {{-- Next arrow --}}
-            <button type="button" x-show="hasNext" x-on:click.stop="next()"
-                    class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white transition-colors"
-                    style="z-index:100001; width:48px; height:48px;">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                </svg>
-            </button>
-
             {{-- Modal container --}}
             <div class="relative w-full rounded-2xl bg-white dark:bg-gray-900 shadow-2xl overflow-hidden flex flex-col"
                  style="max-width:920px; max-height:88vh; z-index:100000;">
 
                 {{-- Header --}}
-                <div class="flex items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0">
-                    <span class="text-sm font-semibold text-gray-700 dark:text-gray-200" style="padding-left:10px;">Detalles del archivo</span>
+                <div class="flex items-center px-5 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0" style="gap:0;">
+                    <span class="text-sm font-semibold text-gray-700 dark:text-gray-200 flex-1" style="padding-left:10px;">Detalles del archivo</span>
+                    {{-- Nav arrows centered --}}
+                    <div class="flex items-center gap-1" style="margin:0 12px;">
+                        <button type="button" x-show="hasPrev" x-on:click.stop="prev()"
+                                class="flex items-center justify-center rounded-lg transition-colors"
+                                style="width:36px; height:36px; background:#111; color:#fff; border:none; cursor:pointer;"
+                                onmouseover="this.style.background='#333'" onmouseout="this.style.background='#111'">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button type="button" x-show="!hasPrev" disabled
+                                class="flex items-center justify-center rounded-lg"
+                                style="width:36px; height:36px; background:#d1d5db; color:#9ca3af; border:none; cursor:not-allowed;">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button type="button" x-show="hasNext" x-on:click.stop="next()"
+                                class="flex items-center justify-center rounded-lg transition-colors"
+                                style="width:36px; height:36px; background:#111; color:#fff; border:none; cursor:pointer;"
+                                onmouseover="this.style.background='#333'" onmouseout="this.style.background='#111'">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                        <button type="button" x-show="!hasNext" disabled
+                                class="flex items-center justify-center rounded-lg"
+                                style="width:36px; height:36px; background:#d1d5db; color:#9ca3af; border:none; cursor:not-allowed;">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
                     <button x-on:click="close()" class="rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-200 transition-colors">
                         <x-heroicon-o-x-mark class="h-5 w-5" />
                     </button>

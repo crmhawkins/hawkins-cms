@@ -13,11 +13,11 @@ class HeaderResource extends Resource
 {
     protected static ?string $model = Header::class;
     protected static ?string $navigationIcon = 'heroicon-o-window';
-    protected static ?string $navigationLabel = 'Headers';
+    protected static ?string $navigationLabel = 'Cabeceras';
     protected static ?string $navigationGroup = 'Diseño';
     protected static ?int $navigationSort = 1;
-    protected static ?string $modelLabel = 'Header';
-    protected static ?string $pluralModelLabel = 'Headers';
+    protected static ?string $modelLabel = 'Cabecera';
+    protected static ?string $pluralModelLabel = 'Cabeceras';
 
     public static function form(Form $form): Form
     {
@@ -31,11 +31,11 @@ class HeaderResource extends Resource
                     Forms\Components\Select::make('type')
                         ->label('Tipo de header')
                         ->options([
-                            'classic'  => 'Classic — Logo izq, nav derecha',
-                            'centered' => 'Centered — Logo centrado, nav debajo',
-                            'split'    => 'Split — Nav | Logo | Nav',
-                            'minimal'  => 'Minimal — Logo + hamburger overlay',
-                            'mega'     => 'Mega — Top bar + nav completa',
+                            'classic'  => 'Clásico — Logo izq, nav derecha',
+                            'centered' => 'Centrado — Logo centrado, nav debajo',
+                            'split'    => 'Partido — Nav | Logo | Nav',
+                            'minimal'  => 'Mínimo — Logo + menú hamburguesa',
+                            'mega'     => 'Mega — Barra superior + nav completa',
                         ])
                         ->required()
                         ->default('classic')
@@ -120,11 +120,11 @@ class HeaderResource extends Resource
                     Forms\Components\Toggle::make('show_social')
                         ->label('Mostrar redes sociales')
                         ->columnSpanFull(),
-                    Forms\Components\TextInput::make('social_instagram')->label('Instagram URL')->url(),
-                    Forms\Components\TextInput::make('social_facebook')->label('Facebook URL')->url(),
-                    Forms\Components\TextInput::make('social_twitter')->label('Twitter/X URL')->url(),
-                    Forms\Components\TextInput::make('social_linkedin')->label('LinkedIn URL')->url(),
-                    Forms\Components\TextInput::make('social_youtube')->label('YouTube URL')->url(),
+                    Forms\Components\TextInput::make('social_instagram')->label('URL de Instagram')->url(),
+                    Forms\Components\TextInput::make('social_facebook')->label('URL de Facebook')->url(),
+                    Forms\Components\TextInput::make('social_twitter')->label('URL de Twitter/X')->url(),
+                    Forms\Components\TextInput::make('social_linkedin')->label('URL de LinkedIn')->url(),
+                    Forms\Components\TextInput::make('social_youtube')->label('URL de YouTube')->url(),
                 ])->columns(2)->collapsible()->collapsed(),
         ]);
     }

@@ -83,7 +83,7 @@ class PageResource extends Resource
                                     Forms\Components\Select::make('container_width')
                                         ->label('Ancho contenido')
                                         ->options([
-                                            'full'   => 'Full width',
+                                            'full'   => 'Ancho completo',
                                             'wide'   => 'Ancho (1400px)',
                                             'normal' => 'Normal (1200px)',
                                             'narrow' => 'Estrecho (800px)',
@@ -94,19 +94,19 @@ class PageResource extends Resource
                                 ]),
                                 Forms\Components\Grid::make(5)->schema([
                                     Forms\Components\TextInput::make('padding_top')
-                                        ->label('Padding top (px)')
+                                        ->label('Relleno superior (px)')
                                         ->numeric()->default(0)->suffix('px'),
                                     Forms\Components\TextInput::make('padding_bottom')
-                                        ->label('Padding bottom (px)')
+                                        ->label('Relleno inferior (px)')
                                         ->numeric()->default(0)->suffix('px'),
                                     Forms\Components\TextInput::make('padding_x')
-                                        ->label('Padding lateral (px)')
+                                        ->label('Relleno lateral (px)')
                                         ->numeric()->default(0)->suffix('px'),
                                     Forms\Components\TextInput::make('margin_top')
-                                        ->label('Margin top (px)')
+                                        ->label('Margen superior (px)')
                                         ->numeric()->default(0)->suffix('px'),
                                     Forms\Components\TextInput::make('margin_bottom')
-                                        ->label('Margin bottom (px)')
+                                        ->label('Margen inferior (px)')
                                         ->numeric()->default(0)->suffix('px'),
                                 ]),
                                 Forms\Components\Grid::make(3)->schema([
@@ -391,7 +391,7 @@ class PageResource extends Resource
                 Forms\Components\TextInput::make('content.subtitle')->label('Subtítulo'),
                 Forms\Components\TextInput::make('content.video_url')->label('URL YouTube o Vimeo')->required(),
                 Forms\Components\TextInput::make('content.cover_image')->label('Imagen de portada URL'),
-                Forms\Components\Toggle::make('content.autoplay')->label('Autoplay (con mute)'),
+                Forms\Components\Toggle::make('content.autoplay')->label('Reproducción automática (con silencio)'),
             ],
             'counter' => [
                 Forms\Components\TextInput::make('content.title')->label('Título sección'),
