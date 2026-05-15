@@ -231,7 +231,7 @@
 
                 {{-- Header --}}
                 <div class="flex items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0">
-                    <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Detalles del archivo</span>
+                    <span class="text-sm font-semibold text-gray-700 dark:text-gray-200" style="padding-left:10px;">Detalles del archivo</span>
                     <button x-on:click="close()" class="rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-gray-200 transition-colors">
                         <x-heroicon-o-x-mark class="h-5 w-5" />
                     </button>
