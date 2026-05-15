@@ -9,6 +9,7 @@ class Registry
         return [
             'hero', 'gallery', 'text_image', 'contact_form', 'services', 'cta', 'map', 'shop',
             'testimonials', 'faq', 'team', 'video', 'counter', 'accordion', 'pricing', 'timeline', 'logo_grid', 'banner',
+            'text', 'image', 'spacer', 'divider', 'columns',
         ];
     }
 
@@ -33,6 +34,11 @@ class Registry
             'timeline'     => ['title' => '', 'items' => []],
             'logo_grid'    => ['title' => '', 'subtitle' => '', 'logos' => []],
             'banner'       => ['text' => '', 'cta_text' => '', 'cta_url' => '', 'bg_color' => '', 'text_color' => '', 'dismissible' => false],
+            'text'         => ['title' => '', 'body' => '', 'text_align' => 'left', 'max_width' => 'normal', 'font_size' => '1', 'line_height' => '1.75', 'text_color' => ''],
+            'image'        => ['src' => '', 'alt' => '', 'caption' => '', 'align' => 'center', 'max_width' => '100%', 'border_radius' => 0, 'shadow' => false, 'link_url' => '', 'link_new_tab' => false],
+            'spacer'       => ['height' => 60],
+            'divider'      => ['style' => 'solid', 'color' => '#e0dbd5', 'thickness' => 1, 'width' => '100%', 'padding' => 20],
+            'columns'      => ['vertical_align' => 'top', 'gap' => '2rem', 'columns' => []],
             default        => [],
         };
     }
@@ -58,6 +64,11 @@ class Registry
             'timeline'     => 'Línea temporal',
             'logo_grid'    => 'Grid de logos',
             'banner'       => 'Banner anuncio',
+            'text'         => '📝 Texto enriquecido',
+            'image'        => '🖼️ Imagen',
+            'spacer'       => '↕️ Espaciador',
+            'divider'      => '➖ Divisor / Separador',
+            'columns'      => '▦ Columnas',
             default        => $type,
         };
     }

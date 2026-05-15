@@ -72,6 +72,78 @@ class PageResource extends Resource
                         Forms\Components\Group::make()
                             ->schema(fn (Get $get): array => static::blockSchema($get('type') ?? ''))
                             ->columnSpanFull(),
+
+                        Forms\Components\Section::make('⚙️ Layout del bloque')
+                            ->schema([
+                                Forms\Components\Grid::make(4)->schema([
+                                    Forms\Components\ColorPicker::make('bg_color')
+                                        ->label('Fondo'),
+                                    Forms\Components\ColorPicker::make('text_color')
+                                        ->label('Color texto'),
+                                    Forms\Components\Select::make('container_width')
+                                        ->label('Ancho contenido')
+                                        ->options([
+                                            'full'   => 'Full width',
+                                            'wide'   => 'Ancho (1400px)',
+                                            'normal' => 'Normal (1200px)',
+                                            'narrow' => 'Estrecho (800px)',
+                                        ])
+                                        ->default('normal'),
+                                    Forms\Components\Toggle::make('full_width')
+                                        ->label('Sin container'),
+                                ]),
+                                Forms\Components\Grid::make(5)->schema([
+                                    Forms\Components\TextInput::make('padding_top')
+                                        ->label('Padding top (px)')
+                                        ->numeric()->default(0)->suffix('px'),
+                                    Forms\Components\TextInput::make('padding_bottom')
+                                        ->label('Padding bottom (px)')
+                                        ->numeric()->default(0)->suffix('px'),
+                                    Forms\Components\TextInput::make('padding_x')
+                                        ->label('Padding lateral (px)')
+                                        ->numeric()->default(0)->suffix('px'),
+                                    Forms\Components\TextInput::make('margin_top')
+                                        ->label('Margin top (px)')
+                                        ->numeric()->default(0)->suffix('px'),
+                                    Forms\Components\TextInput::make('margin_bottom')
+                                        ->label('Margin bottom (px)')
+                                        ->numeric()->default(0)->suffix('px'),
+                                ]),
+                                Forms\Components\Grid::make(3)->schema([
+                                    Forms\Components\Select::make('separator_top')
+                                        ->label('Separador superior')
+                                        ->options([
+                                            'none'     => 'Ninguno',
+                                            'wave'     => 'Ola',
+                                            'diagonal' => 'Diagonal',
+                                            'curve'    => 'Curva',
+                                            'triangle' => 'Triángulo',
+                                        ])->default('none'),
+                                    Forms\Components\Select::make('separator_bottom')
+                                        ->label('Separador inferior')
+                                        ->options([
+                                            'none'     => 'Ninguno',
+                                            'wave'     => 'Ola',
+                                            'diagonal' => 'Diagonal',
+                                            'curve'    => 'Curva',
+                                            'triangle' => 'Triángulo',
+                                        ])->default('none'),
+                                    Forms\Components\ColorPicker::make('separator_color')
+                                        ->label('Color separador'),
+                                ]),
+                                Forms\Components\Grid::make(2)->schema([
+                                    Forms\Components\TextInput::make('css_class')
+                                        ->label('Clases CSS adicionales')
+                                        ->placeholder('mi-clase otra-clase'),
+                                    Forms\Components\Textarea::make('custom_css')
+                                        ->label('CSS personalizado del bloque')
+                                        ->rows(3)
+                                        ->placeholder('font-size: 1.1rem; letter-spacing: .05em;'),
+                                ]),
+                            ])
+                            ->collapsible()
+                            ->collapsed()
+                            ->columnSpanFull(),
                     ])
                     ->columns(2)
                     ->reorderable('sort')
@@ -386,6 +458,67 @@ class PageResource extends Resource
                 Forms\Components\ColorPicker::make('content.bg_color')->label('Color fondo')->default('#c9a96e'),
                 Forms\Components\ColorPicker::make('content.text_color')->label('Color texto')->default('#ffffff'),
                 Forms\Components\Toggle::make('content.dismissible')->label('Se puede cerrar'),
+            ],
+            'text' => [
+                Forms\Components\TextInput::make('content.title')->label('Título (opcional)'),
+                Forms\Components\Select::make('content.title_align')->label('Alineación título')
+                    ->options(['left'=>'Izquierda','center'=>'Centro','right'=>'Derecha'])->default('left'),
+                Forms\Components\Textarea::make('content.body')->label('Contenido (texto)')->rows(8)->required(),
+                Forms\Components\Select::make('content.text_align')->label('Alineación texto')
+                    ->options(['left'=>'Izquierda','center'=>'Centro','right'=>'Derecha','justify'=>'Justificado'])->default('left'),
+                Forms\Components\Select::make('content.max_width')->label('Ancho máximo')
+                    ->options(['narrow'=>'Estrecho (600px)','normal'=>'Normal (760px)','wide'=>'Ancho (1000px)','full'=>'Full'])->default('normal'),
+                Forms\Components\TextInput::make('content.font_size')->label('Tamaño fuente (rem)')->default('1')->suffix('rem'),
+                Forms\Components\TextInput::make('content.line_height')->label('Altura de línea')->default('1.75'),
+                Forms\Components\ColorPicker::make('content.text_color')->label('Color texto'),
+            ],
+            'image' => [
+                Forms\Components\TextInput::make('content.src')->label('URL de la imagen')->required(),
+                Forms\Components\TextInput::make('content.alt')->label('Texto alternativo (SEO)'),
+                Forms\Components\TextInput::make('content.caption')->label('Pie de foto'),
+                Forms\Components\Select::make('content.align')->label('Alineación')
+                    ->options(['left'=>'Izquierda','center'=>'Centro','right'=>'Derecha'])->default('center'),
+                Forms\Components\TextInput::make('content.max_width')->label('Ancho máximo')->placeholder('800px o 100%')->default('100%'),
+                Forms\Components\TextInput::make('content.border_radius')->label('Bordes redondeados (px)')->numeric()->default(0)->suffix('px'),
+                Forms\Components\Toggle::make('content.shadow')->label('Sombra'),
+                Forms\Components\TextInput::make('content.link_url')->label('Enlace al hacer clic'),
+                Forms\Components\Toggle::make('content.link_new_tab')->label('Abrir en nueva pestaña'),
+            ],
+            'spacer' => [
+                Forms\Components\TextInput::make('content.height')->label('Altura (px)')->numeric()->default(60)->suffix('px')->required(),
+            ],
+            'divider' => [
+                Forms\Components\Select::make('content.style')->label('Estilo')
+                    ->options(['solid'=>'Línea sólida','dashed'=>'Discontinuo','dotted'=>'Punteado','dots'=>'Puntos ···','asterisk'=>'Asteriscos ✦'])
+                    ->default('solid'),
+                Forms\Components\ColorPicker::make('content.color')->label('Color')->default('#e0dbd5'),
+                Forms\Components\TextInput::make('content.thickness')->label('Grosor (px)')->numeric()->default(1)->suffix('px'),
+                Forms\Components\TextInput::make('content.width')->label('Ancho')->placeholder('100% o 600px')->default('100%'),
+                Forms\Components\TextInput::make('content.padding')->label('Espacio vertical (px)')->numeric()->default(20)->suffix('px'),
+            ],
+            'columns' => [
+                Forms\Components\Select::make('content.vertical_align')->label('Alineación vertical')
+                    ->options(['top'=>'Arriba','center'=>'Centro','bottom'=>'Abajo'])->default('top'),
+                Forms\Components\TextInput::make('content.gap')->label('Espacio entre columnas')->default('2rem'),
+                Forms\Components\Repeater::make('content.columns')
+                    ->label('Columnas')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')->label('Título'),
+                        Forms\Components\Textarea::make('body')->label('Texto')->rows(4),
+                        Forms\Components\TextInput::make('image')->label('Imagen URL'),
+                        Forms\Components\TextInput::make('image_alt')->label('Alt imagen'),
+                        Forms\Components\TextInput::make('button_text')->label('Botón texto'),
+                        Forms\Components\TextInput::make('button_url')->label('Botón URL'),
+                        Forms\Components\Select::make('text_align')->label('Alineación')
+                            ->options(['left'=>'Izquierda','center'=>'Centro','right'=>'Derecha'])->default('left'),
+                        Forms\Components\ColorPicker::make('bg_color')->label('Fondo columna'),
+                        Forms\Components\TextInput::make('border_radius')->label('Radio bordes (px)')->numeric()->default(0),
+                        Forms\Components\TextInput::make('padding')->label('Padding interno')->placeholder('1.5rem'),
+                    ])
+                    ->columns(2)
+                    ->minItems(2)
+                    ->maxItems(4)
+                    ->defaultItems(2),
             ],
             default => [
                 Forms\Components\KeyValue::make('content')->label('Contenido')->reorderable(),

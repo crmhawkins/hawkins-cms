@@ -934,3 +934,54 @@ footer a:hover { opacity: .75; }
   .footer-inner { grid-template-columns: 1fr; padding: 2.5rem 1.25rem; }
   .counter-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ================================================================
+   BLOQUES NUEVOS — text, image, spacer, divider, columns
+   ================================================================ */
+
+/* Text block */
+.block-text { }
+.block-text-body { }
+.block-text-body p { margin-bottom: 1rem; }
+.block-text-body h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 1rem; }
+.block-text-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: .75rem; }
+.block-text-body ul, .block-text-body ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+.block-text-body li { margin-bottom: .4rem; line-height: 1.7; }
+.block-text-body a { color: var(--accent); text-decoration: underline; }
+.block-text-body strong { font-weight: 600; }
+.block-text-body em { font-style: italic; }
+.block-text-body blockquote {
+  border-left: 3px solid var(--accent);
+  padding: .75rem 1.25rem;
+  margin: 1.5rem 0;
+  color: #666;
+  font-style: italic;
+  background: var(--light);
+}
+
+/* Image block */
+.block-image figure { display: inline-block; }
+.block-image img { display: block; }
+.block-image figcaption { text-align: center; font-size: .85rem; color: #999; margin-top: .75rem; font-style: italic; }
+
+/* Spacer */
+.block-spacer { display: block; }
+
+/* Divider */
+.block-divider hr { margin: 0; }
+
+/* Columns */
+.block-columns {}
+.block-col img { width: 100%; display: block; }
+
+@media (max-width: 768px) {
+  .block-columns > div { grid-template-columns: 1fr !important; }
+}
+
+/* ================================================================
+   WRAPPER UNIVERSAL DE BLOQUE
+   ================================================================ */
+.cms-block { position: relative; }
+.cms-block-inner { }
+.cms-separator { position: relative; z-index: 1; }
+.cms-separator svg { display: block; }
