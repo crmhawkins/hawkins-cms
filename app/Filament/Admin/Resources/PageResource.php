@@ -4,6 +4,8 @@ namespace App\Filament\Admin\Resources;
 
 use App\Blocks\Registry;
 use App\Filament\Admin\Resources\PageResource\Pages;
+use App\Models\Footer;
+use App\Models\Header;
 use App\Models\Page;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -99,6 +101,22 @@ class PageResource extends Resource
                         'none'    => 'Sin pie de página',
                     ])
                     ->default('default'),
+
+                Forms\Components\Select::make('header_id')
+                    ->label('Header personalizado')
+                    ->relationship('header', 'name')
+                    ->placeholder('— Usar predeterminado del sitio —')
+                    ->searchable()
+                    ->preload()
+                    ->helperText('Si no seleccionas uno, se usará el header predeterminado'),
+
+                Forms\Components\Select::make('footer_id')
+                    ->label('Footer personalizado')
+                    ->relationship('footer', 'name')
+                    ->placeholder('— Usar predeterminado del sitio —')
+                    ->searchable()
+                    ->preload()
+                    ->helperText('Si no seleccionas uno, se usará el footer predeterminado'),
             ])->columns(2)->collapsible()->collapsed(),
 
             Forms\Components\Section::make('SEO')->schema([
@@ -129,6 +147,20 @@ class PageResource extends Resource
                     ])
                     ->default('index, follow'),
             ])->columns(2)->collapsible()->collapsed(),
+
+            Forms\Components\Section::make('CSS / JS personalizado')
+                ->schema([
+                    Forms\Components\Textarea::make('custom_css')
+                        ->label('CSS personalizado')
+                        ->rows(6)
+                        ->placeholder('/* CSS solo para esta página */')
+                        ->helperText('Se inyecta en el <head> solo en esta página'),
+                    Forms\Components\Textarea::make('custom_js')
+                        ->label('JavaScript personalizado')
+                        ->rows(6)
+                        ->placeholder('// JS solo para esta página')
+                        ->helperText('Se inyecta antes de </body> solo en esta página'),
+                ])->collapsible()->collapsed(),
         ]);
     }
 
@@ -245,6 +277,115 @@ class PageResource extends Resource
                 Forms\Components\TextInput::make('content.title')->label('Título de sección')->default('Nuestra Tienda'),
                 Forms\Components\Toggle::make('content.show_featured')->label('Solo productos destacados')->default(true),
                 Forms\Components\TextInput::make('content.max_products')->label('Máximo de productos')->numeric()->default(6)->minValue(1)->maxValue(24),
+            ],
+            'testimonials' => [
+                Forms\Components\TextInput::make('content.title')->label('Título sección'),
+                Forms\Components\Repeater::make('content.items')
+                    ->label('Testimonios')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')->label('Nombre'),
+                        Forms\Components\TextInput::make('role')->label('Cargo/Empresa'),
+                        Forms\Components\Textarea::make('text')->label('Testimonio')->rows(3),
+                        Forms\Components\TextInput::make('photo')->label('Foto URL'),
+                        Forms\Components\Select::make('rating')->label('Puntuación')->options([1=>'⭐',2=>'⭐⭐',3=>'⭐⭐⭐',4=>'⭐⭐⭐⭐',5=>'⭐⭐⭐⭐⭐'])->default(5),
+                    ])->columns(2)->defaultItems(1),
+            ],
+            'faq' => [
+                Forms\Components\TextInput::make('content.title')->label('Título sección'),
+                Forms\Components\TextInput::make('content.subtitle')->label('Subtítulo'),
+                Forms\Components\Repeater::make('content.items')
+                    ->label('Preguntas')
+                    ->schema([
+                        Forms\Components\TextInput::make('question')->label('Pregunta')->required(),
+                        Forms\Components\Textarea::make('answer')->label('Respuesta')->rows(3)->required(),
+                    ])->defaultItems(1),
+            ],
+            'team' => [
+                Forms\Components\TextInput::make('content.title')->label('Título sección'),
+                Forms\Components\TextInput::make('content.subtitle')->label('Subtítulo'),
+                Forms\Components\Repeater::make('content.items')
+                    ->label('Miembros del equipo')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')->label('Nombre'),
+                        Forms\Components\TextInput::make('role')->label('Cargo'),
+                        Forms\Components\Textarea::make('bio')->label('Bio corta')->rows(2),
+                        Forms\Components\TextInput::make('photo')->label('Foto URL'),
+                        Forms\Components\TextInput::make('linkedin')->label('LinkedIn URL'),
+                        Forms\Components\TextInput::make('instagram')->label('Instagram URL'),
+                    ])->columns(2)->defaultItems(1),
+            ],
+            'video' => [
+                Forms\Components\TextInput::make('content.title')->label('Título'),
+                Forms\Components\TextInput::make('content.subtitle')->label('Subtítulo'),
+                Forms\Components\TextInput::make('content.video_url')->label('URL YouTube o Vimeo')->required(),
+                Forms\Components\TextInput::make('content.cover_image')->label('Imagen de portada URL'),
+                Forms\Components\Toggle::make('content.autoplay')->label('Autoplay (con mute)'),
+            ],
+            'counter' => [
+                Forms\Components\TextInput::make('content.title')->label('Título sección'),
+                Forms\Components\ColorPicker::make('content.bg_color')->label('Color de fondo')->default('#111111'),
+                Forms\Components\Repeater::make('content.items')
+                    ->label('Estadísticas')
+                    ->schema([
+                        Forms\Components\TextInput::make('number')->label('Número (ej: 200+)')->required(),
+                        Forms\Components\TextInput::make('label')->label('Etiqueta')->required(),
+                        Forms\Components\TextInput::make('icon')->label('Icono emoji'),
+                    ])->columns(3)->defaultItems(3),
+            ],
+            'accordion' => [
+                Forms\Components\TextInput::make('content.title')->label('Título sección'),
+                Forms\Components\Repeater::make('content.items')
+                    ->label('Items del acordeón')
+                    ->schema([
+                        Forms\Components\TextInput::make('heading')->label('Título')->required(),
+                        Forms\Components\Textarea::make('body')->label('Contenido')->rows(3)->required(),
+                        Forms\Components\Toggle::make('open')->label('Abierto por defecto'),
+                    ])->defaultItems(1),
+            ],
+            'pricing' => [
+                Forms\Components\TextInput::make('content.title')->label('Título sección'),
+                Forms\Components\TextInput::make('content.subtitle')->label('Subtítulo'),
+                Forms\Components\Repeater::make('content.items')
+                    ->label('Planes')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')->label('Nombre del plan')->required(),
+                        Forms\Components\TextInput::make('price')->label('Precio (ej: 49€/mes)')->required(),
+                        Forms\Components\TextInput::make('description')->label('Descripción corta'),
+                        Forms\Components\Textarea::make('features')->label('Características (una por línea)')->rows(5),
+                        Forms\Components\TextInput::make('cta_text')->label('Texto botón'),
+                        Forms\Components\TextInput::make('cta_url')->label('URL botón'),
+                        Forms\Components\Toggle::make('highlighted')->label('Plan destacado'),
+                    ])->columns(2)->defaultItems(1),
+            ],
+            'timeline' => [
+                Forms\Components\TextInput::make('content.title')->label('Título sección'),
+                Forms\Components\Repeater::make('content.items')
+                    ->label('Eventos')
+                    ->schema([
+                        Forms\Components\TextInput::make('year')->label('Año / Fecha')->required(),
+                        Forms\Components\TextInput::make('title')->label('Título')->required(),
+                        Forms\Components\Textarea::make('description')->label('Descripción')->rows(2),
+                        Forms\Components\TextInput::make('image')->label('Imagen URL'),
+                    ])->columns(2)->defaultItems(1),
+            ],
+            'logo_grid' => [
+                Forms\Components\TextInput::make('content.title')->label('Título sección'),
+                Forms\Components\TextInput::make('content.subtitle')->label('Subtítulo'),
+                Forms\Components\Repeater::make('content.logos')
+                    ->label('Logos')
+                    ->schema([
+                        Forms\Components\TextInput::make('image')->label('URL imagen')->required(),
+                        Forms\Components\TextInput::make('alt')->label('Nombre empresa'),
+                        Forms\Components\TextInput::make('url')->label('URL (opcional)'),
+                    ])->columns(3)->defaultItems(1),
+            ],
+            'banner' => [
+                Forms\Components\TextInput::make('content.text')->label('Texto del banner')->required(),
+                Forms\Components\TextInput::make('content.cta_text')->label('Texto botón CTA'),
+                Forms\Components\TextInput::make('content.cta_url')->label('URL botón CTA'),
+                Forms\Components\ColorPicker::make('content.bg_color')->label('Color fondo')->default('#c9a96e'),
+                Forms\Components\ColorPicker::make('content.text_color')->label('Color texto')->default('#ffffff'),
+                Forms\Components\Toggle::make('content.dismissible')->label('Se puede cerrar'),
             ],
             default => [
                 Forms\Components\KeyValue::make('content')->label('Contenido')->reorderable(),

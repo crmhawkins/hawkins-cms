@@ -62,6 +62,18 @@ class PostResource extends Resource
                     ->disk('public')
                     ->directory('posts')
                     ->columnSpanFull(),
+
+                Forms\Components\Select::make('tags')
+                    ->label('Etiquetas')
+                    ->relationship('tags', 'name')
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')->label('Nombre')->required(),
+                        Forms\Components\TextInput::make('slug')->label('Slug'),
+                    ])
+                    ->columnSpanFull(),
             ])->columns(2),
 
             Forms\Components\Section::make('Publicación')->schema([
@@ -74,6 +86,10 @@ class PostResource extends Resource
                 Forms\Components\DateTimePicker::make('published_at')
                     ->label('Publicar el')
                     ->nullable(),
+
+                Forms\Components\Toggle::make('featured')
+                    ->label('Post destacado')
+                    ->helperText('Los posts destacados aparecen primero y pueden mostrarse en home'),
             ])->columns(2),
 
             Forms\Components\Section::make('SEO')->schema([
@@ -126,6 +142,7 @@ class PostResource extends Resource
                     ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->placeholder('—'),
+                Tables\Columns\IconColumn::make('featured')->label('Dest.')->boolean(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
