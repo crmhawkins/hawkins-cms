@@ -10,6 +10,10 @@ php artisan db:seed --class=DemoContentSeeder --force || echo "[WARN] DemoConten
 echo "==> Storage link..."
 php artisan storage:link || true
 
+echo "==> Ensuring storage dirs writable..."
+mkdir -p /var/www/storage/app/public/images
+chmod -R 777 /var/www/storage/app/public || true
+
 echo "==> Clearing old caches..."
 php artisan config:clear || true
 php artisan route:clear || true
