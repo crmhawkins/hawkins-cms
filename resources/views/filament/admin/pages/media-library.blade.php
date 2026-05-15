@@ -38,10 +38,32 @@
             }
         }));
 
-        Alpine.data('mediaModal', () => ({
+        Alpine.data('mediaModal', (ids = [], currentId = null) => ({
             cropper: null,
             cropping: false,
             urlCopied: false,
+            ids: ids,
+            currentId: currentId,
+
+            get currentIndex() { return this.ids.indexOf(this.currentId); },
+            get hasPrev() { return this.currentIndex > 0; },
+            get hasNext() { return this.currentIndex < this.ids.length - 1; },
+
+            async prev() {
+                if (!this.hasPrev) return;
+                this.cancelCrop();
+                const id = this.ids[this.currentIndex - 1];
+                this.currentId = id;
+                await this.$wire.startEdit(id);
+            },
+
+            async next() {
+                if (!this.hasNext) return;
+                this.cancelCrop();
+                const id = this.ids[this.currentIndex + 1];
+                this.currentId = id;
+                await this.$wire.startEdit(id);
+            },
 
             initCropper() {
                 if (this.cropper) { this.cropper.destroy(); this.cropper = null; }
@@ -172,19 +194,40 @@
     {{-- Detail Modal — WordPress style --}}
     @if($editingMediaId && $this->editingFile)
         @php
-            $file    = $this->editingFile;
-            $fileUrl = asset('storage/'.$file->directory.'/'.$file->filename);
+            $file      = $this->editingFile;
+            $fileUrl   = asset('storage/'.$file->directory.'/'.$file->filename);
+            $mediaIds  = $this->media->pluck('id')->values()->toArray();
             try {
                 $imgPath = Storage::disk($file->disk)->path($file->directory.'/'.$file->filename);
                 [$imgW, $imgH] = $file->isImage() ? (@getimagesize($imgPath) ?: [null, null]) : [null, null];
             } catch(\Throwable $e) { $imgW = $imgH = null; }
         @endphp
-        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" x-data="mediaModal()">
+        <div class="fixed inset-0 flex items-center justify-center p-6"
+             style="z-index:99999; background:rgba(0,0,0,0.85);"
+             x-data="mediaModal({{ json_encode($mediaIds) }}, {{ $file->id }})">
             <div class="absolute inset-0" x-on:click="close()"></div>
+
+            {{-- Prev arrow --}}
+            <button type="button" x-show="hasPrev" x-on:click.stop="prev()"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white transition-colors"
+                    style="z-index:100001; width:48px; height:48px;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                </svg>
+            </button>
+
+            {{-- Next arrow --}}
+            <button type="button" x-show="hasNext" x-on:click.stop="next()"
+                    class="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white transition-colors"
+                    style="z-index:100001; width:48px; height:48px;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
 
             {{-- Modal container --}}
             <div class="relative w-full rounded-2xl bg-white dark:bg-gray-900 shadow-2xl overflow-hidden flex flex-col"
-                 style="max-width:900px; max-height:90vh;">
+                 style="max-width:920px; max-height:88vh; z-index:100000;">
 
                 {{-- Header --}}
                 <div class="flex items-center justify-between px-5 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0">
@@ -220,7 +263,7 @@
                     <div class="flex-1 overflow-y-auto flex flex-col">
 
                         {{-- File metadata (static) --}}
-                        <div class="px-5 py-4 border-b border-gray-100 dark:border-gray-700 space-y-1 shrink-0">
+                        <div class="px-6 py-5 border-b border-gray-100 dark:border-gray-700 space-y-1.5 shrink-0">
                             <p class="text-xs font-bold text-gray-900 dark:text-white truncate">{{ $file->original_name }}</p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">{{ $file->created_at->format('d/m/Y') }} &middot; {{ $file->human_size }}
                                 @if($imgW && $imgH) &middot; {{ $imgW }}&times;{{ $imgH }} px @endif
@@ -229,7 +272,7 @@
                         </div>
 
                         {{-- Editable fields --}}
-                        <div class="px-5 py-4 space-y-4 flex-1">
+                        <div class="px-6 py-5 space-y-6 flex-1">
 
                             {{-- Nombre --}}
                             <div>
@@ -298,7 +341,7 @@
                 </div>{{-- /body --}}
 
                 {{-- Footer --}}
-                <div class="flex items-center justify-between px-5 py-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 shrink-0">
+                <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 shrink-0">
                     <button wire:click="deleteMedia({{ $file->id }})"
                             wire:confirm="¿Eliminar '{{ addslashes($file->original_name) }}'? No se puede deshacer."
                             class="rounded-lg bg-red-500 px-4 py-2 text-xs font-semibold text-white hover:bg-red-600 transition-colors">
