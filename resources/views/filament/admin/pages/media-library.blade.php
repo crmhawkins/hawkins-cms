@@ -1,22 +1,29 @@
 <x-filament-panels::page>
+    <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('mediaUploader', () => ({
+            dragging: false,
+            uploading: false,
+            handleFiles(files) {
+                if (!files || !files.length) return;
+                this.uploading = true;
+                const wire = this.$wire;
+                wire.uploadMultiple('uploads', Array.from(files),
+                    () => { this.uploading = false; this.$refs.fileInput.value = ''; wire.saveUploads(); },
+                    () => { this.uploading = false; },
+                    () => {}
+                );
+            }
+        }));
+    });
+    </script>
+
     {{-- Upload zone --}}
     <div class="mb-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 text-center"
-         x-data="{
-             dragging: false,
-             uploading: false,
-             handleFiles(files) {
-                 if (!files || !files.length) return;
-                 this.uploading = true;
-                 \$wire.uploadMultiple('uploads', Array.from(files),
-                     () => { this.uploading = false; this.\$refs.fileInput.value = ''; \$wire.saveUploads(); },
-                     () => { this.uploading = false; },
-                     () => {}
-                 );
-             }
-         }"
+         x-data="mediaUploader()"
          x-on:dragover.prevent="dragging = true"
          x-on:dragleave.prevent="dragging = false"
-         x-on:drop.prevent="dragging = false; handleFiles(\$event.dataTransfer.files)"
+         x-on:drop.prevent="dragging = false; handleFiles($event.dataTransfer.files)"
          :class="dragging ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/10' : ''">
 
         <div class="flex flex-col items-center gap-3">
@@ -25,10 +32,10 @@
 
             <input type="file" x-ref="fileInput" multiple accept="image/*,video/*,application/pdf"
                    style="display:none"
-                   x-on:change="handleFiles(\$event.target.files)">
+                   x-on:change="handleFiles($event.target.files)">
 
             <button type="button"
-                    x-on:click="\$refs.fileInput.click()"
+                    x-on:click="$refs.fileInput.click()"
                     class="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors cursor-pointer">
                 Seleccionar archivos
             </button>
