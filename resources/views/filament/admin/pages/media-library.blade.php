@@ -23,7 +23,7 @@
                  }
                  this.uploading = false;
                  this.\$refs.fileInput.value = '';
-                 \$wire.\$refresh();
+                 window.location.reload();
              }
          }"
          x-on:dragover.prevent="dragging = true"
