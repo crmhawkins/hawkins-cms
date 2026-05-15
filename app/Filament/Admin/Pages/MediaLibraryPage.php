@@ -14,6 +14,7 @@ class MediaLibraryPage extends Page
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
     protected static ?string $navigationLabel = 'Biblioteca de medios';
+    protected static ?string $title = 'Biblioteca de medios';
     protected static ?string $navigationGroup = 'Contenido';
     protected static ?int $navigationSort = 20;
     protected static string $view = 'filament.admin.pages.media-library';
