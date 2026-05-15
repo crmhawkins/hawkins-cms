@@ -17,7 +17,7 @@
                      fd.append('file', file);
                      fd.append('_token', this.csrf);
                      try {
-                         await fetch('/admin/media/upload-file', { method: 'POST', body: fd });
+                         await fetch('/cms/media/upload', { method: 'POST', body: fd });
                      } catch(e) {}
                      this.done++;
                  }

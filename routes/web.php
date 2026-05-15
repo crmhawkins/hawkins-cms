@@ -6,8 +6,8 @@ use App\Http\Controllers\Editor\MediaController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-// Media upload (admin panel)
-Route::post('/admin/media/upload-file', [\App\Http\Controllers\Admin\MediaUploadController::class, 'store'])
+// Media upload (admin panel) — fuera de /admin/ para evitar conflicto con Filament
+Route::post('/cms/media/upload', [\App\Http\Controllers\Admin\MediaUploadController::class, 'store'])
     ->middleware(['web', 'auth'])
     ->name('admin.media.upload');
 
