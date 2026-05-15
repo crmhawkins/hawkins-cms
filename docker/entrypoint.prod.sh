@@ -10,6 +10,11 @@ php artisan db:seed --class=DemoContentSeeder --force || echo "[WARN] DemoConten
 echo "==> Storage link..."
 php artisan storage:link || true
 
+echo "==> Clearing old caches..."
+php artisan config:clear || true
+php artisan route:clear || true
+php artisan view:clear || true
+
 echo "==> Caching config & routes..."
 php artisan config:cache || true
 php artisan route:cache || true
