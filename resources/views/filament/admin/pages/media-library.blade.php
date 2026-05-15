@@ -1,4 +1,8 @@
 <x-filament-panels::page>
+    @push('scripts')
+    <script>window._mediaCsrf = '{{ csrf_token() }}';</script>
+    @endpush
+
     {{-- Upload zone --}}
     <div class="mb-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 text-center"
          x-data="{
@@ -11,15 +15,13 @@
                  this.uploading = true;
                  this.done = 0;
                  this.total = files.length;
-                 const token = document.cookie.match(/XSRF-TOKEN=([^;]+)/)?.[1];
                  for (const file of Array.from(files)) {
                      const fd = new FormData();
                      fd.append('file', file);
-                     await fetch('/admin/media/upload-file', {
-                         method: 'POST',
-                         headers: { 'X-XSRF-TOKEN': token ? decodeURIComponent(token) : '' },
-                         body: fd
-                     });
+                     fd.append('_token', window._mediaCsrf);
+                     try {
+                         await fetch('/admin/media/upload-file', { method: 'POST', body: fd });
+                     } catch(e) {}
                      this.done++;
                  }
                  this.uploading = false;
@@ -28,19 +30,25 @@
              }
          }"
          x-on:dragover.prevent="dragging = true"
-         x-on:dragleave="dragging = false"
+         x-on:dragleave.prevent="dragging = false"
          x-on:drop.prevent="dragging = false; handleFiles($event.dataTransfer.files)"
          :class="dragging ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/10' : ''">
 
         <div class="flex flex-col items-center gap-3">
             <x-heroicon-o-arrow-up-tray class="h-10 w-10 text-gray-400" />
             <p class="text-sm text-gray-600 dark:text-gray-400">Arrastra archivos aquí o</p>
-            <label class="cursor-pointer rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors">
+
+            {{-- Hidden file input --}}
+            <input type="file" x-ref="fileInput" multiple accept="image/*,video/*,application/pdf"
+                   style="display:none"
+                   x-on:change="handleFiles($event.target.files)">
+
+            {{-- Trigger button --}}
+            <button type="button"
+                    x-on:click="$refs.fileInput.click()"
+                    class="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors cursor-pointer">
                 Seleccionar archivos
-                <input type="file" x-ref="fileInput" multiple accept="image/*,video/*,application/pdf"
-                       class="sr-only"
-                       x-on:change="handleFiles($event.target.files)">
-            </label>
+            </button>
         </div>
 
         {{-- Progress --}}
