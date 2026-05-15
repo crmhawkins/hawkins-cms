@@ -5,12 +5,9 @@ use App\Models\Media;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Storage;
-use Livewire\WithFileUploads;
 
 class MediaLibraryPage extends Page
 {
-    use WithFileUploads;
-
     protected static ?string $navigationIcon = 'heroicon-o-photo';
     protected static ?string $navigationLabel = 'Biblioteca de medios';
     protected static ?string $navigationGroup = 'Contenido';
@@ -19,7 +16,6 @@ class MediaLibraryPage extends Page
 
     public string $search = '';
     public string $filterType = '';
-    public $uploads = [];
     public ?int $editingMediaId = null;
     public string $editingAlt = '';
 
@@ -33,32 +29,6 @@ class MediaLibraryPage extends Page
                 ->where(fn ($q) => $q->where('mime_type', 'like', 'application/%')->orWhere('mime_type', 'like', 'text/%')))
             ->latest()
             ->paginate(24);
-    }
-
-    public function uploadFiles(): void
-    {
-        $this->validate(['uploads.*' => 'file|max:20480']);
-
-        foreach ($this->uploads as $file) {
-            $filename  = \Illuminate\Support\Str::uuid().'.'.$file->getClientOriginalExtension();
-            $directory = 'images';
-
-            $file->storeAs($directory, $filename, 'public');
-
-            Media::create([
-                'disk'          => 'public',
-                'directory'     => $directory,
-                'filename'      => $filename,
-                'original_name' => $file->getClientOriginalName(),
-                'mime_type'     => $file->getMimeType(),
-                'size'          => $file->getSize(),
-                'alt'           => '',
-            ]);
-        }
-
-        $count = count($this->uploads);
-        $this->uploads = [];
-        Notification::make()->title($count > 1 ? 'Archivos subidos' : 'Archivo subido')->success()->send();
     }
 
     public function startEditAlt(int $id): void

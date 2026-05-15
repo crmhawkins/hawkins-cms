@@ -6,6 +6,11 @@ use App\Http\Controllers\Editor\MediaController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
+// Media upload (admin panel)
+Route::post('/admin/media/upload-file', [\App\Http\Controllers\Admin\MediaUploadController::class, 'store'])
+    ->middleware(['web', 'auth'])
+    ->name('admin.media.upload');
+
 // Editor API routes — require auth + edit-content permission + no-cache
 Route::prefix('edit')->name('editor.')->middleware(['web', 'auth', 'editor.cache', 'throttle:60,1'])->group(function () {
     Route::patch('api/field', [FieldController::class, 'update'])->name('field.update');

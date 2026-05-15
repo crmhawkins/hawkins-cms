@@ -1,30 +1,56 @@
 <x-filament-panels::page>
     {{-- Upload zone --}}
     <div class="mb-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 p-6 text-center"
-         x-data="{ dragging: false }"
+         x-data="{
+             dragging: false,
+             uploading: false,
+             done: 0,
+             total: 0,
+             async handleFiles(files) {
+                 if (!files || !files.length) return;
+                 this.uploading = true;
+                 this.done = 0;
+                 this.total = files.length;
+                 const token = document.cookie.match(/XSRF-TOKEN=([^;]+)/)?.[1];
+                 for (const file of Array.from(files)) {
+                     const fd = new FormData();
+                     fd.append('file', file);
+                     await fetch('/admin/media/upload-file', {
+                         method: 'POST',
+                         headers: { 'X-XSRF-TOKEN': token ? decodeURIComponent(token) : '' },
+                         body: fd
+                     });
+                     this.done++;
+                 }
+                 this.uploading = false;
+                 this.$refs.fileInput.value = '';
+                 $wire.\$refresh();
+             }
+         }"
          x-on:dragover.prevent="dragging = true"
          x-on:dragleave="dragging = false"
-         x-on:drop.prevent="dragging = false"
+         x-on:drop.prevent="dragging = false; handleFiles($event.dataTransfer.files)"
          :class="dragging ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/10' : ''">
-        <form wire:submit.prevent="uploadFiles">
-            <div class="flex flex-col items-center gap-3">
-                <x-heroicon-o-arrow-up-tray class="h-10 w-10 text-gray-400" />
-                <p class="text-sm text-gray-600 dark:text-gray-400">Arrastra archivos aquí o</p>
-                <label class="cursor-pointer rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors">
-                    Seleccionar archivos
-                    <input type="file" wire:model="uploads" multiple accept="image/*,video/*,application/pdf" class="sr-only">
-                </label>
-                @error('uploads.*') <p class="text-sm text-red-500">{{ $message }}</p> @enderror
+
+        <div class="flex flex-col items-center gap-3">
+            <x-heroicon-o-arrow-up-tray class="h-10 w-10 text-gray-400" />
+            <p class="text-sm text-gray-600 dark:text-gray-400">Arrastra archivos aquí o</p>
+            <label class="cursor-pointer rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white hover:bg-primary-700 transition-colors">
+                Seleccionar archivos
+                <input type="file" x-ref="fileInput" multiple accept="image/*,video/*,application/pdf"
+                       class="sr-only"
+                       x-on:change="handleFiles($event.target.files)">
+            </label>
+        </div>
+
+        {{-- Progress --}}
+        <div x-show="uploading" x-cloak class="mt-4 flex flex-col items-center gap-2">
+            <div class="h-2 w-64 rounded-full bg-gray-200 dark:bg-gray-700">
+                <div class="h-2 rounded-full bg-primary-600 transition-all"
+                     :style="`width:${total > 0 ? Math.round(done/total*100) : 0}%`"></div>
             </div>
-            @if(count($uploads ?? []) > 0)
-                <div class="mt-4 flex items-center justify-center gap-3">
-                    <span class="text-sm text-gray-600">{{ count($uploads) }} archivo(s) seleccionado(s)</span>
-                    <button type="submit" class="rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
-                        Subir
-                    </button>
-                </div>
-            @endif
-        </form>
+            <p class="text-xs text-gray-500" x-text="`Subiendo ${done}/${total}...`"></p>
+        </div>
     </div>
 
     {{-- Filters --}}
