@@ -17,9 +17,9 @@ RUN apk add --no-cache \
         gd \
         zip \
         intl \
-        opcache
+    && docker-php-ext-enable opcache
 
-RUN printf "opcache.enable=1\nopcache.memory_consumption=256\nopcache.max_accelerated_files=20000\nopcache.validate_timestamps=0\n" \
+RUN printf "opcache.enable=1\nopcache.memory_consumption=128\nopcache.max_accelerated_files=10000\nopcache.validate_timestamps=0\nopcache.jit=0\n" \
     > /usr/local/etc/php/conf.d/opcache.ini
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
