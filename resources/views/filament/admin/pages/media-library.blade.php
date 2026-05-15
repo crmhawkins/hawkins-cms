@@ -128,10 +128,10 @@
         </div>
 
         {{-- Grid --}}
-        <div class="grid grid-cols-6 gap-2">
+        <div class="grid gap-2" style="grid-template-columns: repeat(6, minmax(0, 1fr));">
             @foreach($this->media as $file)
                 @php $fileId = $file->id; @endphp
-                <div class="relative group rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 aspect-square cursor-pointer"
+                <div class="relative group rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 cursor-pointer" style="aspect-ratio:1/1;"
                      :class="isSelected({{ $fileId }}) ? 'ring-2 ring-primary-500' : 'hover:ring-2 hover:ring-gray-300 dark:hover:ring-gray-600'">
 
                     {{-- Thumbnail --}}
