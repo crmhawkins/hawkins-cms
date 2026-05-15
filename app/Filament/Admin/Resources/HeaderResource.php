@@ -29,7 +29,7 @@ class HeaderResource extends Resource
                         ->required()
                         ->maxLength(100),
                     Forms\Components\Select::make('type')
-                        ->label('Tipo de header')
+                        ->label('Tipo de cabecera')
                         ->options([
                             'classic'  => 'Clásico — Logo izq, nav derecha',
                             'centered' => 'Centrado — Logo centrado, nav debajo',
@@ -41,8 +41,8 @@ class HeaderResource extends Resource
                         ->default('classic')
                         ->live(),
                     Forms\Components\Toggle::make('is_default')
-                        ->label('Header predeterminado del sitio')
-                        ->helperText('Solo uno puede ser el predeterminado'),
+                        ->label('Cabecera predeterminada del sitio')
+                        ->helperText('Solo una puede ser la predeterminada'),
                 ])->columns(3),
 
             Forms\Components\Section::make('Logo')
@@ -55,7 +55,7 @@ class HeaderResource extends Resource
                         ->helperText('Si no hay imagen, se usará el texto del logo'),
                     Forms\Components\TextInput::make('logo_text')
                         ->label('Texto del logo')
-                        ->helperText('Fallback si no hay imagen'),
+                        ->helperText('Texto alternativo si no hay imagen'),
                     Forms\Components\TextInput::make('logo_height')
                         ->label('Alto del logo (px)')
                         ->numeric()
@@ -72,17 +72,17 @@ class HeaderResource extends Resource
                         ->label('Texto / Nav')
                         ->default('#111111'),
                     Forms\Components\ColorPicker::make('hover_color')
-                        ->label('Hover links')
+                        ->label('Color hover enlaces')
                         ->default('#c9a96e'),
                     Forms\Components\ColorPicker::make('active_color')
-                        ->label('Link activo')
+                        ->label('Enlace activo')
                         ->default('#c9a96e'),
                 ])->columns(4),
 
             Forms\Components\Section::make('Comportamiento')
                 ->schema([
                     Forms\Components\Toggle::make('sticky')
-                        ->label('Sticky (se queda fijo al hacer scroll)'),
+                        ->label('Fijo al hacer scroll'),
                     Forms\Components\Toggle::make('transparent_on_top')
                         ->label('Transparente al inicio de página')
                         ->helperText('Útil sobre heroes con imagen'),
@@ -143,7 +143,7 @@ class HeaderResource extends Resource
                         'gray'    => 'mega',
                     ]),
                 Tables\Columns\IconColumn::make('is_default')->label('Predeterminado')->boolean(),
-                Tables\Columns\IconColumn::make('sticky')->label('Sticky')->boolean(),
+                Tables\Columns\IconColumn::make('sticky')->label('Fijo')->boolean(),
                 Tables\Columns\ColorColumn::make('bg_color')->label('Fondo'),
                 Tables\Columns\TextColumn::make('updated_at')->label('Actualizado')->since()->sortable(),
             ])

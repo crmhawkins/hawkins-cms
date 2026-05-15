@@ -60,11 +60,11 @@ class SiteSettingsPage extends Page
                             'Inter'      => 'Inter',
                             'Nunito'     => 'Nunito',
                         ])->default('Montserrat'),
-                    Forms\Components\Select::make('default_header_id')->label('Header predeterminado del sitio')
+                    Forms\Components\Select::make('default_header_id')->label('Cabecera predeterminada del sitio')
                         ->options(fn () => \App\Models\Header::pluck('name', 'id')->toArray())
                         ->placeholder('— Sin header predeterminado —')
                         ->searchable(),
-                    Forms\Components\Select::make('default_footer_id')->label('Footer predeterminado del sitio')
+                    Forms\Components\Select::make('default_footer_id')->label('Pie de página predeterminado del sitio')
                         ->options(fn () => \App\Models\Footer::pluck('name', 'id')->toArray())
                         ->placeholder('— Sin footer predeterminado —')
                         ->searchable(),
@@ -78,7 +78,7 @@ class SiteSettingsPage extends Page
                     Forms\Components\TextInput::make('social_youtube')->label('YouTube')->url()->prefix('https://'),
                 ])->columns(2),
 
-                Forms\Components\Tabs\Tab::make('E-commerce')->schema([
+                Forms\Components\Tabs\Tab::make('Comercio electrónico')->schema([
                     Forms\Components\Toggle::make('ecommerce_enabled')->label('E-commerce activo'),
                     Forms\Components\Select::make('payment_gateway')->label('Pasarela de pago')
                         ->options(['none'=>'Ninguna','stripe_connect'=>'Stripe Connect','redsys'=>'Redsys','paypal'=>'PayPal'])
@@ -89,7 +89,7 @@ class SiteSettingsPage extends Page
                         ->dehydrateStateUsing(fn ($state) => filled($state) ? $state : \App\Models\SiteSettings::instance()->stripe_webhook_secret),
                 ])->columns(2),
 
-                Forms\Components\Tabs\Tab::make('Analytics / Código')->schema([
+                Forms\Components\Tabs\Tab::make('Analíticas / Código')->schema([
                     Forms\Components\Textarea::make('google_analytics_code')
                         ->label('Código Google Analytics / GTM')
                         ->rows(4)

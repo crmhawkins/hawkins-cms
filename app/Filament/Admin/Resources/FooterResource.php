@@ -25,7 +25,7 @@ class FooterResource extends Resource
             Forms\Components\Section::make('Identificación')
                 ->schema([
                     Forms\Components\TextInput::make('name')->label('Nombre interno')->required()->maxLength(100),
-                    Forms\Components\Select::make('type')->label('Tipo de footer')
+                    Forms\Components\Select::make('type')->label('Tipo de pie de página')
                         ->options([
                             'classic'  => 'Clásico — 4 columnas',
                             'centered' => 'Centrado — Logo + enlaces centrados',
@@ -34,13 +34,13 @@ class FooterResource extends Resource
                             'mega'     => 'Mega — Newsletter + columnas + barra inferior',
                         ])
                         ->required()->default('classic'),
-                    Forms\Components\Toggle::make('is_default')->label('Footer predeterminado del sitio'),
+                    Forms\Components\Toggle::make('is_default')->label('Pie de página predeterminado del sitio'),
                 ])->columns(3),
 
             Forms\Components\Section::make('Logo y Branding')
                 ->schema([
                     Forms\Components\FileUpload::make('logo_path')->label('Logo')->image()->directory('footers')->imagePreviewHeight('50'),
-                    Forms\Components\TextInput::make('logo_text')->label('Texto del logo (fallback)'),
+                    Forms\Components\TextInput::make('logo_text')->label('Texto del logo (alternativo)'),
                     Forms\Components\Textarea::make('tagline')->label('Eslogan / Descripción corta')->rows(2),
                 ])->columns(3),
 
@@ -48,7 +48,7 @@ class FooterResource extends Resource
                 ->schema([
                     Forms\Components\ColorPicker::make('bg_color')->label('Fondo')->default('#111111'),
                     Forms\Components\ColorPicker::make('text_color')->label('Texto')->default('#ffffff'),
-                    Forms\Components\ColorPicker::make('link_color')->label('Color links')->default('#c9a96e'),
+                    Forms\Components\ColorPicker::make('link_color')->label('Color de enlaces')->default('#c9a96e'),
                     Forms\Components\ColorPicker::make('border_color')->label('Color separadores')->default('#333333'),
                 ])->columns(4),
 

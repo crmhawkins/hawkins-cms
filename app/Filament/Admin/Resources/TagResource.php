@@ -34,7 +34,7 @@ class TagResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->label('Nombre')->searchable(),
                 Tables\Columns\TextColumn::make('slug')->label('Slug')->color('gray'),
-                Tables\Columns\TextColumn::make('posts_count')->label('Posts')->counts('posts')->sortable(),
+                Tables\Columns\TextColumn::make('posts_count')->label('Artículos')->counts('posts')->sortable(),
             ])
             ->actions([Tables\Actions\EditAction::make(), Tables\Actions\DeleteAction::make()])
             ->bulkActions([Tables\Actions\BulkActionGroup::make([Tables\Actions\DeleteBulkAction::make()])]);

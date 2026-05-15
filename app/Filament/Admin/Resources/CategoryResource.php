@@ -55,7 +55,7 @@ class CategoryResource extends Resource
                 Tables\Columns\TextColumn::make('slug')
                     ->label('Slug'),
                 Tables\Columns\TextColumn::make('posts_count')
-                    ->label('Posts')
+                    ->label('Artículos')
                     ->counts('posts')
                     ->sortable(),
             ])

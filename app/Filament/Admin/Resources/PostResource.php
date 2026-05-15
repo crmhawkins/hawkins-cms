@@ -88,8 +88,8 @@ class PostResource extends Resource
                     ->nullable(),
 
                 Forms\Components\Toggle::make('featured')
-                    ->label('Post destacado')
-                    ->helperText('Los posts destacados aparecen primero y pueden mostrarse en home'),
+                    ->label('Artículo destacado')
+                    ->helperText('Los artículos destacados aparecen primero y pueden mostrarse en inicio'),
             ])->columns(2),
 
             Forms\Components\Section::make('SEO')->schema([
